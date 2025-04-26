@@ -10,6 +10,7 @@
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" href="images/logo/favicon.webp" type="image/x-icon">
 
+    <link rel="stylesheet" href="style.css">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,6 +49,24 @@
             </div>
         </div>
     </div><!-- /preloader -->
+
+
+
+    <div id="chatbot-toggle" class="chatbot-button">
+    <img src="chat.gif" alt="Chat" class="chat-icon">
+  </div>
+
+
+    <!-- Chatbot Popup -->
+    <div id="chatbot-popup" class="chatbot-popup hidden">
+      <div class="chatbox">
+        <div class="chatlogs" id="chatlogs"></div>
+        <form class="chat-form" id="chat-form">
+          <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off" required>
+          <button type="submit">→</button>
+        </form>
+      </div>
+    </div>
 
 
     <!--  ====== header-area-start
@@ -1356,16 +1375,10 @@ Best Nick</blockquote>
     <!-- footer-area-end  -->
 
 
-    <!-- back top -->
-    <div id="scroll" class="scrollTop text-right">
-        <a href="#" class="theme-bg white-text text-center d-inline-block mr-10 transition5">
-            <span><i class="fal fa-angle-double-up"></i></span>
-        </a>
-    </div>
-
 
     <!-- ================== All js here ================ -->
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="script.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

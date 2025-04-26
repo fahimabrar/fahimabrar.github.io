@@ -1,0 +1,160 @@
+/* Chatbot Toggle Button */
+.chatbot-button:hover {
+  background: #6366f1;
+  transform: scale(1.05);
+}
+
+
+.chatbot-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: transparent; /* No color, because image will be seen */
+  border: none;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden; /* Important! Keeps the image inside circle */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1001;
+  padding: 0;
+}
+
+.chat-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Makes sure the gif/image fits nicely */
+  border-radius: 50%;
+}
+
+
+/* Chatbot Popup */
+.chatbot-popup {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 320px;
+  height: 450px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Hidden Popup */
+.hidden {
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+}
+
+/* Chatbox Layout */
+.chatbox {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Chat Logs */
+.chatlogs {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #f9fafb;
+}
+
+/* Individual Chat Message */
+.chat {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.chat .user-photo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover; /* Important! */
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #f3f4f6;
+}
+
+
+/* Chat Message Bubble */
+.chat .chat-message {
+  background: #e0e7ff;
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 14px;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+
+/* Bot Message Special Style */
+.chat.bot .chat-message {
+  background: #f3f4f6;
+}
+
+/* Chat Form (Input Area) */
+.chat-form {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.chat-form input {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
+  font-size: 14px;
+}
+
+.chat-form button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.chat-form button:hover {
+  background: #6366f1;
+}
+
+
+/* Mobile Responsiveness */
+@media (max-width: 500px) {
+  .chatbot-popup {
+    width: 90%;
+    right: 5%;
+    bottom: 90px;
+    height: 80%;
+    border-radius: 15px;
+  }
+
+  .chat-form input {
+    font-size: 16px;
+  }
+
+  .chat-form button {
+    font-size: 18px;
+  }
+
+  .chat .chat-message {
+    font-size: 16px;
+  }
+}
