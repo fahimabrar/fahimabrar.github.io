@@ -10,30 +10,37 @@
 }
 
 /* Little Bubble */
+/* Little Bubble - Moved to Left */
 .chatbot-bubble {
   background: #4f46e5;
   color: white;
   padding: 8px 14px;
   border-radius: 20px;
   font-size: 14px;
-  margin-bottom: 8px;
+  margin-right: 10px; /* Move it left side away from button */
+  margin-bottom: 0px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   opacity: 1;
   transition: opacity 0.3s ease;
-  position: relative;
+  position: absolute;
+  right: 100%; /* Bubble is placed fully left of button */
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap; /* Keep text in one line */
 }
 
-/* Little Arrow (under the bubble) */
+/* Arrow under the bubble */
 .chatbot-bubble::after {
   content: "";
   position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  right: -6px;
+  transform: translateY(-20%);
   border-width: 6px;
   border-style: solid;
-  border-color: #4f46e5 transparent transparent transparent;
+  border-color: transparent transparent transparent #4f46e5;
 }
+
 
 /* Hover to hide the bubble (optional) */
 .chatbot-container:hover .chatbot-bubble {
