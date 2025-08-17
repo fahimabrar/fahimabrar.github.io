@@ -264,6 +264,24 @@
     </div>
   </header>
 
+      <div class="chatbot-container">
+      <div class="chatbot-bubble">Ask me anything about Abrar!</div>
+      <div id="chatbot-toggle" class="chatbot-button">
+        <img src="chat.gif" alt="Chat" class="chat-icon">
+      </div>
+    </div>
+
+    <!-- Chatbot Popup -->
+    <div id="chatbot-popup" class="chatbot-popup hidden">
+      <div class="chatbox">
+        <div class="chatlogs" id="chatlogs"></div>
+        <form class="chat-form" id="chat-form">
+          <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off" required>
+          <button type="submit">→</button>
+        </form>
+      </div>
+    </div>
+
   <main id="home">
     <!-- HERO SECTION -->
     <section class="hero">
