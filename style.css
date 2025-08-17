@@ -183,6 +183,61 @@
 }
 
 
+/* === Chatbot dark mode (works with <html data-theme="dark">) === */
+html[data-theme="dark"] .chatbot-popup {
+  background: #0f172a;
+  color: #e6edf3;
+  border: 1px solid #2a3348;
+}
+
+html[data-theme="dark"] .chatbox { background: #0f172a; color: #e6edf3; }
+html[data-theme="dark"] .chatlogs { background: #0f172a; color: #e6edf3; }
+
+/* message bubbles */
+html[data-theme="dark"] .chat .chat-message {
+  background: #4f46e5;  /* user bubble */
+  color: #ffffff;
+}
+html[data-theme="dark"] .chat.bot .chat-message {
+  background: #1b2236;  /* bot bubble */
+  color: #e6edf3;
+}
+
+/* avatars */
+html[data-theme="dark"] .chat .user-photo { background: #1f2937; }
+
+/* input area */
+html[data-theme="dark"] .chat-form {
+  background: #0f172a;
+  border-top: 1px solid #2a3348;
+}
+html[data-theme="dark"] .chat-form input {
+  background: #1b2236;
+  color: #e6edf3;
+  border: 1px solid #2a3348;
+}
+html[data-theme="dark"] .chat-form input::placeholder { color: #9fb0c3; }
+html[data-theme="dark"] .chat-form button { background: #4f46e5; color: #fff; }
+html[data-theme="dark"] .chat-form button:hover { background: #6366f1; }
+
+/* launcher button + tip bubble */
+html[data-theme="dark"] .chatbot-button {
+  background: #0f172a;
+  border-color: #4f46e5;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.45);
+}
+html[data-theme="dark"] .chatbot-bubble { background: #4f46e5; color: #fff; }
+html[data-theme="dark"] .chatbot-bubble::after {
+  border-color: transparent transparent transparent #4f46e5;
+}
+
+/* optional: nicer dark scrollbar inside chat logs */
+html[data-theme="dark"] .chatlogs::-webkit-scrollbar { width: 10px; }
+html[data-theme="dark"] .chatlogs::-webkit-scrollbar-track { background: #0f172a; }
+html[data-theme="dark"] .chatlogs::-webkit-scrollbar-thumb { background: #2a3348; border-radius: 8px; }
+
+
+
 /* Mobile Responsiveness */
 @media (max-width: 500px) {
   .chatbot-popup {
@@ -205,3 +260,4 @@
     font-size: 16px;
   }
 }
+
