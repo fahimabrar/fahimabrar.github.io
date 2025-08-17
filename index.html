@@ -1,348 +1,704 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+
+<html data-theme="dark" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abrar Fahim - Data Scientist | LLMs & NLP Specialist</title>
-  <meta name="description" content="Abrar Fahim · Data Scientist in London focused on LLMs, NLP, Cloud and ML.">
-</head>
+<meta charset="utf-8"/>
+<style>/* =========================================
+   GLOBAL THEME & BASE
+   ========================================= */
+:root {
+  --accent: #80db66;
+  --accent-dark: #5cbd44;
+  --bg: #0b1020;
+  --panel: rgba(255,255,255,0.06);
+  --ink: #e6edf3;
+  --muted: #9fb0c3;
+  --line: rgba(255,255,255,0.12);
+  --tile: #0f172a;
+  --shadow: 0 12px 28px rgba(0,0,0,0.35);
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --border-radius: 24px;
+
+  /* brand colors */
+  --linkedin: #0A66C2;
+  --linkedin-hover: #004182;
+  --github: #24292f;
+  --github-hover: #171a1f;
+  --email: #EA4335;
+  --email-hover: #C5362C;
+
+  /* chatbot */
+  --chat-accent: #4f46e5;
+  --chat-accent-hover: #6366f1;
+  --chat-dark-bg: #0f172a;
+  --chat-dark-panel: #1b2236;
+  --chat-dark-line: #2a3348;
+  --chat-dark-ink: #e6edf3;
+  --chat-dark-muted: #9fb0c3;
+}
+
+@media (prefers-color-scheme: light) {
+  html[data-theme="auto"] {
+    --bg: #f8fafc;
+    --panel: rgba(0,0,0,0.04);
+    --ink: #0f172a;
+    --muted: #475569;
+    --line: #e2e8f0;
+    --tile: #ffffff;
+    --shadow: 0 10px 24px rgba(2,6,23,0.08);
+  }
+}
+
+html[data-theme="light"] {
+  --bg: #f8fafc;
+  --panel: rgba(0,0,0,0.04);
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #e2e8f0;
+  --tile: #ffffff;
+  --shadow: 0 10px 24px rgba(2,6,23,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px; line-height: 1.6; overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+/* Screen-reader-only utility (labels use .sr) */
+.sr { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+
+/* =========================================
+   ANIMATED BACKGROUND
+   ========================================= */
+.animated-background { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
+.particle {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.1; filter: blur(20px); animation: float 25s infinite linear;
+}
+.particle:nth-child(1){ width:400px;height:400px;top:10%;left:5%;animation-duration:30s; }
+.particle:nth-child(2){ width:300px;height:300px;top:60%;left:80%;animation-duration:40s;animation-delay:-10s; }
+.particle:nth-child(3){ width:200px;height:200px;top:20%;left:70%;animation-duration:35s;animation-delay:-5s; }
+.grid-overlay {
+  position: fixed; inset: 0; opacity: 0.08;
+  background-image: linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 40px 40px; color: #fff; z-index: -1;
+}
+
+/* =========================================
+   HEADER / NAV
+   ========================================= */
+.topbar { position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--line); backdrop-filter: saturate(160%) blur(10px); background: color-mix(in srgb, var(--bg) 85%, transparent); transition: var(--transition); }
+.topbar.scrolled { box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+.wrap { max-width: 1200px; margin: auto; padding: 0 20px; }
+.bar { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-badge { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 16px; border: 1px solid var(--line); background: var(--panel); font-weight: 800; font-size: 20px; transition: var(--transition); }
+.brand:hover .brand-badge { transform: rotate(10deg); background: var(--accent); color: #061307; }
+.brand small { display: block; color: var(--muted); font-size: 14px; line-height: 1.2; margin-top: 4px; }
+.nav { display: none; gap: 24px; }
+.nav a { color: var(--muted); position: relative; padding: 8px 0; font-weight: 500; }
+.nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent); transition: var(--transition); }
+.nav a:hover, .nav a.active { color: var(--ink); }
+.nav a:hover::after, .nav a.active::after { width: 100%; }
+.actions { display: flex; align-items: center; gap: 12px; }
+
+@media (min-width: 900px) { .nav { display: flex; } }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 20px; border-radius: 14px; border: 1px solid var(--line);
+  background: var(--panel); box-shadow: var(--shadow); font-weight: 600;
+  transition: var(--transition); transform: translateY(0);
+}
+.btn svg { width: 18px; height: 18px; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.25); }
+.btn:active { transform: translateY(0); }
+.btn-accent { background: var(--accent); color: #061307; border-color: transparent; }
+.btn-accent:hover { background: var(--accent-dark); }
+.btn-ghost { background: var(--panel); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--accent); }
+
+/* Brand buttons */
+.btn-brand { color: #fff; border: none; }
+.btn-linkedin { background: var(--linkedin); }
+.btn-linkedin:hover { background: var(--linkedin-hover); }
+.btn-github { background: var(--github); }
+.btn-github:hover { background: var(--github-hover); }
+.btn-email { background: var(--email); }
+.btn-email:hover { background: var(--email-hover); }
+
+/* =========================================
+   HERO
+   ========================================= */
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 0 60px; position: relative; }
+.hero-grid { display: grid; gap: 24px; width: 100%; }
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: repeat(12, 1fr); }
+  .span-7 { grid-column: span 7; }
+  .span-5 { grid-column: span 5; }
+  .span-4 { grid-column: span 4; }
+}
+
+/* non-transparent tiles */
+.tile {
+  position: relative; overflow: hidden; border-radius: var(--border-radius);
+  border: 1px solid var(--line); background: var(--tile); padding: 24px;
+  box-shadow: var(--shadow); transition: var(--transition); transform: translateY(0);
+  opacity: 0; animation: fadeUp 0.8s forwards;
+}
+.tile:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
+.kicker { display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--line); background: var(--panel); color: var(--muted); padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 500; margin-bottom: 16px; animation: pulse 2s infinite; }
+.h1 { font-size: clamp(32px, 4.5vw, 52px); line-height: 1.15; margin: 12px 0; font-weight: 800; }
+.muted { color: var(--muted); }
+.pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+.pill { border: 1px solid var(--line); background: var(--panel); padding: 8px 14px; border-radius: 999px; font-size: 14px; color: var(--ink); transition: var(--transition); }
+.pill:hover { transform: translateY(-3px); background: var(--accent); color: #061307; border-color: transparent; }
+
+.portrait { position: relative; aspect-ratio: 4/3; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); transition: var(--transition); transform: translateY(0); }
+.portrait:hover { transform: translateY(-8px); }
+.portrait::before { content: ""; position: absolute; inset: 0; background: radial-gradient(650px 200px at 10% 0%, rgba(128,219,102,0.2), transparent), radial-gradient(500px 200px at 90% 100%, rgba(99,102,241,0.18), transparent); z-index: 1; }
+.portrait img { position: relative; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.portrait:hover img { transform: scale(1.05); }
+
+.facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.fact { border: 1px solid var(--line); background: var(--panel); border-radius: 20px; padding: 20px; transition: var(--transition); }
+.fact:hover { transform: translateY(-5px); background: rgba(128, 219, 102, 0.1); }
+.fact .n { font-weight: 800; font-size: 32px; color: var(--accent); margin-bottom: 4px; }
+
+/* =========================================
+   SECTIONS & HEADINGS
+   ========================================= */
+.section { padding: 70px 0 28px; position: relative; } /* reduced gaps */
+.section .wrap > *:last-child { margin-bottom: 0; }
+
+.head { display: flex; align-items: center; gap: 16px; margin: 0 0 32px; }
+.head i { width: 8px; height: 32px; background: var(--accent); border-radius: 8px; display: inline-block; }
+h2 { font-size: clamp(28px, 3vw, 36px); margin: 0; font-weight: 800; }
+h3 { font-size: 22px; margin: 0 0 12px; font-weight: 700; }
+
+/* =========================================
+   CARDS & GRIDS
+   ========================================= */
+.grid { display: grid; gap: 24px; }
+.g3 { grid-template-columns: repeat(1, 1fr); }
+.g2 { grid-template-columns: repeat(1, 1fr); }
+@media (min-width: 768px) {
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+}
+.card {
+  border: 1px solid var(--line); background: var(--tile);
+  border-radius: var(--border-radius); padding: 28px;
+  box-shadow: var(--shadow); transition: var(--transition);
+  transform: translateY(0); opacity: 0; animation: fadeUp 0.8s forwards;
+}
+.card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.when { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+
+/* =========================================
+   PROJECTS
+   ========================================= */
+.filters { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.chip { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 10px 18px; font-size: 14px; color: var(--ink); transition: var(--transition); cursor: pointer; }
+.chip:hover, .chip[aria-pressed="true"] { background: var(--accent); color: #061307; border-color: transparent; }
+
+.rail { overflow-x: auto; padding-bottom: 12px; margin: 0 -20px; padding-left: 20px; }
+.rail::-webkit-scrollbar { display: none; }
+.row { display: flex; gap: 24px; }
+
+.proj { width: 320px; flex: 0 0 auto; border: 1px solid var(--line); background: var(--tile); border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); transform: translateY(0); }
+.proj:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.proj .media { position: relative; height: 200px; overflow: hidden; border-bottom: 1px solid var(--line); }
+.proj .media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.proj:hover .media img { transform: scale(1.1); }
+.meta { position: absolute; top: 16px; left: 16px; background: rgba(11, 16, 32, 0.75); color: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 12px; z-index: 2; }
+.proj .body { padding: 24px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.tag { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 6px 12px; font-size: 12px; color: var(--muted); }
+
+/* =========================================
+   CONTACT
+   ========================================= */
+.list { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.list li { display: flex; gap: 12px; align-items: center; color: var(--muted); }
+.form { display: grid; gap: 16px; }
+.input { padding: 16px; border-radius: 16px; border: 1px solid var(--line); background: var(--tile); color: var(--ink); font: inherit; transition: var(--transition); }
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
+
+/* =========================================
+   FOOTER
+   ========================================= */
+footer { border-top: 1px solid var(--line); color: var(--muted); padding: 32px 20px; text-align: center; }
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes float { 0% { transform: translate(0, 0);} 25% { transform: translate(10px, -10px);} 50% { transform: translate(20px, 5px);} 75% { transform: translate(10px, 15px);} 100% { transform: translate(0, 0);} }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(128, 219, 102, 0.4);} 70% { box-shadow: 0 0 0 10px rgba(128, 219, 102, 0);} 100% { box-shadow: 0 0 0 0 rgba(128, 219, 102, 0);} }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* =========================================
+   RESPONSIVE TWEAKS
+   ========================================= */
+@media (max-width: 768px) {
+  .bar { height: 70px; }
+  .hero { padding: 80px 0 40px; }
+  .section { padding: 50px 0 20px; }
+  .tile { padding: 20px; }
+  .h1 { font-size: 32px; }
+}
+
+/* =========================================
+   CHATBOT (scoped + dark mode)
+   ========================================= */
+
+/* Launcher + hint bubble */
+.chatbot-container {
+  position: fixed; bottom: 20px; right: 20px;
+  display: flex; flex-direction: column; align-items: center; z-index: 1001;
+}
+.chatbot-container .chatbot-bubble {
+  background: var(--chat-accent); color: #ffffff; padding: 8px 14px;
+  border-radius: 20px; font-size: 14px; margin-right: 10px; margin-bottom: 0;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2); opacity: 1; transition: opacity 0.3s ease;
+  position: absolute; right: 100%; top: 50%; transform: translateY(-50%); white-space: nowrap;
+}
+.chatbot-container .chatbot-bubble::after {
+  content: ""; position: absolute; top: 50%; right: -6px; transform: translateY(-20%);
+  border-width: 6px; border-style: solid; border-color: transparent transparent transparent var(--chat-accent);
+}
+.chatbot-container:hover .chatbot-bubble { opacity: 0; }
+
+.chatbot-container .chatbot-button {
+  background: #ffffff; border: 4px solid var(--chat-accent);
+  width: 90px; height: 90px; border-radius: 50%; overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25); cursor: pointer; padding: 0; transition: transform 0.3s ease;
+}
+.chatbot-container .chatbot-button:hover { transform: scale(1.1); }
+.chatbot-container .chat-icon { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+/* Popup (scoped) */
+.chatbot-popup {
+  position: fixed; bottom: 100px; right: 20px;
+  width: 320px; height: 450px; background: #ffffff; border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column;
+  overflow: hidden; z-index: 1000; opacity: 1; transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+/* ONLY this popup hides; avoids global .hidden conflicts */
+.chatbot-popup.hidden { opacity: 0; transform: scale(0); pointer-events: none; }
+
+/* Chatbox internals */
+#chatbot-popup .chatbox { display: flex; flex-direction: column; height: 100%; }
+#chatbot-popup .chatlogs { flex-grow: 1; padding: 15px; overflow-y: auto; background: #f9fafb; }
+#chatbot-popup .chat { display: flex; align-items: flex-start; margin-bottom: 15px; }
+#chatbot-popup .chat .user-photo {
+  width: 40px; height: 40px; object-fit: cover; border-radius: 50%;
+  margin-right: 10px; background: #f3f4f6;
+}
+#chatbot-popup .chat .chat-message {
+  background: #e0e7ff; padding: 10px 15px; border-radius: 15px;
+  font-size: 14px; max-width: 75%; word-wrap: break-word;
+}
+#chatbot-popup .chat.bot .chat-message { background: #f3f4f6; }
+
+/* Input area */
+#chatbot-popup .chat-form {
+  display: flex; padding: 10px; border-top: 1px solid #e5e7eb; background: #ffffff;
+}
+#chatbot-popup .chat-form input {
+  flex: 1; border: 1px solid #d1d5db; border-radius: 10px; padding: 10px; outline: none; font-size: 14px;
+}
+#chatbot-popup .chat-form button {
+  background: var(--chat-accent); color: #ffffff; border: none; padding: 10px 20px;
+  margin-left: 8px; border-radius: 10px; cursor: pointer; font-size: 16px; transition: background 0.3s;
+}
+#chatbot-popup .chat-form button:hover { background: var(--chat-accent-hover); }
+
+/* Mobile */
+@media (max-width: 500px) {
+  .chatbot-popup {
+    width: 90%; right: 5%; bottom: 90px; height: 80%; border-radius: 15px;
+  }
+  #chatbot-popup .chat-form input { font-size: 16px; }
+  #chatbot-popup .chat-form button { font-size: 18px; }
+  #chatbot-popup .chat .chat-message { font-size: 16px; }
+}
+
+/* Dark mode for chatbot (uses your <html data-theme="dark">) */
+html[data-theme="dark"] .chatbot-popup {
+  background: var(--chat-dark-bg); color: var(--chat-dark-ink); border: 1px solid var(--chat-dark-line);
+}
+html[data-theme="dark"] #chatbot-popup .chatbox { background: var(--chat-dark-bg); color: var(--chat-dark-ink); }
+html[data-theme="dark"] #chatbot-popup .chatlogs { background: var(--chat-dark-bg); color: var(--chat-dark-ink); }
+html[data-theme="dark"] #chatbot-popup .chat .chat-message { background: var(--chat-accent); color: #ffffff; }
+html[data-theme="dark"] #chatbot-popup .chat.bot .chat-message { background: var(--chat-dark-panel); color: var(--chat-dark-ink); }
+html[data-theme="dark"] #chatbot-popup .chat-form {
+  background: var(--chat-dark-bg); border-top: 1px solid var(--chat-dark-line);
+}
+html[data-theme="dark"] #chatbot-popup .chat-form input {
+  background: var(--panel); color: var(--chat-dark-ink); border: 1px solid var(--chat-dark-line);
+}
+html[data-theme="dark"] #chatbot-popup .chat-form input::placeholder { color: var(--chat-dark-muted); }
+html[data-theme="dark"] #chatbot-popup .chat-form button { background: var(--chat-accent); color: #ffffff; }
+html[data-theme="dark"] #chatbot-popup .chat-form button:hover { background: var(--chat-accent-hover); }
+
+/* Launcher + hint bubble in dark */
+html[data-theme="dark"] .chatbot-container .chatbot-button {
+  background: var(--chat-dark-bg); border-color: var(--chat-accent);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.45);
+}
+html[data-theme="dark"] .chatbot-container .chatbot-bubble { background: var(--chat-accent); color: #ffffff; }
+html[data-theme="dark"] .chatbot-container .chatbot-bubble::after { border-color: transparent transparent transparent var(--chat-accent); }
+
+/* Nice dark scrollbar */
+html[data-theme="dark"] #chatbot-popup .chatlogs::-webkit-scrollbar { width: 10px; }
+html[data-theme="dark"] #chatbot-popup .chatlogs::-webkit-scrollbar-track { background: var(--chat-dark-bg); }
+html[data-theme="dark"] #chatbot-popup .chatlogs::-webkit-scrollbar-thumb { background: var(--chat-dark-line); border-radius: 8px; }
+</style>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Abrar Fahim - Data Scientist | LLMs &amp; NLP Specialist</title>
+<meta content="Abrar Fahim · Data Scientist in London focused on LLMs, NLP, Cloud and ML." name="description"/>
+<style>
+/* Extra: ring layout used in HERO specials */
+.ring {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 12px;
+  place-items: center;
+  text-align: center;
+}
+.ring > div {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.ring > div:hover { background: var(--accent); color: #061307; border-color: transparent; }
+</style></head>
 <body>
-  <!-- Animated Background -->
-  <div class="animated-background">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-  </div>
-  <div class="grid-overlay"></div>
-
-  <!-- Header -->
-  <header class="topbar" id="topbar">
-    <div class="wrap bar">
-      <a href="#home" class="brand" aria-label="Home">
-        <div class="brand-badge">AF</div>
-        <div>
-          <strong>Abrar Fahim</strong>
-          <small>Data Scientist · London, UK</small>
-        </div>
-      </a>
-
-      <nav class="nav" aria-label="Primary">
-        <a href="#about" class="active">About</a>
-        <a href="#work">Work</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="actions">
-        <!-- Nicer CV button with icon -->
-        <a class="btn btn-accent" href="https://drive.google.com/file/d/1s0ybOKPL2PQrz_AMQObNCoAnzgS66nVW/view?usp=sharing" target="_blank" rel="noreferrer noopener">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-          <span>Download CV</span>
-        </a>
-        <button id="themeToggle" class="btn btn-ghost" type="button" aria-label="Toggle theme">🌙</button>
-      </div>
-    </div>
-  </header>
-
-      <div class="chatbot-container">
-      <div class="chatbot-bubble">Ask me anything about Abrar!</div>
-      <div id="chatbot-toggle" class="chatbot-button">
-        <img src="chat.gif" alt="Chat" class="chat-icon">
-      </div>
-    </div>
-
-    <!-- Chatbot Popup -->
-    <div id="chatbot-popup" class="chatbot-popup hidden">
-      <div class="chatbox">
-        <div class="chatlogs" id="chatlogs"></div>
-        <form class="chat-form" id="chat-form">
-          <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off" required>
-          <button type="submit">→</button>
-        </form>
-      </div>
-    </div>
-
-  <main id="home">
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div class="wrap">
-        <div class="hero-grid">
-          <!-- Intro -->
-          <div class="tile span-7 delay-1">
-            <div class="kicker">✨ Building practical AI systems</div>
-            <h1 class="h1">Hello, I'm Abrar - I turn <span style="color:var(--accent)">LLMs</span> & <span style="color:var(--accent)">NLP</span> into production value.</h1>
-            <p class="muted">3+ years across FinTech & Healthcare. UK Global Talent Visa (UKRI endorsed). Focused on LLM fine‑tuning, advanced RAG, topic modeling, and AWS deployments.</p>
-            <div class="pills">
-              <span class="pill"> LLM fine‑tuning</span>
-              <span class="pill"> RAG & evaluation</span>
-              <span class="pill"> AWS (S3 · EC2 · Lambda)</span>
-            </div>
-            <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
-              <a class="btn btn-accent" href="#projects">See projects ↗</a>
-              <!-- Branded LinkedIn button -->
-              <a class="btn btn-brand btn-linkedin" href="https://www.linkedin.com/in/abrar-fahim/" target="_blank" rel="noreferrer noopener" aria-label="Connect on LinkedIn">
-                <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0h4.8v2.2h.07c.67-1.27 2.3-2.6 4.73-2.6C21.4 7.6 24 10 24 14.3V24h-5v-8.3c0-2-0.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.4V24H7.5V8z"/>
-                </svg>
-                <span>LinkedIn</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Portrait -->
-          <div class="tile span-5 delay-2">
-            <div class="portrait" aria-hidden="true">
-              <img src="https://www.abrarfahim.co.uk/images/slider/best.webp" alt="Abrar portrait" />
-            </div>
-            <div style="display:flex;justify-content:space-between;margin-top:16px" class="muted">
-              <span>London, UK</span>
-              <span title="Open to Work">Open to collaborations</span>
-            </div>
-          </div>
-
-          <!-- Facts -->
-          <div class="tile span-4 delay-3">
-            <div class="facts">
-              <div class="fact"><div class="n">3+</div><div class="muted">Years experience</div></div>
-              <div class="fact"><div class="n">30</div><div class="muted">GitHub projects</div></div>
-              <div class="fact"><div class="n">5</div><div class="muted">Years UK visa</div></div>
-              <div class="fact"><div class="n">UKRI</div><div class="muted">Global Talent Visa</div></div>
-            </div>
-          </div>
-
-          <!-- Quick links (brand-styled) -->
-          <div class="tile span-4 delay-4">
-            <div class="quick-links" style="gap: 10px;">
-              <a class="btn btn-brand btn-email" href="mailto:abrar-personal@outlook.com">
-                <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                <span>Email</span>
-              </a>
-              <a class="btn btn-brand btn-github" href="https://github.com/fahimabrar" target="_blank" rel="noreferrer noopener">
-                <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.51 2.87 8.33 6.84 9.68.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05A9.2 9.2 0 0 1 12 7.13c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.02 1.63 1.02 2.75 0 3.94-2.33 4.8-4.56 5.06.36.32.67.94.67 1.9 0 1.37-.01 2.47-.01 2.81 0 .26.18.59.69.49A10.1 10.1 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
-                <span>GitHub</span>
-              </a>
-
-            </div>
-          </div>
-
-          <!-- Specialties ring -->
-          <div class="tile span-4 delay-3">
-            <div class="ring">
-              <div>LLMs</div><div>RAG</div><div>NLP</div>
-              <div>AWS</div><div>Pandas</div><div>scikit‑learn</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="work" class="section">
-      <div class="wrap">
-        <div class="head"><i></i><h2>Experience</h2></div>
-        <div class="grid g3">
-          <article class="card delay-1">
-            <div class="when">Jan 2023 - Present · Heco Analytics</div>
-            <h3>Consultant Data Scientist</h3>
-            <p class="muted">Developed AI tools for health economics using LLMs, topic modeling, and AWS. Prototype → production features.</p>
-          </article>
-          <article class="card delay-2">
-            <div class="when">Dec 2021 - Jan 2023 · Advanced Logic Analytics</div>
-            <h3>Data Scientist</h3>
-            <p class="muted">Built a news‑emotion stock observation system; data pipelines and evaluation loops with measurable impact.</p>
-          </article>
-          <article class="card delay-3">
-            <div class="when">Jul 2021 — Oct 2021 · City Maas</div>
-            <h3>Data Science Intern</h3>
-            <p class="muted">Developed an image captioning model for visually impaired users; experimented with CNN‑RNN variants.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section id="education" class="section">
-      <div class="wrap">
-        <div class="head"><i></i><h2>Education</h2></div>
-        <div class="grid g2">
-          <article class="card delay-1">
-            <div class="when">2020 - 2021 · Brunel University London</div>
-            <h3>MSc Data Science & Analytics</h3>
-            <p class="muted">ML, Quantitative Analysis, Visualization, HPC, Ethics & Governance, Digital Strategy.</p>
-          </article>
-          <article class="card delay-2">
-            <div class="when">2015 - 2019 · North South University</div>
-            <h3>BSc Computer Science & Engineering</h3>
-            <p class="muted">87% average. Capstone: ANPR (Top‑20 showcase).</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="section">
-      <div class="wrap">
-        <div class="head"><i></i><h2>Projects</h2></div>
-
-        <div class="filters" role="tablist" aria-label="Filter projects">
-          <button class="chip" data-filter="All" aria-pressed="true">All</button>
-          <button class="chip" data-filter="LLMs">LLMs</button>
-          <button class="chip" data-filter="NLP">NLP</button>
-          <button class="chip" data-filter="Chrome Extension">Chrome Extension</button>
-        </div>
-
-        <div class="rail" tabindex="0">
-          <div class="row" id="projRow">
-            <article class="proj" data-tags="LLMs,Data Science">
-              <div class="media">
-                <img src="https://www.abrarfahim.co.uk/images/portfolio/port-img11.webp" alt="Verbix preview" />
-                <span class="meta">Live</span>
-              </div>
-              <div class="body">
-                <h3 style="margin:0 0 8px;font-size:20px">Verbix - Practical AI Apps</h3>
-                <p class="muted" style="margin:0">Job Helper (Gemini) and story→movie via semantic search.</p>
-                <div class="tags"><span class="tag">LLMs</span><span class="tag">Vector Search</span><span class="tag">Python</span></div>
-                <p style="margin:12px 0 0"><a href="https://www.verbix.co.uk/" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Open ↗</a></p>
-              </div>
-            </article>
-
-            <article class="proj" data-tags="NLP,Data Science">
-              <div class="media">
-                <img src="https://www.abrarfahim.co.uk/images/portfolio/emotion_ai.webp" alt="Emotion AI for trading" />
-                <span class="meta">KTP</span>
-              </div>
-              <div class="body">
-                <h3 style="margin:0 0 8px;font-size:20px">Emotion AI for Trading</h3>
-                <p class="muted" style="margin:0">Emotion‑driven analytics; improved correlations (up to ~43%).</p>
-                <div class="tags"><span class="tag">FinTech</span><span class="tag">NLP</span></div>
-                <p style="margin:12px 0 0"><a href="https://www.brunel.ac.uk/research/projects/emotion-ai-for-trading-on-financial-markets" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Project page ↗</a></p>
-              </div>
-            </article>
-
-            <article class="proj" data-tags="NLP,Data Science">
-              <div class="media">
-                <img src="https://www.abrarfahim.co.uk/images/portfolio/port-img444.webp" alt="Image captioning" />
-                <span class="meta">MSc A+</span>
-              </div>
-              <div class="body">
-                <h3 style="margin:0 0 8px;font-size:20px">Image Captioning for Accessibility</h3>
-                <p class="muted" style="margin:0">Six CNN‑RNN variants; best BLEU ≈ 0.54; improvements proposed.</p>
-                <div class="tags"><span class="tag">CV</span><span class="tag">NLP</span></div>
-                <p style="margin:12px 0 0"><a href="https://drive.google.com/file/d/1BbL6WjCjF-AO-JOmg_DpJJ6t3_4sd7f3/view" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Report ↗</a></p>
-              </div>
-            </article>
-
-            <article class="proj" data-tags="Chrome Extension">
-              <div class="media">
-                <img src="https://www.abrarfahim.co.uk/images/quickreach.png" alt="quickreach for linkedin" />
-                <span class="meta">Chrome Extension</span>
-              </div>
-              <div class="body">
-                <h3 style="margin:0 0 8px;font-size:20px">QuickReach for Linkedin</h3>
-                <p class="muted" style="margin:0">Send instant Linkedin DM from drafts</p>
-                <div class="tags"><span class="tag">Linkedin DM</span><span class="tag">Communication</span></div>
-                <p style="margin:12px 0 0"><a href="https://chromewebstore.google.com/detail/quickreach-for-linkedin/cmejfoncckaegjgkdekeifmmdkidhbba" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Install ↗</a></p>
-              </div>
-            </article>
-
-
-            <article class="proj" data-tags="Chrome Extension">
-              <div class="media">
-                <img src="https://www.abrarfahim.co.uk/images/ss.png" alt="sentiment scope" />
-                <span class="meta">Chrome Extension</span>
-              </div>
-              <div class="body">
-                <h3 style="margin:0 0 8px;font-size:20px">Sentiment Scope</h3>
-                <p class="muted" style="margin:0">Emotional trajectory from news</p>
-                <div class="tags"><span class="tag">Time‑series</span><span class="tag">Dashboards</span></div>
-                <p style="margin:12px 0 0"><a href="https://chromewebstore.google.com/detail/sentiment-scope/gmoenhampdaoefjhjkdccceioohkhmap" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Install ↗</a></p>
-              </div>
-            </article>
-
-
-            <article class="proj" data-tags="Chrome Extension">
-              <div class="media">
-                <img src="https://www.abrarfahim.co.uk/images/webpage_summarizer.png" alt="webpage summarizer" />
-                <span class="meta">Chrome Extension</span>
-              </div>
-              <div class="body">
-                <h3 style="margin:0 0 8px;font-size:20px">Webpage Summarizer</h3>
-                <p class="muted" style="margin:0">A powerful Chrome extension that provides instant, precise summaries of any webpage.</p>
-                <div class="tags"><span class="tag">one click summary</span><span class="tag">AI</span></div>
-                <p style="margin:12px 0 0"><a href="https://chromewebstore.google.com/detail/webpage-summarizer/mlhoabnedbnggedofccedbfchklhdfac" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Install ↗</a></p>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section id="testimonials" class="section">
-      <div class="wrap">
-        <div class="head"><i></i><h2>Testimonials</h2></div>
-        <div class="grid g3">
-          <figure class="card delay-1" style="margin:0">
-            <blockquote class="muted" style="margin:0">“Abrar likes challenges and solves them with creative data‑science approaches. Excellent teamwork and work ethics.”</blockquote>
-            <figcaption class="muted" style="margin-top:16px">- Dr. Alaa Marshan, University of Surrey</figcaption>
-          </figure>
-          <figure class="card delay-2" style="margin:0">
-            <blockquote class="muted" style="margin:0">“The project was very well done. Abrar delivered solid results. Happy to provide a reference.”</blockquote>
-            <figcaption class="muted" style="margin-top:16px">- Nick Ellis, Advanced Logic Analytics</figcaption>
-          </figure>
-          <figure class="card delay-3" style="margin:0">
-            <blockquote class="muted" style="margin:0">“Skilled programmer and data scientist. Excellent work across platforms, including cloud.”</blockquote>
-            <figcaption class="muted" style="margin-top:16px">- Dr. David Bell, Heco Analytics</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-      <div class="wrap">
-        <div class="head"><i></i><h2>Contact</h2></div>
-        <div class="grid g3">
-          <div class="card delay-1">
-            <h3 style="margin:0 0 16px">Say hello</h3>
-            <ul class="list">
-              <li>📍 London, United Kingdom</li>
-              <li>✉️ <a href="mailto:abrar-personal@outlook.com" style="color:var(--accent);font-weight:500">abrar-personal@outlook.com</a></li>
-              <li>🔗 <a href="https://www.linkedin.com/in/abrar-fahim/" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">LinkedIn</a></li>
-              <li>🐙 <a href="https://github.com/fahimabrar" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">GitHub</a></li>
-            </ul>
-          </div>
-          <div class="card delay-2">
-            <h3 style="margin:0 0 16px">Quick form</h3>
-            <form class="form" action="https://formspree.io/f/your-id" method="POST">
-              <label class="sr" for="name">Name</label>
-              <input class="input" id="name" name="name" placeholder="Your name" required />
-              <label class="sr" for="email">Email</label>
-              <input class="input" id="email" type="email" name="email" placeholder="Your email" required />
-              <label class="sr" for="msg">Message</label>
-              <textarea class="input" id="msg" name="message" rows="4" placeholder="Hi Abrar, I need help with..." required></textarea>
-              <button class="btn btn-accent" type="submit">Send</button>
-              <p class="muted" style="margin:12px 0 0">Prefer email? <a href="mailto:abrar-personal@outlook.com" style="color:var(--accent);font-weight:500">abrar-personal@outlook.com</a></p>
-            </form>
-          </div>
-          <div class="card delay-3">
-            <h3 style="margin:0 0 16px">Availability</h3>
-            <p class="muted">Open to impactful roles & collaborations across LLMs, NLP, and data platforms.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>© <span id="year"></span> Abrar Fahim. All rights reserved.</footer>
-
-  <script>
+<!-- Animated Background -->
+<div class="animated-background">
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+</div>
+<div class="grid-overlay"></div>
+<!-- Header -->
+<header class="topbar" id="topbar">
+<div class="wrap bar">
+<a aria-label="Home" class="brand" href="#home">
+<div class="brand-badge">AF</div>
+<div>
+<strong>Abrar Fahim</strong>
+<small>Data Scientist · London, UK</small>
+</div>
+</a>
+<nav aria-label="Primary" class="nav">
+<a class="active" href="#about">About</a>
+<a href="#work">Work</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</nav>
+<div class="actions">
+<!-- Nicer CV button with icon -->
+<a class="btn btn-accent" href="https://drive.google.com/file/d/1s0ybOKPL2PQrz_AMQObNCoAnzgS66nVW/view?usp=sharing" rel="noreferrer noopener" target="_blank">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+<polyline points="7 10 12 15 17 10"></polyline>
+<line x1="12" x2="12" y1="15" y2="3"></line>
+</svg>
+<span>Download CV</span>
+</a>
+<button aria-label="Toggle theme" class="btn btn-ghost" id="themeToggle" type="button">🌙</button>
+</div>
+</div>
+</header>
+<div class="chatbot-container">
+<div class="chatbot-bubble">Ask me anything about Abrar!</div>
+<div class="chatbot-button" id="chatbot-toggle">
+<img alt="Chat" class="chat-icon" src="chat.gif"/>
+</div>
+</div>
+<!-- Chatbot Popup -->
+<div class="chatbot-popup hidden" id="chatbot-popup">
+<div class="chatbox">
+<div class="chatlogs" id="chatlogs"></div>
+<form class="chat-form" id="chat-form">
+<input autocomplete="off" id="user-input" placeholder="Type a message..." required="" type="text"/>
+<button type="submit">→</button>
+</form>
+</div>
+</div>
+<main id="home">
+<!-- HERO SECTION -->
+<section class="hero">
+<div class="wrap">
+<div class="hero-grid">
+<!-- Intro -->
+<div class="tile span-7 delay-1">
+<div class="kicker">✨ Building practical AI systems</div>
+<h1 class="h1">Hello, I'm Abrar - I turn <span style="color:var(--accent)">LLMs</span> &amp; <span style="color:var(--accent)">NLP</span> into production value.</h1>
+<p class="muted">3+ years across FinTech &amp; Healthcare. UK Global Talent Visa (UKRI endorsed). Focused on LLM fine‑tuning, advanced RAG, topic modeling, and AWS deployments.</p>
+<div class="pills">
+<span class="pill"> LLM fine‑tuning</span>
+<span class="pill"> RAG &amp; evaluation</span>
+<span class="pill"> AWS (S3 · EC2 · Lambda)</span>
+</div>
+<div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+<a class="btn btn-accent" href="#projects">See projects ↗</a>
+<!-- Branded LinkedIn button -->
+<a aria-label="Connect on LinkedIn" class="btn btn-brand btn-linkedin" href="https://www.linkedin.com/in/abrar-fahim/" rel="noreferrer noopener" target="_blank">
+<svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24">
+<path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0h4.8v2.2h.07c.67-1.27 2.3-2.6 4.73-2.6C21.4 7.6 24 10 24 14.3V24h-5v-8.3c0-2-0.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.4V24H7.5V8z"></path>
+</svg>
+<span>LinkedIn</span>
+</a>
+</div>
+</div>
+<!-- Portrait -->
+<div class="tile span-5 delay-2">
+<div aria-hidden="true" class="portrait">
+<img alt="Abrar portrait" src="https://www.abrarfahim.co.uk/images/slider/best.webp">
+</img></div>
+<div class="muted" style="display:flex;justify-content:space-between;margin-top:16px">
+<span>London, UK</span>
+<span title="Open to Work">Open to collaborations</span>
+</div>
+</div>
+<!-- Facts -->
+<div class="tile span-4 delay-3">
+<div class="facts">
+<div class="fact"><div class="n">3+</div><div class="muted">Years experience</div></div>
+<div class="fact"><div class="n">30</div><div class="muted">GitHub projects</div></div>
+<div class="fact"><div class="n">5</div><div class="muted">Years UK visa</div></div>
+<div class="fact"><div class="n">UKRI</div><div class="muted">Global Talent Visa</div></div>
+</div>
+</div>
+<!-- Quick links (brand-styled) -->
+<div class="tile span-4 delay-4">
+<div class="quick-links" style="gap: 10px;">
+<a class="btn btn-brand btn-email" href="mailto:abrar-personal@outlook.com">
+<svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+<span>Email</span>
+</a>
+<a class="btn btn-brand btn-github" href="https://github.com/fahimabrar" rel="noreferrer noopener" target="_blank">
+<svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.51 2.87 8.33 6.84 9.68.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05A9.2 9.2 0 0 1 12 7.13c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.02 1.63 1.02 2.75 0 3.94-2.33 4.8-4.56 5.06.36.32.67.94.67 1.9 0 1.37-.01 2.47-.01 2.81 0 .26.18.59.69.49A10.1 10.1 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"></path></svg>
+<span>GitHub</span>
+</a>
+</div>
+</div>
+<!-- Specialties ring -->
+<div class="tile span-4 delay-3">
+<div class="ring">
+<div>LLMs</div><div>RAG</div><div>NLP</div>
+<div>AWS</div><div>Pandas</div><div>scikit‑learn</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- EXPERIENCE -->
+<section class="section" id="work">
+<div class="wrap">
+<div class="head"><i></i><h2>Experience</h2></div>
+<div class="grid g3">
+<article class="card delay-1">
+<div class="when">Jan 2023 - Present · Heco Analytics</div>
+<h3>Consultant Data Scientist</h3>
+<p class="muted">Developed AI tools for health economics using LLMs, topic modeling, and AWS. Prototype → production features.</p>
+</article>
+<article class="card delay-2">
+<div class="when">Dec 2021 - Jan 2023 · Advanced Logic Analytics</div>
+<h3>Data Scientist</h3>
+<p class="muted">Built a news‑emotion stock observation system; data pipelines and evaluation loops with measurable impact.</p>
+</article>
+<article class="card delay-3">
+<div class="when">Jul 2021 — Oct 2021 · City Maas</div>
+<h3>Data Science Intern</h3>
+<p class="muted">Developed an image captioning model for visually impaired users; experimented with CNN‑RNN variants.</p>
+</article>
+</div>
+</div>
+</section>
+<!-- EDUCATION -->
+<section class="section" id="education">
+<div class="wrap">
+<div class="head"><i></i><h2>Education</h2></div>
+<div class="grid g2">
+<article class="card delay-1">
+<div class="when">2020 - 2021 · Brunel University London</div>
+<h3>MSc Data Science &amp; Analytics</h3>
+<p class="muted">ML, Quantitative Analysis, Visualization, HPC, Ethics &amp; Governance, Digital Strategy.</p>
+</article>
+<article class="card delay-2">
+<div class="when">2015 - 2019 · North South University</div>
+<h3>BSc Computer Science &amp; Engineering</h3>
+<p class="muted">87% average. Capstone: ANPR (Top‑20 showcase).</p>
+</article>
+</div>
+</div>
+</section>
+<!-- PROJECTS -->
+<section class="section" id="projects">
+<div class="wrap">
+<div class="head"><i></i><h2>Projects</h2></div>
+<div aria-label="Filter projects" class="filters" role="tablist">
+<button aria-pressed="true" class="chip" data-filter="All">All</button>
+<button class="chip" data-filter="LLMs">LLMs</button>
+<button class="chip" data-filter="NLP">NLP</button>
+<button class="chip" data-filter="Chrome Extension">Chrome Extension</button>
+</div>
+<div class="rail" tabindex="0">
+<div class="row" id="projRow">
+<article class="proj" data-tags="LLMs,Data Science">
+<div class="media">
+<img alt="Verbix preview" src="https://www.abrarfahim.co.uk/images/portfolio/port-img11.webp"/>
+<span class="meta">Live</span>
+</div>
+<div class="body">
+<h3 style="margin:0 0 8px;font-size:20px">Verbix - Practical AI Apps</h3>
+<p class="muted" style="margin:0">Job Helper (Gemini) and story→movie via semantic search.</p>
+<div class="tags"><span class="tag">LLMs</span><span class="tag">Vector Search</span><span class="tag">Python</span></div>
+<p style="margin:12px 0 0"><a href="https://www.verbix.co.uk/" rel="noreferrer noopener" style="color:var(--accent);font-weight:500" target="_blank">Open ↗</a></p>
+</div>
+</article>
+<article class="proj" data-tags="NLP,Data Science">
+<div class="media">
+<img alt="Emotion AI for trading" src="https://www.abrarfahim.co.uk/images/portfolio/emotion_ai.webp"/>
+<span class="meta">KTP</span>
+</div>
+<div class="body">
+<h3 style="margin:0 0 8px;font-size:20px">Emotion AI for Trading</h3>
+<p class="muted" style="margin:0">Emotion‑driven analytics; improved correlations (up to ~43%).</p>
+<div class="tags"><span class="tag">FinTech</span><span class="tag">NLP</span></div>
+<p style="margin:12px 0 0"><a href="https://www.brunel.ac.uk/research/projects/emotion-ai-for-trading-on-financial-markets" rel="noreferrer noopener" style="color:var(--accent);font-weight:500" target="_blank">Project page ↗</a></p>
+</div>
+</article>
+<article class="proj" data-tags="NLP,Data Science">
+<div class="media">
+<img alt="Image captioning" src="https://www.abrarfahim.co.uk/images/portfolio/port-img444.webp"/>
+<span class="meta">MSc A+</span>
+</div>
+<div class="body">
+<h3 style="margin:0 0 8px;font-size:20px">Image Captioning for Accessibility</h3>
+<p class="muted" style="margin:0">Six CNN‑RNN variants; best BLEU ≈ 0.54; improvements proposed.</p>
+<div class="tags"><span class="tag">CV</span><span class="tag">NLP</span></div>
+<p style="margin:12px 0 0"><a href="https://drive.google.com/file/d/1BbL6WjCjF-AO-JOmg_DpJJ6t3_4sd7f3/view" rel="noreferrer noopener" style="color:var(--accent);font-weight:500" target="_blank">Report ↗</a></p>
+</div>
+</article>
+<article class="proj" data-tags="Chrome Extension">
+<div class="media">
+<img alt="quickreach for linkedin" src="https://www.abrarfahim.co.uk/images/quickreach.png"/>
+<span class="meta">Chrome Extension</span>
+</div>
+<div class="body">
+<h3 style="margin:0 0 8px;font-size:20px">QuickReach for Linkedin</h3>
+<p class="muted" style="margin:0">Send instant Linkedin DM from drafts</p>
+<div class="tags"><span class="tag">Linkedin DM</span><span class="tag">Communication</span></div>
+<p style="margin:12px 0 0"><a href="https://chromewebstore.google.com/detail/quickreach-for-linkedin/cmejfoncckaegjgkdekeifmmdkidhbba" rel="noreferrer noopener" style="color:var(--accent);font-weight:500" target="_blank">Install ↗</a></p>
+</div>
+</article>
+<article class="proj" data-tags="Chrome Extension">
+<div class="media">
+<img alt="sentiment scope" src="https://www.abrarfahim.co.uk/images/ss.png"/>
+<span class="meta">Chrome Extension</span>
+</div>
+<div class="body">
+<h3 style="margin:0 0 8px;font-size:20px">Sentiment Scope</h3>
+<p class="muted" style="margin:0">Emotional trajectory from news</p>
+<div class="tags"><span class="tag">Time‑series</span><span class="tag">Dashboards</span></div>
+<p style="margin:12px 0 0"><a href="https://chromewebstore.google.com/detail/sentiment-scope/gmoenhampdaoefjhjkdccceioohkhmap" rel="noreferrer noopener" style="color:var(--accent);font-weight:500" target="_blank">Install ↗</a></p>
+</div>
+</article>
+<article class="proj" data-tags="Chrome Extension">
+<div class="media">
+<img alt="webpage summarizer" src="https://www.abrarfahim.co.uk/images/webpage_summarizer.png"/>
+<span class="meta">Chrome Extension</span>
+</div>
+<div class="body">
+<h3 style="margin:0 0 8px;font-size:20px">Webpage Summarizer</h3>
+<p class="muted" style="margin:0">A powerful Chrome extension that provides instant, precise summaries of any webpage.</p>
+<div class="tags"><span class="tag">one click summary</span><span class="tag">AI</span></div>
+<p style="margin:12px 0 0"><a href="https://chromewebstore.google.com/detail/webpage-summarizer/mlhoabnedbnggedofccedbfchklhdfac" rel="noreferrer noopener" style="color:var(--accent);font-weight:500" target="_blank">Install ↗</a></p>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+<div class="wrap">
+<div class="head"><i></i><h2>Testimonials</h2></div>
+<div class="grid g3">
+<figure class="card delay-1" style="margin:0">
+<blockquote class="muted" style="margin:0">“Abrar likes challenges and solves them with creative data‑science approaches. Excellent teamwork and work ethics.”</blockquote>
+<figcaption class="muted" style="margin-top:16px">- Dr. Alaa Marshan, University of Surrey</figcaption>
+</figure>
+<figure class="card delay-2" style="margin:0">
+<blockquote class="muted" style="margin:0">“The project was very well done. Abrar delivered solid results. Happy to provide a reference.”</blockquote>
+<figcaption class="muted" style="margin-top:16px">- Nick Ellis, Advanced Logic Analytics</figcaption>
+</figure>
+<figure class="card delay-3" style="margin:0">
+<blockquote class="muted" style="margin:0">“Skilled programmer and data scientist. Excellent work across platforms, including cloud.”</blockquote>
+<figcaption class="muted" style="margin-top:16px">- Dr. David Bell, Heco Analytics</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<!-- CONTACT -->
+<section class="section" id="contact">
+<div class="wrap">
+<div class="head"><i></i><h2>Contact</h2></div>
+<div class="grid g3">
+<div class="card delay-1">
+<h3 style="margin:0 0 16px">Say hello</h3>
+<ul class="list">
+<li>📍 London, United Kingdom</li>
+<li>✉️ <a href="mailto:abrar-personal@outlook.com" style="color:var(--accent);font-weight:500">abrar-personal@outlook.com</a></li>
+<li>🔗 <a href="https://www.linkedin.com/in/abrar-fahim/" rel="noreferrer noopener" style="color:var(--accent);font-weight:500" target="_blank">LinkedIn</a></li>
+<li>🐙 <a href="https://github.com/fahimabrar" rel="noreferrer noopener" style="color:var(--accent);font-weight:500" target="_blank">GitHub</a></li>
+</ul>
+</div>
+<div class="card delay-2">
+<h3 style="margin:0 0 16px">Quick form</h3>
+<form action="https://formspree.io/f/your-id" class="form" method="POST">
+<label class="sr" for="name">Name</label>
+<input class="input" id="name" name="name" placeholder="Your name" required="">
+<label class="sr" for="email">Email</label>
+<input class="input" id="email" name="email" placeholder="Your email" required="" type="email"/>
+<label class="sr" for="msg">Message</label>
+<textarea class="input" id="msg" name="message" placeholder="Hi Abrar, I need help with..." required="" rows="4"></textarea>
+<button class="btn btn-accent" type="submit">Send</button>
+<p class="muted" style="margin:12px 0 0">Prefer email? <a href="mailto:abrar-personal@outlook.com" style="color:var(--accent);font-weight:500">abrar-personal@outlook.com</a></p>
+</input></form>
+</div>
+<div class="card delay-3">
+<h3 style="margin:0 0 16px">Availability</h3>
+<p class="muted">Open to impactful roles &amp; collaborations across LLMs, NLP, and data platforms.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>© <span id="year"></span> Abrar Fahim. All rights reserved.</footer>
+<script>
     // Theme toggle with localStorage
     (function(){
       const root = document.documentElement;
@@ -419,34 +775,45 @@
       }
     });
   </script>
+<!-- ================== All js here ================ -->
 
 
-  <!-- ================== All js here ================ -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="script.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- knob-js -->
-    <script src="js/jquery-appear.js"></script>
-    <script src="js/jquery-knob.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/jquery.fancybox.min.js"></script>
-    <script src="js/waypoint.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/image-loaded.min.js"></script>
-    <script src="js/counterup-min.js"></script>
-    <script src="js/one-page-nav-min.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/parallax.js"></script>
-    <!-- map js -->
-    <script src="js/leaflet.js"></script>
-    <script src="js/typer.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/vanilla-tilt.min.js"></script>
-    <script src="js/jquery.meanmenu.min.js"></script>
-    <script src="js/main.js"></script>
 
-</body>
+
+
+<!-- knob-js -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- map js -->
+
+
+
+
+
+
+
+<script>
+// Chatbot toggle (open/close)
+(function(){
+  const toggle = document.getElementById('chatbot-toggle');
+  const popup = document.getElementById('chatbot-popup');
+  if (toggle && popup) {
+    toggle.addEventListener('click', ()=>{
+      popup.classList.toggle('hidden');
+      // focus the input when opened
+      const input = popup.querySelector('#user-input');
+      if (!popup.classList.contains('hidden') && input) input.focus();
+    });
+  }
+})();
+</script></body>
 </html>
