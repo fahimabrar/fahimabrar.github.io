@@ -1,1385 +1,624 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
-
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Abrar - Data Scientist</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" href="images/logo/favicon.webp" type="image/x-icon">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abrar Fahim - Data Scientist | LLMs & NLP Specialist</title>
+  <meta name="description" content="Abrar Fahim · Data Scientist in London focused on LLMs, NLP, Cloud and ML.">
 
-    <link rel="stylesheet" href="style.css">
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== BASE STYLES ===== */
+    :root {
+      --accent: #80db66;
+      --accent-dark: #5cbd44;
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,0.06);
+      --ink: #e6edf3;
+      --muted: #9fb0c3;
+      --line: rgba(255,255,255,0.12);
+      --tile: #0f172a;
+      --shadow: 0 12px 28px rgba(0,0,0,0.35);
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --border-radius: 24px;
+      /* brand colors */
+      --linkedin: #0A66C2;
+      --linkedin-hover: #004182;
+      --github: #24292f;
+      --github-hover: #171a1f;
+      --email: #EA4335; /* Gmail red */
+      --email-hover: #C5362C;
+    }
 
+    @media (prefers-color-scheme: light) {
+      html[data-theme="auto"] {
+        --bg: #f8fafc;
+        --panel: rgba(0,0,0,0.04);
+        --ink: #0f172a;
+        --muted: #475569;
+        --line: #e2e8f0;
+        --tile: #ffffff;
+        --shadow: 0 10px 24px rgba(2,6,23,0.08);
+      }
+    }
 
-    <!-- All css here -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="css/slick.css">
-    <link rel="stylesheet" href="css/leaflet.css">
-    <link rel="stylesheet" href="css/meanmenu.css">
-    <link rel="stylesheet" href="css/default.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    html[data-theme="light"] {
+      --bg: #f8fafc;
+      --panel: rgba(0,0,0,0.04);
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --tile: #ffffff;
+      --shadow: 0 10px 24px rgba(2,6,23,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    /* Screen-reader-only utility (labels use .sr) */
+    .sr { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    .animated-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; }
+    .particle { position: absolute; border-radius: 50%; background: radial-gradient(circle, var(--accent) 0%, transparent 70%); opacity: 0.1; filter: blur(20px); animation: float 25s infinite linear; }
+    .particle:nth-child(1) { width: 400px; height: 400px; top: 10%; left: 5%; animation-duration: 30s; }
+    .particle:nth-child(2) { width: 300px; height: 300px; top: 60%; left: 80%; animation-duration: 40s; animation-delay: -10s; }
+    .particle:nth-child(3) { width: 200px; height: 200px; top: 20%; left: 70%; animation-duration: 35s; animation-delay: -5s; }
+    .grid-overlay { position: fixed; inset: 0; opacity: 0.08; background-image: linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px); background-size: 40px 40px; color: #fff; z-index: -1; }
+
+    /* ===== HEADER ===== */
+    .topbar { position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--line); backdrop-filter: saturate(160%) blur(10px); background: color-mix(in srgb, var(--bg) 85%, transparent); transition: var(--transition); }
+    .topbar.scrolled { box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+    .wrap { max-width: 1200px; margin: auto; padding: 0 20px; }
+    .bar { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-badge { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 16px; border: 1px solid var(--line); background: var(--panel); font-weight: 800; font-size: 20px; transition: var(--transition); }
+    .brand:hover .brand-badge { transform: rotate(10deg); background: var(--accent); color: #061307; }
+    .brand small { display: block; color: var(--muted); font-size: 14px; line-height: 1.2; margin-top: 4px; }
+    .nav { display: none; gap: 24px; }
+    .nav a { color: var(--muted); position: relative; padding: 8px 0; font-weight: 500; }
+    .nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent); transition: var(--transition); }
+    .nav a:hover, .nav a.active { color: var(--ink); }
+    .nav a:hover::after, .nav a.active::after { width: 100%; }
+    .actions { display: flex; align-items: center; gap: 12px; }
+
+    /* Base button */
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 14px; border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow); font-weight: 600; transition: var(--transition); transform: translateY(0); }
+    .btn svg { width: 18px; height: 18px; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.25); }
+    .btn:active { transform: translateY(0); }
+    .btn-accent { background: var(--accent); color: #061307; border-color: transparent; }
+    .btn-accent:hover { background: var(--accent-dark); }
+    .btn-ghost { background: var(--panel); color: var(--ink); }
+    .btn-ghost:hover { border-color: var(--accent); }
+
+    /* Brand buttons */
+    .btn-brand { color: #fff; border: none; }
+    .btn-linkedin { background: var(--linkedin); }
+    .btn-linkedin:hover { background: var(--linkedin-hover); }
+    .btn-github { background: var(--github); }
+    .btn-github:hover { background: var(--github-hover); }
+    .btn-email { background: var(--email); }
+    .btn-email:hover { background: var(--email-hover); }
+
+    @media (min-width: 900px) { .nav { display: flex; } }
+
+    /* ===== HERO SECTION ===== */
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 0 60px; position: relative; }
+    .hero-grid { display: grid; gap: 24px; width: 100%; }
+    @media (min-width: 900px) {
+      .hero-grid { grid-template-columns: repeat(12, 1fr); }
+      .span-7 { grid-column: span 7; }
+      .span-5 { grid-column: span 5; }
+      .span-4 { grid-column: span 4; }
+    }
+
+    /* Make first cards non-transparent (use solid tile background) */
+    .tile { position: relative; overflow: hidden; border-radius: var(--border-radius); border: 1px solid var(--line); background: var(--tile); padding: 24px; box-shadow: var(--shadow); transition: var(--transition); transform: translateY(0); opacity: 0; animation: fadeUp 0.8s forwards; }
+    .tile:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
+    .kicker { display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--line); background: var(--panel); color: var(--muted); padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 500; margin-bottom: 16px; animation: pulse 2s infinite; }
+    .h1 { font-size: clamp(32px, 4.5vw, 52px); line-height: 1.15; margin: 12px 0; font-weight: 800; }
+    .muted { color: var(--muted); }
+    .pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+    .pill { border: 1px solid var(--line); background: var(--panel); padding: 8px 14px; border-radius: 999px; font-size: 14px; color: var(--ink); transition: var(--transition); }
+    .pill:hover { transform: translateY(-3px); background: var(--accent); color: #061307; border-color: transparent; }
+    .portrait { position: relative; aspect-ratio: 4/3; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); transition: var(--transition); transform: translateY(0); }
+    .portrait:hover { transform: translateY(-8px); }
+    .portrait::before { content: ""; position: absolute; inset: 0; background: radial-gradient(650px 200px at 10% 0%, rgba(128,219,102,0.2), transparent), radial-gradient(500px 200px at 90% 100%, rgba(99,102,241,0.18), transparent); z-index: 1; }
+    .portrait img { position: relative; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .portrait:hover img { transform: scale(1.05); }
+    .facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .fact { border: 1px solid var(--line); background: var(--panel); border-radius: 20px; padding: 20px; transition: var(--transition); }
+    .fact:hover { transform: translateY(-5px); background: rgba(128, 219, 102, 0.1); }
+    .fact .n { font-weight: 800; font-size: 32px; color: var(--accent); margin-bottom: 4px; }
+
+    /* ===== SECTIONS ===== */
+    .section { padding: 70px 0 28px; position: relative; } /* reduced bottom padding to remove big gaps */
+    .section .wrap > *:last-child { margin-bottom: 0; }
+
+    .head { display: flex; align-items: center; gap: 16px; margin: 0 0 32px; }
+    .head i { width: 8px; height: 32px; background: var(--accent); border-radius: 8px; display: inline-block; }
+    h2 { font-size: clamp(28px, 3vw, 36px); margin: 0; font-weight: 800; }
+    h3 { font-size: 22px; margin: 0 0 12px; font-weight: 700; }
+
+    /* ===== CARDS ===== */
+    .grid { display: grid; gap: 24px; }
+    .g3 { grid-template-columns: repeat(1, 1fr); }
+    .g2 { grid-template-columns: repeat(1, 1fr); }
+    @media (min-width: 768px) {
+      .g3 { grid-template-columns: repeat(3, 1fr); }
+      .g2 { grid-template-columns: repeat(2, 1fr); }
+    }
+    .card { border: 1px solid var(--line); background: var(--tile); border-radius: var(--border-radius); padding: 28px; box-shadow: var(--shadow); transition: var(--transition); transform: translateY(0); opacity: 0; animation: fadeUp 0.8s forwards; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .when { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+
+    /* ===== PROJECTS ===== */
+    .filters { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+    .chip { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 10px 18px; font-size: 14px; color: var(--ink); transition: var(--transition); cursor: pointer; }
+    .chip:hover, .chip[aria-pressed="true"] { background: var(--accent); color: #061307; border-color: transparent; }
+    .rail { overflow-x: auto; padding-bottom: 12px; margin: 0 -20px 0 -20px; padding-left: 20px; }
+    .rail::-webkit-scrollbar { display: none; }
+    .row { display: flex; gap: 24px; }
+    .proj { width: 320px; flex: 0 0 auto; border: 1px solid var(--line); background: var(--tile); border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); transform: translateY(0); }
+    .proj:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .proj .media { position: relative; height: 200px; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .proj .media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .proj:hover .media img { transform: scale(1.1); }
+    .meta { position: absolute; top: 16px; left: 16px; background: rgba(11, 16, 32, 0.75); color: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 12px; z-index: 2; }
+    .proj .body { padding: 24px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+    .tag { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 6px 12px; font-size: 12px; color: var(--muted); }
+
+    /* ===== CONTACT ===== */
+    .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+    .list li { display: flex; gap: 12px; align-items: center; color: var(--muted); }
+    .form { display: grid; gap: 16px; }
+    .input { padding: 16px; border-radius: 16px; border: 1px solid var(--line); background: var(--tile); color: var(--ink); font: inherit; transition: var(--transition); }
+    .input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
+
+    /* ===== FOOTER ===== */
+    footer { border-top: 1px solid var(--line); color: var(--muted); padding: 32px 20px; text-align: center; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes float { 0% { transform: translate(0, 0);} 25% { transform: translate(10px, -10px);} 50% { transform: translate(20px, 5px);} 75% { transform: translate(10px, 15px);} 100% { transform: translate(0, 0);} }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(128, 219, 102, 0.4);} 70% { box-shadow: 0 0 0 10px rgba(128, 219, 102, 0);} 100% { box-shadow: 0 0 0 0 rgba(128, 219, 102, 0);} }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* ===== RESPONSIVE ADJUSTMENTS ===== */
+    @media (max-width: 768px) {
+      .bar { height: 70px; }
+      .hero { padding: 80px 0 40px; }
+      .section { padding: 50px 0 20px; }
+      .tile { padding: 20px; }
+      .h1 { font-size: 32px; }
+    }
+  </style>
 </head>
+<body>
+  <!-- Animated Background -->
+  <div class="animated-background">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  <div class="grid-overlay"></div>
 
-<body data-background="images/slider/new.webp">
-    <!--[if lte IE 9]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-    <![endif]-->
-
-    <!--  ====== preloader=============================================  -->
-    <div id="preloader">
-        <div id="loading">
-            <div id="loading-center">
-                <div id="loading-center-absolute">
-                    <div class="object" id="object_one"></div>
-                    <div class="object" id="object_two"></div>
-                    <div class="object" id="object_three"></div>
-                </div>
-            </div>
+  <!-- Header -->
+  <header class="topbar" id="topbar">
+    <div class="wrap bar">
+      <a href="#home" class="brand" aria-label="Home">
+        <div class="brand-badge">AF</div>
+        <div>
+          <strong>Abrar Fahim</strong>
+          <small>Data Scientist · London, UK</small>
         </div>
-    </div><!-- /preloader -->
+      </a>
 
+      <nav class="nav" aria-label="Primary">
+        <a href="#about" class="active">About</a>
+        <a href="#work">Work</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-    <div class="chatbot-container">
-      <div class="chatbot-bubble">Ask me anything about Abrar!</div>
-      <div id="chatbot-toggle" class="chatbot-button">
-        <img src="chat.gif" alt="Chat" class="chat-icon">
+      <div class="actions">
+        <!-- Nicer CV button with icon -->
+        <a class="btn btn-accent" href="https://drive.google.com/file/d/1s0ybOKPL2PQrz_AMQObNCoAnzgS66nVW/view?usp=sharing" target="_blank" rel="noreferrer noopener">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Download CV</span>
+        </a>
+        <button id="themeToggle" class="btn btn-ghost" type="button" aria-label="Toggle theme">🌙</button>
       </div>
     </div>
+  </header>
 
-
-
-    <!-- Chatbot Popup -->
-    <div id="chatbot-popup" class="chatbot-popup hidden">
-      <div class="chatbox">
-        <div class="chatlogs" id="chatlogs"></div>
-        <form class="chat-form" id="chat-form">
-          <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off" required>
-          <button type="submit">→</button>
-        </form>
-      </div>
-    </div>
-
-
-    <!--  ====== header-area-start
-    ============================================================ -->
-    <header>
-        <div id="header-sticky" class="transparent-header header-area">
-            <div class="header">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-5">
-                            <div class="logo mt-50 mb-50 transition5">
-                                <a class="header-logo" href="index.html"><img src="images/logo/abrar.webp"
-                                        alt="abrar"></a>
-                            </div>
-                        </div><!-- /col -->
-                        <div
-                            class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-7 pl-0 d-flex justify-content-end align-items-center">
-                            <div class="main-menu">
-                                <nav id="mobile-menu">
-                                    <ul class="d-block">
-                                        <li>
-                                            <a class="active" href="#home">Home</a>
-                                        </li>
-                                        <li>
-                                            <a href="#about">About</a>
-                                        </li>
-                                        <li>
-                                            <a href="#service">Skills</a>
-                                        </li>
-                                        <li>
-                                            <a href="#work">Works</a>
-                                        </li>
-                                        <li>
-                                            <a href="#contact">Contact</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div><!-- /main-menu -->
-                            <div class="header-btn pl-45">
-                                <a href="https://drive.google.com/file/d/1s0ybOKPL2PQrz_AMQObNCoAnzgS66nVW/view?usp=sharing" class="white-text text-uppercase d-inline-block">download cv</a>
-                            </div><!-- /header-btn -->
-                            <div class="mobile-m-bar d-block d-lg-none ml-30">
-                                <a class="mobile-menubar theme-color primary-hover" href="javascript:void(0);"><i
-                                        class="far fa-bars"></i></a>
-                            </div>
-                        </div><!-- /col -->
-                    </div><!-- /row -->
-                </div><!-- /container -->
+  <main id="home">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <!-- Intro -->
+          <div class="tile span-7 delay-1">
+            <div class="kicker">✨ Building practical AI systems</div>
+            <h1 class="h1">Hello, I'm Abrar - I turn <span style="color:var(--accent)">LLMs</span> & <span style="color:var(--accent)">NLP</span> into production value.</h1>
+            <p class="muted">3+ years across FinTech & Healthcare. UK Global Talent Visa (UKRI endorsed). Focused on LLM fine‑tuning, advanced RAG, topic modeling, and AWS deployments.</p>
+            <div class="pills">
+              <span class="pill"> LLM fine‑tuning</span>
+              <span class="pill"> RAG & evaluation</span>
+              <span class="pill"> AWS (S3 · EC2 · Lambda)</span>
             </div>
-        </div><!-- /header-bottom -->
-    </header>
-    <!--  header-area-end  -->
-
-
-    <!--  ====== header extra info start
-    ============================================================ -->
-
-    <!-- side-mobile-menu start -->
-    <div class="side-mobile-menu pt-15 pb-30 pl-30 pr-20 pb-100">
-        <div class="d-fle justify-content-between w-100">
-            <div class="close-icon d-inline-block float-right clear-both mt-20 mb-15">
-                <a href="javascript:void(0);"><span class="icon-clear theme-color"><i
-                            class="fa fa-times"></i></span></a>
+            <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+              <a class="btn btn-accent" href="#projects">See projects ↗</a>
+              <!-- Branded LinkedIn button -->
+              <a class="btn btn-brand btn-linkedin" href="https://www.linkedin.com/in/abrar-fahim/" target="_blank" rel="noreferrer noopener" aria-label="Connect on LinkedIn">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0h4.8v2.2h.07c.67-1.27 2.3-2.6 4.73-2.6C21.4 7.6 24 10 24 14.3V24h-5v-8.3c0-2-0.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.4V24H7.5V8z"/>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
             </div>
-        </div>
-        <div class="mobile-menu mt-10"></div>
-        <h5 class="text-white text-center mt-35 pb-1 d-inline-block ml-3">Follow me</h5>
-        <ul class="social social-bg text-center d-flex mt-10 ml-3">
-
-            <li class="mr-2 rotate-hover">
-                <a class="linkedin-bg text-center pr-0 text-white d-block rotate transition-3" href="https://www.linkedin.com/in/abrar-fahim/"><i
-                        class="fab fa-linkedin-in"></i></a>
-            </li>
-        </ul><!-- social -->
-    </div><!-- /side-mobile-menu -->
-    <div class="body-overlay"></div>
-    <!-- header extra info end  -->
-
-    <main class="over-hiddenn">
-
-        <!-- ====== slider-area-start
-        ==================================================== -->
-        <div id="home" class="slider-area slider-bg-color over-hidden">
-            <div class="single-slider slider-height over-hidden position-relative xxl-device-width bg-cover no-repeat"
-                data-background="images/slider/1.jpg">
-
-                <div id="scene" class="parallax position-absolute w-100 h-100 z-index1">
-                    <img data-depth="0.20" class="hero-shape hero-shape1 position-absolute d-none d-lg-inline-block"
-                        src="images/shape/shape1.webp" alt="a"><!-- /hero-shape1 -->
-                    <img data-depth="0.15" class="hero-shape hero-shape2 position-absolute d-none d-lg-inline-block"
-                        src="images/shape/shape2.webp" alt="a"><!-- /hero-shape2 -->
-                    <img data-depth="0.30" class="hero-shape hero-shape3 position-absolute d-none d-lg-inline-block"
-                        src="images/shape/Shape3.webp" alt="a"><!-- /hero-shape3 -->
-                    <img data-depth="0.10" class="hero-shape hero-shape4 position-absolute d-none d-lg-inline-block"
-                        src="images/shape/shape4.webp" alt="a"><!-- /hero-shape4 -->
-                </div><!-- /parallax -->
-
-                <div class="container slider-height d-flex align-items-end">
-                    <div class="row justify-content-center align-items-center h-100">
-
-                        <div class="col-xl-5 col-lg-6 col-md-12 col-sm-11 col-12  d-flex align-items-center justify-content-center">
-                            <div class="slider-wrapper h-100">
-                                <div class="slider-content text-center mt--45 text-lg-left position-relative z-index11"
-                                    data-aos="fade-right" data-aos-duration="2200" data-aos-delay="1000">
-                                    <h1 class="mb-15 white-text">
-                                        <span class="sub-heading d-block text-uppercase theme-color mb-0">Hello
-                                            I’m</span>
-                                        Abrar Fahim
-                                    </h1>
-                                    <h2 class="text-capitalize white-text mb-40">
-                                        A Passionate
-                                        <span class="d-text d-block d-sm-inline-block">
-                                            <span class="typer theme-color d-inline-block pl-2" id="main"
-                                                data-words="Data Scientist, Researcher"
-                                                data-delay="100" data-colors="#80db66"></span><span
-                                                class="cursor theme-color d-inline-block" data-owner="main"></span>
-                                        </span>
-                                    </h2>
-                                </div><!-- /slider-content -->
-                            </div><!-- /slider-wrapper -->
-                        </div><!-- /col -->
-
-                        <div
-                            class="col-xl-7 col-lg-6 col-md-7 col-sm-10 col-12 d-flex justify-content-center align-items-end h-100">
-                            <div class="slider-img pl-120 position-relative z-index1">
-                                <img src="images/slider/best.webp" alt="hero image">
-                            </div><!-- /slider-img -->
-                        </div><!-- /col -->
-
-                    </div><!-- /row -->
-                </div><!-- /container -->
-
-
-                <div class="slider-social-link position-absolute right-0 d-none d-md-block z-index11">
-                    <ul class="social pr-60">
-
-                        <li class="mt-10 mb-10 rotate-hover">
-                            <a class="text-white text-center d-inline-block rotate" href="https://www.linkedin.com/in/abrar-fahim/"><i
-                                    class="fab fa-linkedin-in"></i></a>
-                        </li>
-                    </ul><!-- social -->
-                </div><!-- /slider-social-link -->
-            </div><!-- /single-slider -->
-
-        </div>
-        <!-- slider-area-end  -->
-
-
-
-        <!-- ====== intro-feature-area-start
-        ================================================== -->
-        <div class="intro-feature-area over-hidden position-relative section-bg">
-            <div class="container"><br><br>
-                <h2 style="color: green;"><u>My Area of Expertise</u></h2>
-                <div class="row single-intro-feature-wrapper justify-content-center pt-170 pb-140">
-                    <div class="col-xl-3  col-lg-3  col-md-6  col-sm-9 col-11">
-                        <div class="single-intro-feature-content white-bg border-radius10 transition5 mb-30" data-tilt data-tilt-max="10">
-                            <div class="intro-ft-icon d-inline-block mb-30 transition5">
-                                <img src="images/icon/llm.webp" alt="icon1">
-                            </div><!-- /intro ft-icon -->
-                            <div class="intro-feature-text">
-                                <h4 class="mb-22">Large Language Models</h4>
-                                <p>Fine Tuning a Large Language Model (LLM) | Retrieval Augmented Generation (RAG) |  Application Development</p>
-                              </div>
-                        </div><!-- /single-intro-feature-content -->
-                    </div><!-- /col -->
-
-                    <div class="col-xl-3  col-lg-3  col-md-6  col-sm-9 col-11">
-                        <div class="single-intro-feature-content white-bg border-radius10 transition5 mb-30 intro-feature-margin mt-60" data-tilt data-tilt-max="10">
-                            <div class="intro-ft-icon d-inline-block mb-30 transition5">
-                                <img src="images/icon/nlp.webp" alt="icon1">
-                            </div><!-- /intro ft-icon -->
-                            <div class="intro-feature-text">
-                                <h4 class="mb-22">Natural Language Processing</h4>
-                                <p>Emotion in Large Scale News data | Topic Modeling | Fact Induction in Documents</p>
-                            </div>
-                        </div><!-- /single-intro-feature-content -->
-                    </div><!-- /col -->
-
-                    <div class="col-xl-3  col-lg-3  col-md-6  col-sm-9 col-11">
-                        <div class="single-intro-feature-content white-bg border-radius10 transition5 mb-30" data-tilt data-tilt-max="10">
-                            <div class="intro-ft-icon d-inline-block mb-30 transition5">
-                                <img src="images/icon/cloud.webp" alt="icon1">
-                            </div><!-- /intro ft-icon -->
-                            <div class="intro-feature-text">
-                                <h4 class="mb-22">Cloud Computing</h4>
-                                <p>Deployment of a Web Scraper | RAG deployment on AWS | S3, EC2, Lambda</p>
-                            </div>
-                        </div><!-- /single-intro-feature-content -->
-                    </div><!-- /col -->
-
-                    <div class="col-xl-3  col-lg-3  col-md-6  col-sm-9 col-11">
-                        <div
-                            class="single-intro-feature-content white-bg border-radius10 transition5 mb-30 intro-feature-margin mt-60" data-tilt data-tilt-max="10">
-                            <div class="intro-ft-icon d-inline-block mb-30 transition5">
-                                <img src="images/icon/ds.webp" alt="icon1">
-                            </div><!-- /intro ft-icon -->
-                            <div class="intro-feature-text">
-                                <h4 class="mb-22">Data Science</h4>
-                                <p>Machine Learning Algorithms | Prediction and Modeling</p>
-                            </div>
-                        </div><!-- /single-intro-feature-content -->
-                    </div><!-- /col -->
-                </div><!-- /row -->
-            </div><!-- /container -->
-            <div class="intro-feature-text-style position-absolute d-none d-md-inline-block">
-                <span class="d-inline-block">Abrar</span>
-            </div><!-- /intro-feature-text -->
-            <div class="intro-feature-icon position-absolute d-none d-md-inline-block zoom-animation">
-                <img src="images/shape/content-shape1.webp" alt="intro shape 1">
-            </div><!-- /intro-feature-icon -->
-        </div>
-        <!-- intro-area-end  -->
-
-
-
-        <!-- ====== about-area-start
-        ==================================================== -->
-        <div id="about" class="about-area over-hidden">
-            <div class="about-content-wrapper about-margin mt-170 mb-110 position-relative">
-                <div class="container">
-                    <div class="row justify-content-center">
-
-                        <div class="col-xl-6 col-lg-6 col-md-8 offset-md-0 col-sm-10 col-10">
-                            <div class="about-img-wrapper position-relative mb-90">
-                                <div class="about-img position-relative z-index11" data-aos="fade-right"
-                                    data-aos-duration="2000" data-aos-delay="100">
-                                    <div class="about-img-over pl-50 transition5 d-inline-block position-relative">
-                                        <div class="position-relative z-index11" data-tilt data-tilt-max="10">
-                                            <img class="border-radius10 position-relative z-index11" src="images/about/about_img.webp" alt="about image 1">
-                                        </div>
-
-                                        <div class="about-shape1 position-absolute" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="800"></div><!-- /about-shape1 -->
-                                        <div class="about-shape2 position-absolute z-index11" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="800"></div><!-- /about-shape2 -->
-                                        <div class="about-download-wrapper position-absolute z-index11">
-                                            <img class="download-bg rotate-animation d-inline-block"
-                                                src="images/about/download-bg.webp" alt="about image 2">
-                                            <a href="https://drive.google.com/file/d/1s0ybOKPL2PQrz_AMQObNCoAnzgS66nVW/view?usp=sharing" class="cv-download-link transition5">
-                                                <img class="d-icon d-inline-block position-absolute"
-                                                    src="images/icon/download-icon.webp" alt="about image 3">
-                                            </a>
-                                        </div><!-- /about-download -->
-
-                                    </div>
-                                </div><!-- /about-img -->
-                            </div><!-- /about-img-wrapper -->
-                        </div><!-- /col -->
-
-                        <div class="col-xl-6 col-lg-6  col-md-12 col-sm-12 col-12">
-                            <div class="about-content position-relative mb-50">
-                                <div class="position-relative">
-                                    <div class="title">
-                                        <span class="theme-color text-uppercase d-block mb-1 mt--5">About Me</span>
-                                        <h2 class="mb-30">Data Scientist: Professional Background</h2>
-                                    </div><!-- /title -->
-                                </div>
-                                <p class="mb-25">Data Scientist with 3 years of experience in Fintech and Healthcare Industries. Developed Stock
-Market Observation tools, AI tools for health Economics.<br><br>Specialities include: fine tuning large language models (LLM), advanced
-retrieval augmented generation (RAG), emotion identification in large texts, domain adaptation of
-language models. <br>
-Endorsed by UK Research and Innovation for significant research contributions and obtained
-prestigious Global Talent Visa.</p>
-                                <div class="about-info-wrapper pt-25 pb-20 mt-25">
-                                    <div class="row">
-                                        <div class="col-xl-6  col-lg-12  col-md-6  col-sm-12 col-12">
-                                            <ul class="about-info">
-                                                <li class="d-inline-block pr-50">
-                                                    <p class="jostMedium-font-family mb-6">Name</p>
-                                                </li><!-- /li -->
-                                                <li class="d-inline-block">
-                                                    <p class="mb-6">Abrar Fahim</p>
-                                                </li><!-- /li -->
-                                            </ul>
-                                        </div><!-- /col -->
-                                        <div class="col-xl-6  col-lg-12  col-md-6  col-sm-12 col-12">
-                                            <ul class="about-info">
-                                                <li class="d-inline-block pr-50">
-                                                    <p class="jostMedium-font-family mb-6">Email</p>
-                                                </li><!-- /li -->
-                                                <li class="d-inline-block">
-                                                  <p class="mb-6">abrar-personal@outlook.com</p>
-                                                </li><!-- /li -->
-                                            </ul>
-                                        </div><!-- /col -->
-                                    </div><!-- /row -->
-                                </div><!-- /about-info-wrapper -->
-                                <div class="about-footer-content d-sm-flex align-items-center mt-lg-2 mt-sm-4 mt-3">
-                                    <div class="signature pt-12 pr-45">
-                                        <img src="images/about/signature.webp" alt="signature">
-                                    </div>
-
-                                </div><!-- /about-footer-content -->
-                            </div><!-- /about-content -->
-                        </div><!-- /col -->
-
-                    </div><!-- /row -->
-                </div><!-- /container -->
-
-                <div class="about-text-style position-absolute d-none d-md-inline-block">
-                    <span class="d-inline-block section-text-color">Fahim</span>
-                </div><!-- /intro-feature-text -->
-                <div class="about-icon position-absolute d-none d-md-inline-block z-index1 zoom-animation">
-                    <img src="images/shape/content-shape2.webp" alt="about shape 2">
-                </div><!-- /intro-feature-icon -->
-
-            </div><!-- /about-wrapper -->
-        </div>
-        <!-- about-area-end -->
-
-
-        <!-- ====== experience-area-start
-        ==================================================== -->
-        <div class="experience-area over-hidden pb-165">
-            <div class="experience-wrapper extra-width position-relative">
-                <div class="experience-bg-img left-0 top-0 bottom-0 bg-cover no-repeat w-50 position-absolute"
-                    data-background="images/work/work-imgg.webp"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 d-none">
-                            <div class="experience-img" data-aos="fade-right" data-aos-duration="2000">
-                            </div><!-- /experience-img -->
-                        </div><!-- /col -->
-                        <div class="col-xl-6 col-lg-6 offset-lg-6 col-md-12 col-sm-12 col-12">
-                            <div class="experience-margin mt-160 pb-80 pl-100 mb-50">
-                                <div class="position-relative">
-                                    <div class="title">
-                                        <span class="theme-color text-uppercase d-block mb-6 mt--5">Work
-                                            Experience</span>
-                                        <h2 class="mb-25">My Experience</h2>
-
-                                    </div><!-- /title -->
-                                </div>
-                                <div class="experience-wrapper pt-25">
-                                    <ul class="experience-content">
-                                        <li class="mb-32 d-flex align-items-start rotate-hover">
-                                            <div
-                                                class="experience-ser-icon d-inline-block text-center mt-10 mr-30 transition3">
-                                                <span class="theme-color d-inline-block">
-                                                    <span class="d-block rotate flat-family flaticon-briefcase"></span>
-                                                </span>
-                                            </div><!-- /experience-ser-icon -->
-                                            <div class="experience-service-text d-inline-block">
-                                                <h3 class="mb-2">Consultant Data Scientist</h3>
-                                                <h4>Heco Analytics<span class="meta-text-color openS-font-family"> ( Jan 2023
-                                                        - Today )</span></h4>
-                                                <p class="mb-0 mt-15">Developed AI tools related to helath economics. Utilized Large Language Models, Topic Modeling and Cloud Computing.</p>
-                                            </div>
-                                        </li>
-                                        <li class="mb-32 d-flex align-items-start rotate-hover">
-                                            <div
-                                                class="experience-ser-icon d-inline-block text-center mt-10 mr-30 transition3">
-                                                <span class="theme-color d-inline-block">
-                                                    <span class="d-block rotate flat-family flaticon-briefcase"></span>
-                                                </span>
-                                            </div><!-- /experience-ser-icon -->
-                                            <div class="experience-service-text d-inline-block">
-                                                <h3 class="mb-2">Data Scientist</h3>
-                                                <h4>Advanced Logic Analytics<span class="meta-text-color openS-font-family"> (
-                                                        Dec 2021 - Jan 2023 )</span></h4>
-                                                <p class="mb-0 mt-15">Led the devleopment of a stock market observation tool based on emotions conveyed in news articles.</p>
-                                            </div>
-                                        </li>
-                                        <li class="mb-32 d-flex align-items-start rotate-hover">
-                                            <div
-                                                class="experience-ser-icon d-inline-block text-center mt-10 mr-30 transition3">
-                                                <span class="theme-color d-inline-block">
-                                                    <span class="d-block rotate flat-family flaticon-briefcase"></span>
-                                                </span>
-                                            </div><!-- /experience-ser-icon -->
-                                            <div class="experience-service-text d-inline-block">
-                                                <h3 class="mb-2">Data Science Intern</h3>
-                                                <h4>City Maas<span class="meta-text-color openS-font-family"> (
-                                                        July 2021  - Oct 2021 )</span></h4>
-                                                <p class="mb-0 mt-15">Developed an image captioning model for visually impaired people.</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div><!-- /experience-wrapper -->
-                            </div><!-- /experience-margin -->
-                        </div><!-- /col -->
-                    </div><!-- /row -->
-                </div><!-- /container -->
-            </div><!-- /experience-wrapper -->
-        </div>
-        <!-- experience-area-end -->
-
-
-
-                <!-- ====== education-area-start
-                ==================================================== -->
-                <div class="education-area over-hidden">
-                    <div class="container">
-                        <div class="row position-relative">
-                            <div class="col-xl-6 col-lg-6  col-md-12 col-sm-12 col-12">
-                                <div class="position-relative">
-                                    <div class="title">
-                                        <span class="theme-color text-uppercase d-block mb-1">Education</span>
-                                        <h2 class="mb-25">My Education</h2>
-                                    </div><!-- /title -->
-                                </div>
-                                <div class="education-wrapper mr-20 pt-25 mb-50">
-                                    <ul class="education-content">
-                                        <li class="mb-32 d-flex align-items-start rotate-hover">
-                                            <div class="experience-ser-icon d-inline-block text-center mt-10 mr-30 transition3">
-                                                <span class="theme-color d-inline-block">
-                                                    <span class="d-block rotate flat-family flaticon-graduation-cap"></span>
-                                                </span>
-                                            </div><!-- /education-ser-icon -->
-                                            <div class="experience-service-text d-inline-block">
-                                                <h3 class="mb-2">Masters in Data Science and Analytics</h3>
-                                                <h4>Brunel University London<span class="meta-text-color openS-font-family"> ( 2020
-                                                        - 2021 )</span></h4>
-                                                <p class="mb-0 mt-15">Courses: Machine Learning, Quantitative Data Analysis, Data Visualisation, Modern Data, High Performance Computational Infrastructures, Research Project Management, Ethics and Governance of Digital Systems,  Digital Innovation and Strategy</p>
-                                            </div>
-                                        </li>
-                                        <li class="mb-32 d-flex align-items-start rotate-hover">
-                                            <div class="experience-ser-icon d-inline-block text-center mt-10 mr-30 transition3">
-                                                <span class="theme-color d-inline-block">
-                                                    <span class="d-block rotate flat-family flaticon-graduation-cap"></span>
-                                                </span>
-                                            </div><!-- /education-ser-icon -->
-                                            <div class="experience-service-text d-inline-block">
-                                                <h3 class="mb-2">Bachelor in Computer Science and Engineering</h3>
-                                                <h4>North South University <span class="meta-text-color openS-font-family"> ( 2015 -
-                                                        2019 )</span></h4>
-                                                <p class="mb-0 mt-15">Highlights: Obtained 87% average score.<br> My project "Automatic Number Plate Detection and Recognition" was one of the 20th top performing project on NSU Capstone showcase.</p>
-                                            </div>
-                                        </li>
-
-                                    </ul>
-                                </div><!-- /education-wrapper -->
-                            </div><!-- /col -->
-                            <div
-                                class="col-xl-5 offset-xl-1 col-lg-6 col-md-12 col-sm-12 col-12 d-lg-blok d-flex align-items-center justify-content-center">
-                                <div class="education-img position-relative text-center" data-aos="fade-left"
-                                    data-aos-duration="2000">
-                                    <img class="border-radius10" src="images/education/education-img.webp" alt="education image">
-                                </div><!-- /education-img -->
-                            </div><!-- /col -->
-                        </div><!-- /row -->
-                    </div><!-- /container -->
-                </div>
-                <!-- education-area-end -->
-
-
-
-                        <!-- ====== service-area-start
-                        ==================================================== -->
-                        <div id="service" class="service-area primary-bg over-hidden pt-160 pb-145">
-                            <div class="service-wrapper position-relative">
-                                <div class="container">
-                                    <div class="row align-items-start">
-                                        <div class="col-xl-12 col-lg-12  col-md-12  col-sm-12 col-12">
-                                            <div class="title text-center">
-                                                <span class="theme-color text-uppercase d-block mb-6">Skills</span>
-                                                <h2 class="text-white">Tools and Technology I know</h2>
-                                            </div><!-- /title -->
-                                        </div><!-- /col -->
-                                    </div><!-- /row -->
-                                    <div class="row service-wrappers mt-80">
-                                        <div class="col-xl-6  col-lg-6  col-md-6  col-sm-12 col-12" data-aos="fade-up"
-                                            data-aos-anchor-placement="top-bottom" data-aos-duration="1000" data-aos-delay="500">
-                                            <div
-                                                class="single-service shadow-hover transition3 white-bg border-radius10 pl-50 pr-50 pt-65 pb-55 mb-25">
-                                                <div class="row">
-                                                    <div class="col-xl-3  col-lg-3  col-md-6  col-sm-4 col-4 text-lg-center">
-                                                        <div
-                                                            class="service-ser-icon d-inline-block text-center position-relative mb-15">
-                                                            <img class="position-relative z-index1" src="images/icon/ser-icon1.webp"
-                                                                alt="icon">
-                                                            <div
-                                                                class="service-small-circle service-circle rounded-circle transition5 secondary-bg d-inline-block position-absolute">
-                                                            </div>
-                                                            <div
-                                                                class="service-large-circle service-circle rounded-circle transition5 secondary-bg d-inline-block position-absolute">
-                                                            </div>
-                                                        </div><!-- /service-ser-icon -->
-                                                    </div><!-- /col -->
-                                                    <div class="col-xl-9  col-lg-9  col-md-12  col-sm-12 col-12">
-                                                        <div class="service-text d-inline-block ml-xl-2">
-                                                            <h3 class="mb-15">Large Language Models</h3>
-                                                            <p class="mb-0"><b>Tools:</b>Transformers, LLamaCPP, LangChain, LLamaIndex
-                                                              <b>Technology: </b>PEFT, Retrieval Augmented Generation</p>
-                                                        </div>
-                                                    </div><!-- /col -->
-                                                </div>
-                                            </div><!-- /single-service -->
-                                        </div><!-- /col -->
-                                        <div class="col-xl-6  col-lg-6  col-md-6  col-sm-12 col-12" data-aos="fade-up"
-                                            data-aos-anchor-placement="top-bottom" data-aos-duration="1200" data-aos-delay="500">
-                                            <div
-                                                class="single-service shadow-hover transition3 white-bg border-radius10 pl-50 pr-50 pt-65 pb-55 mb-25">
-                                                <div class="row">
-                                                    <div class="col-xl-3  col-lg-3  col-md-6  col-sm-4 col-4 text-lg-center">
-                                                        <div
-                                                            class="service-ser-icon d-inline-block text-center position-relative mb-15">
-                                                            <img class="position-relative z-index1" src="images/icon/ser-icon3.webp"
-                                                                alt="icon">
-                                                            <div
-                                                                class="service-small-circle service-circle rounded-circle transition5 secondary-bg d-inline-block position-absolute">
-                                                            </div>
-                                                            <div
-                                                                class="service-large-circle service-circle rounded-circle transition5 secondary-bg d-inline-block position-absolute">
-                                                            </div>
-                                                        </div><!-- /service-ser-icon -->
-                                                    </div><!-- /col -->
-                                                    <div class="col-xl-9  col-lg-9  col-md-12  col-sm-12 col-12">
-                                                        <div class="service-text d-inline-block ml-xl-2">
-                                                            <h3 class="mb-15">NLP</h3>
-                                                            <p class="mb-0"><b>Tools: </b>Spacy, NLTK, PageRank, RegEx
-                                                              <b>Technology: </b>NER, Topic Modeling, Emotion Identification</p>
-                                                        </div>
-                                                    </div><!-- /col -->
-                                                </div>
-                                            </div><!-- /single-service -->
-                                        </div><!-- /col -->
-                                        <div class="col-xl-6  col-lg-6  col-md-6  col-sm-12 col-12" data-aos="fade-up"
-                                            data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
-                                            <div
-                                                class="single-service shadow-hover transition3 white-bg border-radius10 pl-50 pr-50 pt-65 pb-55 mb-25">
-                                                <div class="row">
-                                                    <div class="col-xl-3  col-lg-3  col-md-6  col-sm-4 col-4 text-lg-center">
-                                                        <div
-                                                            class="service-ser-icon d-inline-block text-center position-relative mb-15">
-                                                            <img class="position-relative z-index1" src="images/icon/ser-icon2.webp"
-                                                                alt="icon">
-                                                            <div
-                                                                class="service-small-circle service-circle rounded-circle transition5 secondary-bg d-inline-block position-absolute">
-                                                            </div>
-                                                            <div
-                                                                class="service-large-circle service-circle rounded-circle transition5 secondary-bg d-inline-block position-absolute">
-                                                            </div>
-                                                        </div><!-- /service-ser-icon -->
-                                                    </div><!-- /col -->
-                                                    <div class="col-xl-9  col-lg-9  col-md-12  col-sm-12 col-12">
-                                                        <div class="service-text d-inline-block ml-xl-2">
-                                                            <h3 class="mb-15">Cloud computing</h3>
-                                                            <p class="mb-0"><b>Tools: </b>S3 Bucket, Ec2, Lambda
-                                                              <b>Technology: </b>Connection to AWS, Fetch and Compute data on Cloud</p>
-                                                        </div>
-                                                    </div><!-- /col -->
-                                                </div>
-                                            </div><!-- /single-service -->
-                                        </div><!-- /col -->
-                                        <div class="col-xl-6  col-lg-6  col-md-6  col-sm-12 col-12" data-aos="fade-up"
-                                            data-aos-anchor-placement="top-bottom" data-aos-duration="1200">
-                                            <div
-                                                class="single-service shadow-hover transition3 white-bg border-radius10 pl-50 pr-50 pt-65 pb-55 mb-25">
-                                                <div class="row">
-                                                    <div class="col-xl-3  col-lg-3  col-md-6  col-sm-4 col-4 text-lg-center">
-                                                        <div
-                                                            class="service-ser-icon d-inline-block text-center position-relative mb-15">
-                                                            <img class="position-relative z-index1" src="images/icon/ser-icon4.webp"
-                                                                alt="icon">
-                                                            <div
-                                                                class="service-small-circle service-circle rounded-circle transition5 secondary-bg d-inline-block position-absolute">
-                                                            </div>
-                                                            <div
-                                                                class="service-large-circle service-circle rounded-circle transition5 secondary-bg d-inline-block position-absolute">
-                                                            </div>
-                                                        </div><!-- /service-ser-icon -->
-                                                    </div><!-- /col -->
-                                                    <div class="col-xl-9  col-lg-9  col-md-12  col-sm-12 col-12">
-                                                        <div class="service-text d-inline-block ml-xl-2">
-                                                            <h3 class="mb-15">Data Science</h3>
-                                                            <p class="mb-0"><b>Tools: </b>Python, Numpy, Scipy, Scikit-Learn, Pandas
-                                                              <b>Technology: </b>Data cleaning / Visualization, Prediction Algorithms</p>
-                                                        </div>
-                                                    </div><!-- /col -->
-                                                </div>
-                                            </div><!-- /single-service -->
-                                        </div><!-- /col -->
-                                    </div><!-- /row -->
-                                </div><!-- /container -->
-
-                                <div class="about-icon position-absolute d-none d-md-inline-block z-index1 zoom-animation">
-                                    <img src="images/shape/content-shape2.webp" alt="shape 2">
-                                </div><!-- /intro-feature-icon -->
-
-                            </div><!-- /service-wrapper -->
-                        </div>
-                        <!-- service-area-end -->
-
-        <!-- ====== portfolio-area-start
-        ==================================================== -->
-<!--        <div id="work" class="portfolio-area over-hidden pb-165">
-
-            <div class="marquee-w mb-125">
-                <div class="marquee">
-                    <span class="pl-4">Open to Work *</span>
-                    <span class="pl-4">London Based*</span>
-                </div>
-                <div class="marquee marquee2 pb-1">
-                    <span>I’m Open for new projects * Let’s Work Together.</span>
-                    <span>I’m Open for new projects * Let’s Work Together.</span>
-                </div>
-            </div> /marquee -->
-            <div id ="work">
-            <div  class="portfolio-wrapper position-relative mt--5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12  col-md-12  col-sm-12 col-12">
-                            <div class="title text-center"><br><br>
-                                <span class="theme-color text-uppercase d-block mb-6">Portfolio</span>
-                                <h2>Some Works in Details</h2>
-                            </div><!-- /title -->
-                        </div><!-- /col -->
-                    </div><!-- /row -->
-
-                    <div class="row portfolio mt-80">
-                        <div class="col-12">
-                            <div class="row single-portfolio position-relative theme-border-top align-items-center">
-                                <div class="col-xl-2 col-lg-2 col-md-7  col-sm- col-">
-                                    <div class="port-category">
-                                        <span class="meta-text-color text-uppercase">Founder</span>
-                                    </div>
-                                </div><!-- /col -->
-                                <div class="col-xl-5 col-lg-5 col-md-6 col-sm- col- pl-lg-0">
-                                    <h3>Verbix</h3>
-                                </div><!-- /col -->
-                                <div
-                                    class="col-xl-5  col-lg-5 col-md-6  col-sm- col- d-flex justify-content-end align-items-center">
-
-                                    <img class="port-img position-absolute left-0 ml-xl-3 transition5"
-                                        src="images/portfolio/port-img1.webp" alt="portfolio image 1">
-                                    <div class="port-content text-center transition5 z-index11" data-toggle="modal"
-                                        data-target="#exampleModal-p1">
-                                        <span class="d-inline-block"><i class="far fa-plus"></i>
-                                        </span>
-                                    </div><!-- /port-content -->
-                                </div><!-- /col -->
-                            </div><!-- /single-prot -->
-                        </div><!-- /col -->
-
-                        <div class="col-12">
-                            <div class="row single-portfolio position-relative theme-border-top align-items-center">
-                                <div class="col-xl-2 col-lg-2 col-md-7 col-sm- col-">
-                                    <div class="port-category">
-                                        <span class="meta-text-color text-uppercase">Development</span>
-                                    </div>
-                                </div><!-- /col -->
-                                <div class="col-xl-5 col-lg-5 col-md-6 col-sm- col- ml-lg-0">
-                                    <h3>Emotion Identification in Financial Market: Emotional Journey of Stock Price</h3>
-                                </div><!-- /col -->
-                                <div
-                                    class="col-xl-5 col-lg-5 col-md-6  col-sm- col- d-flex justify-content-end align-items-center">
-                                    <img class="port-img position-absolute left-0 ml-xl-3 transition5"
-                                        src="images/portfolio/port-img3.webp" alt="portfolio image 3">
-                                    <div class="port-content text-center transition5 z-index11" data-toggle="modal"
-                                        data-target="#exampleModal-p3">
-                                        <span class="d-inline-block"><i class="far fa-plus"></i>
-                                        </span>
-                                    </div><!-- /port-content -->
-                                </div><!-- /col -->
-                            </div><!-- /single-prot -->
-                        </div><!-- /col -->
-
-                        <div class="col-12">
-                            <div
-                                class="row single-portfolio position-relative theme-border-top theme-border-bottom align-items-center">
-                                <div class="col-xl-2 col-lg-2 col-md-7 col-sm- col-">
-                                    <div class="port-category">
-                                        <span class="meta-text-color text-uppercase">Development</span>
-                                    </div>
-                                </div><!-- /col -->
-                                <div class="col-xl-5 col-lg-5 col-md-6  col-sm- col- pl-lg-0">
-                                    <h3>Automatic Image Caption Generation for Disabled People</h3>
-                                </div><!-- /col -->
-                                <div
-                                    class="col-xl-5  col-lg-5 col-md-6 col-sm- col- d-flex justify-content-end align-items-center">
-                                    <img class="port-img position-absolute left-0 ml-xl-3 transition5"
-                                        src="images/portfolio/port-img4.webp" alt="portfolio image 4">
-                                    <div class="port-content text-center transition5 z-index11" data-toggle="modal"
-                                        data-target="#exampleModal-p4">
-                                        <span class="d-inline-block"><i class="far fa-plus"></i>
-                                        </span>
-                                    </div><!-- /port-content -->
-                                </div><!-- /col -->
-                            </div><!-- /single-prot -->
-                        </div><!-- /col -->
-
-                    </div><!-- /row -->
-
-
-                    <!-- Modal1 start -->
-                    <div class="modal fade" id="exampleModal-p1" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModal-p1" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="close-icon float-right pt-10 pr-10">
-                                    <button type="button" class="close d-inline-block" data-dismiss="modal"
-                                        aria-label="Close">
-                                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
-                                    </button>
-                                </div>
-                                <div class="modal-content border-0">
-                                    <div class="modal-body pl-50 pr-50 pt-10 pb-20">
-                                        <div class="blog-modal-img">
-                                            <img class="w-100" src="images/portfolio/port-img11.webp"
-                                                alt="product image 02">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xl-7 col-lg-7  col-md-12 col-sm-12 col-12">
-                                                <div class="content-wrapper">
-                                                    <h2 class="modal-title">Verbix - AI Applications</h2>
-                                                    <p>
-                                                      Verbix is a full functional website that contains some practical AI applications. </p>
-                                                      <p>Job Helper AI - Verbix Job Helper AI utilized gemini-pro LLM to generate a skill comparison, interview question and sample cover letters from CV and job descriptions.
-                                                      While using the application be patient, as AI will take some time to generate response.
-                                                    </p>
-                                                    <p>Personalized movie suggestion - Tell your story and get a movie suggestion based on your personalized story. Verbix semantic search utilized the latest technology to find the best movie plot matching to your story.
-                                                    </p>
-                                                </div>
-                                            </div><!-- /col -->
-                                            <div class="col-xl-5 col-lg-5  col-md-12 col-sm-12 col-12">
-                                                <div
-                                                    class="meta-wrapper form-bg mt-60 pt-40 pb-45 pr-20 pl-45 mt-40 mb-10">
-                                                    <ul class="item-meta">
-                                                        <li>Project Type : <span class="pl-2 openS-font-family">AI Applications</span></li>
-                                                    </ul>
-                                                    <a href="https://www.verbix.co.uk/"
-                                                        class="btn position-relative over-hidden text-white theme-bg theme-border2 text-uppercase mt-20 pt-2 pb-2">View
-                                                        Live</a>
-                                                </div>
-                                            </div><!-- /col -->
-                                        </div><!-- /row -->
-                                        <div class="pro-modal-footer mt-30 mb-45">
-                                            <div class="row align-items-center justify-content-md-between">
-                                                <div class="col-xl-7 col-lg-7  col-md-12 col-sm-12 col-12">
-                                                    <div class="modal-tags d-sm-flex align-items-center pt-25">
-                                                        <h6 class="mb-0 pr-15 black-color">Tags :</h6>
-                                                        <ul class="tag-list">
-                                                            <li class="d-inline-block pr-10">
-                                                                <a class="d-block" href="#">Large
-                                                                Language Models</a>
-                                                            </li>
-                                                            <li class="d-inline-block pr-10">
-                                                                <a class="d-block" href="#">Application
-                                                                    Development</a>
-                                                            </li>
-                                                            <li class="d-inline-block pr-10">
-                                                                <a class="d-block" href="#">Web Devlopment</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div><!-- /col -->
-
-                                            </div> <!-- .row -->
-                                        </div>
-                                    </div><!-- /modal-body -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal end -->
-
-
-                    <!-- Modal3 start -->
-                    <div class="modal fade" id="exampleModal-p3" tabindex="-3" role="dialog"
-                        aria-labelledby="exampleModal-p1" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="close-icon float-right pt-10 pr-10">
-                                    <button type="button" class="close d-inline-block" data-dismiss="modal"
-                                        aria-label="Close">
-                                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
-                                    </button>
-                                </div>
-                                <div class="modal-content border-0">
-                                    <div class="modal-body pl-50 pr-50 pt-10 pb-20">
-                                        <div class="blog-modal-img">
-                                            <img class="w-100" src="images/portfolio/emotion_ai.webp"
-                                                alt="product image 02">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xl-7 col-lg-7  col-md-12 col-sm-12 col-12">
-                                                <div class="content-wrapper">
-                                                    <h2 class="modal-title">Emotion Identification in Financial Market</h2>
-                                                    <p>The interplay between emotion and sentiments are the basis of many trading decision. Thus, this FinTech-AI project aims to utilise novel AI and semantic techniques to develop new predictive emotion-based algorithms that utilise financial news.
-                                                    </p>
-                                                    <p><b>Hypothesis</b><br>If there are negative emation (Anger, Fear, Sad etc.) conveyed by the news articles the stock price should go down in the next days, If there are positive emotion (Trust, Joy etc.) the stock price should go up.
-                                                    <br><br><b>contributions</b><br>- Significantly improved correlations between the stock price vs the emotion. In some cases it is up to 43 percent.
-                                                  <br>- Develped a automatic domain specific keywords and their emotion values.
-                                                <br>- The developed tools can be adapted to any other domain.
-                                              <br>- Calculated the tolarance of different companies toward negative news, and devleloped metrics of thershold.</p>
-
-                                                </div>
-                                            </div><!-- /col -->
-                                            <div class="col-xl-5 col-lg-5  col-md-12 col-sm-12 col-12">
-                                                <div
-                                                    class="meta-wrapper form-bg mt-60 pt-40 pb-45 pr-20 pl-45 mt-40 mb-10">
-                                                    <ul class="item-meta">
-                                                        <li>Project Type :<span class="pl-2 openS-font-family">knowledge Transfer Partnership (KTP)</span></li>
-                                                        <li>Collaboration :<span class="pl-2 openS-font-family">Advanced Logic Analytics and Brunel University London</span></li>
-                                                        <li>Duration :<span class="pl-2 openS-font-family">1 year</span></li>
-                                                        <li>Supervised by :<span class="pl-2 openS-font-family">Dr. David Bell<br>Dr. Alaa Marshan<br>Nick Ellis<br>Mike Collins</span></li>
-                                                    </ul>
-                                                    <a href="https://www.brunel.ac.uk/research/projects/emotion-ai-for-trading-on-financial-markets"
-                                                        class="btn position-relative over-hidden text-white theme-bg theme-border2 text-uppercase mt-20 pt-2 pb-2">View
-                                                        at Brunel's website</a>
-                                                </div>
-                                            </div><!-- /col -->
-                                        </div><!-- /row -->
-                                        <div class="pro-modal-footer mt-30 mb-45">
-                                            <div class="row align-items-center justify-content-md-between">
-                                                <div class="col-xl-7 col-lg-7  col-md-12 col-sm-12 col-12">
-                                                    <div class="modal-tags d-sm-flex align-items-center pt-25">
-                                                        <h6 class="mb-0 pr-15 black-color">Tags :</h6>
-                                                        <ul class="tag-list">
-                                                            <li class="d-inline-block pr-10">
-                                                                <a class="d-block" href="#">FinTech</a>
-                                                            </li>
-                                                            <li class="d-inline-block pr-10">
-                                                                <a class="d-block" href="#">Financial News</a>
-                                                            </li>
-                                                            <li class="d-inline-block pr-10">
-                                                                <a class="d-block" href="#">Artificial Intelligence</a>
-                                                            </li>
-                                                            <li class="d-inline-block pr-10">
-                                                                <a class="d-block" href="#">Stock Market</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div><!-- /col -->
-
-                                            </div> <!-- .row -->
-                                        </div>
-                                    </div><!-- /modal-body -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal end -->
-
-                    <!-- Modal4 start -->
-                    <div class="modal fade" id="exampleModal-p4" tabindex="-4" role="dialog"
-                        aria-labelledby="exampleModal-p1" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="close-icon float-right pt-10 pr-10">
-                                    <button type="button" class="close d-inline-block" data-dismiss="modal"
-                                        aria-label="Close">
-                                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
-                                    </button>
-                                </div>
-                                <div class="modal-content border-0">
-                                    <div class="modal-body pl-50 pr-50 pt-10 pb-20">
-                                        <div class="blog-modal-img">
-                                            <img class="w-100" src="images/portfolio/port-img444.webp"
-                                                alt="product image 02">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xl-7 col-lg-7  col-md-12 col-sm-12 col-12">
-                                                <div class="content-wrapper">
-                                                    <h2 class="modal-title">Captioning Images for Disabled People- Using Deep Learning</h2>
-                                                    <p>According to the World Health Organization, more than one billion people are
-                                                      suffering from some sort of disability and the number is increasing day by day (World
-                                                      Health Organization, 2011). Regarding the accessibility of web information, most of
-                                                      the web remains inaccessible or contains some sort of difficulties to access for
-                                                      disabled people (Adam and Kreps, 2006). This project is to develop a captioning system for visually impaired people.
-                                                    </p>
-                                                    <p>A total of six models have been developed
-                                                      based on different Convolutional Neural Networks and Recurrent Neural Network based
-                                                      architectures. Different types of word embeddings along with their strengths and
-                                                      weakness have been discussed. The models are evaluated with appropriate matrices,
-                                                      and the best model is selected for real world implementation. The highest BLEU score
-                                                      achieved from the model is 0.54. Further improvements to the model are also proposed,
-                                                      based on the gained knowledge while conducting the research.
-                                                    </p>
-
-                                                </div>
-
-                                            </div><!-- /col -->
-                                            <div class="col-xl-5 col-lg-5  col-md-12 col-sm-12 col-12">
-                                                <div
-                                                    class="meta-wrapper form-bg mt-60 pt-40 pb-45 pr-20 pl-45 mt-40 mb-10">
-                                                    <ul class="item-meta">
-                                                        <li>Project Type : <span class="pl-2 openS-font-family">Masters Dissertation</span></li>
-                                                        <li>Partner : <span class="pl-2 openS-font-family">CityMaas</span></li>
-                                                        <li>Supervised by :<span class="pl-2 openS-font-family">Dr. Alaa Marshan</span></li>
-                                                        <li>Obtained Grade : <span class="pl-2 openS-font-family">A+</span></li>
-
-                                                    </ul>
-                                                    <a href="https://drive.google.com/file/d/1BbL6WjCjF-AO-JOmg_DpJJ6t3_4sd7f3/view"
-                                                        class="btn position-relative over-hidden text-white theme-bg theme-border2 text-uppercase mt-20 pt-2 pb-2">Download Report</a>
-                                                </div>
-
-                                            </div><!-- /col -->
-                                            <img src="images/portfolio/1.webp"
-                                                alt="product image 02">
-                                                <img src="images/portfolio/2.webp"
-                                                    alt="product image 02">
-                                        </div><!-- /row -->
-                                        <div class="pro-modal-footer mt-30 mb-45">
-                                            <div class="row align-items-center justify-content-md-between">
-                                                <div class="col-xl-7 col-lg-7  col-md-12 col-sm-12 col-12">
-                                                    <div class="modal-tags d-sm-flex align-items-center pt-25">
-                                                        <h6 class="mb-0 pr-15 black-color">Tags :</h6>
-                                                        <ul class="tag-list">
-                                                            <li class="d-inline-block pr-10">
-                                                                <a class="d-block" href="#">Image Captioning</a>
-                                                            </li>
-                                                            <li class="d-inline-block pr-10">
-                                                                <a class="d-block" href="#">Computer Vision
-                                                                  </a>
-                                                            </li>
-                                                            <li class="d-inline-block pr-10">
-                                                                <a class="d-block" href="#">NLP</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div><!-- /col -->
-
-                                            </div> <!-- .row -->
-                                        </div>
-                                    </div><!-- /modal-body -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal end -->
-
-                </div><!-- /container -->
-            </div><!-- /portfolio-wrapper -->
-        </div>
-        <!-- portfolio-area-end -->
-
-
-
-        <!-- ====== fun-fact-area-start
-        ==================================================== -->
-        <div class="fun-fact-area fun-fact-bg position-relative over-hidden pt-150 pb-120" data-aos="fade-up"
-            data-aos-duration="1800">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-5  col-lg-6  col-md-12 col-sm- col-">
-                        <div class="fun-fact-content mb-50 mr-lg-2 mr-xl-0">
-                            <div class="position-relative">
-                                <div class="title">
-                                    <span class="theme-color text-uppercase d-block mb-1 mt--5">Fun Facts</span>
-                                    <h2 class="mb-30 text-white">I do not need sponsorship for working in the UK</h2>
-                                </div><!-- /title -->
-                            </div>
-                            <p></p>
-                        </div><!-- fun-fact-content -->
-                    </div><!-- /col -->
-
-                    <div class="col-xl-6 offset-xl-1 col-lg-6  col-md-12  col-sm- col-">
-                        <div class="row justify-content-center align-items-center">
-                            <div class="col-xl-6 col-lg-6  col-md-6  col-sm-6 col-10">
-                                <div class="single-fact d-block d-flex align-items-center  border-radius10 mb-30">
-                                    <div class="mr-25 d-flex align-content-start justify-content-center">
-                                        <span class="theme-color d-inline-block counter">3</span>
-                                    </div>
-                                    <h3 class="text-white mb-0">Years of <br> Experience</h3>
-                                </div><!-- /single-fact -->
-                            </div><!-- /col -->
-
-                            <div class="col-xl-6 col-lg-6  col-md-6  col-sm-6 col-10">
-                                <div class="single-fact d-block d-flex align-items-center border-radius10 mb-30">
-                                    <div class="mr-25 d-flex align-content-start justify-content-center">
-                                        <span class="theme-color d-inline-block counter">5</span>
-                                    </div>
-                                    <h3 class="text-white mb-0">Years of <br> UK Visa</h3>
-                                </div><!-- /single-fact -->
-                            </div><!-- /col -->
-
-                            <div class="col-xl-6 col-lg-6  col-md-6  col-sm-6 col-10">
-                                <div class="single-fact d-block d-flex align-items-center border-radius10 mb-30">
-                                    <div class="mr-25 d-flex align-content-start justify-content-center">
-                                        <span class="theme-color d-inline-block counter">30</span>
-                                    </div>
-                                    <h3 class="text-white mb-0">Projects <br> on <a href = "https://github.com/fahimabrar">GitHub</a></h3>
-                                </div><!-- /single-fact -->
-                            </div><!-- /col -->
-
-                            <div class="col-xl-6 col-lg-6  col-md-6  col-sm-6 col-10">
-                                <div class="single-fact d-block d-flex align-items-center border-radius10 mb-30">
-                                    <div class="mr-25 d-flex align-content-start justify-content-center">
-                                        <span class="theme-color d-inline-block counter">28</span>
-                                    </div>
-                                    <h3 class="text-white mb-0">Years dealing <br> Homo Sapiens</h3>
-                                </div><!-- /single-fact -->
-                            </div><!-- /col -->
-
-                        </div><!-- /row -->
-                    </div><!-- /col -->
-
-                </div><!-- /row -->
-            </div><!-- /container -->
-<!-- /fact-style2 -->
+          </div>
+
+          <!-- Portrait -->
+          <div class="tile span-5 delay-2">
+            <div class="portrait" aria-hidden="true">
+              <img src="https://www.abrarfahim.co.uk/images/slider/best.webp" alt="Abrar portrait" />
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:16px" class="muted">
+              <span>London, UK</span>
+              <span title="Open to Work">Open to collaborations</span>
+            </div>
+          </div>
+
+          <!-- Facts -->
+          <div class="tile span-4 delay-3">
+            <div class="facts">
+              <div class="fact"><div class="n">3+</div><div class="muted">Years experience</div></div>
+              <div class="fact"><div class="n">30</div><div class="muted">GitHub projects</div></div>
+              <div class="fact"><div class="n">5</div><div class="muted">Years UK visa</div></div>
+              <div class="fact"><div class="n">UKRI</div><div class="muted">Global Talent Visa</div></div>
+            </div>
+          </div>
+
+          <!-- Quick links (brand-styled) -->
+          <div class="tile span-4 delay-4">
+            <div class="quick-links" style="gap: 10px;">
+              <a class="btn btn-brand btn-email" href="mailto:abrar-personal@outlook.com">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <span>Email</span>
+              </a>
+              <a class="btn btn-brand btn-github" href="https://github.com/fahimabrar" target="_blank" rel="noreferrer noopener">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.51 2.87 8.33 6.84 9.68.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05A9.2 9.2 0 0 1 12 7.13c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.02 1.63 1.02 2.75 0 3.94-2.33 4.8-4.56 5.06.36.32.67.94.67 1.9 0 1.37-.01 2.47-.01 2.81 0 .26.18.59.69.49A10.1 10.1 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
+                <span>GitHub</span>
+              </a>
+
+            </div>
+          </div>
+
+          <!-- Specialties ring -->
+          <div class="tile span-4 delay-3">
+            <div class="ring">
+              <div>LLMs</div><div>RAG</div><div>NLP</div>
+              <div>AWS</div><div>Pandas</div><div>scikit‑learn</div>
+            </div>
+          </div>
         </div>
       </div>
-        <!-- fun-fact-area-end  -->
+    </section>
 
-
-
-        <!-- ====== award-area-start
-        ==================================================== -->
-        <div class="award-area over-hidden position-relative z-index11 pt-160 pb-170">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12  col-md-12  col-sm-12 col-12">
-                        <div class="title text-center">
-                            <span class="theme-color text-uppercase d-block mb-6">Success Stories</span>
-                            <h2>Achivements</h2>
-                        </div><!-- /title -->
-                    </div><!-- /col -->
-                </div><!-- /row -->
-                <div class="award-wrapper mt-70">
-                    <div class="row align-items-start theme-border-top award-margin pt-40 pb-35">
-                        <div class="col-xl-2  col-lg-2  col-md-2  col-sm-11 col-12">
-                            <div class="award-logo mt-10 mb-20">
-                                <a href="#" class="d-block">
-                                    <img src="images/award/award-logo1.webp" alt="award logo 1">
-                                </a>
-                            </div><!-- /award-logo -->
-                        </div><!-- /col -->
-                        <div class="col-xl-3  col-lg-3  col-md-3  col-sm-11 col-12">
-                            <div class="award-content">
-                                <h3 class="mb-10">UK - Global Talent Visa</h3>
-                                <p class="meta-text-color">Valid Until Nov 2027</p>
-                            </div><!-- /award-content -->
-                        </div><!-- /col -->
-                        <div class="col-xl-3  col-lg-3  col-md-3  col-sm-11 col-12">
-                            <div class="award-content">
-                                <h3 class="mb-10">Endorsed by UK Research and Innovation</h3>
-                            </div><!-- /award-content -->
-                        </div><!-- /col -->
-                        <div class="col-xl-4  col-lg-4  col-md-4  col-sm-11 col-12">
-                            <div class="award-content">
-                                <p>United Kingdom</p>
-                            </div><!-- /award-content -->
-                        </div><!-- /col -->
-                    </div><!-- /row -->
-
-                </div><!-- /award-wrapper -->
-            </div><!-- /container -->
+    <!-- EXPERIENCE -->
+    <section id="work" class="section">
+      <div class="wrap">
+        <div class="head"><i></i><h2>Experience</h2></div>
+        <div class="grid g3">
+          <article class="card delay-1">
+            <div class="when">Jan 2023 - Present · Heco Analytics</div>
+            <h3>Consultant Data Scientist</h3>
+            <p class="muted">Developed AI tools for health economics using LLMs, topic modeling, and AWS. Prototype → production features.</p>
+          </article>
+          <article class="card delay-2">
+            <div class="when">Dec 2021 - Jan 2023 · Advanced Logic Analytics</div>
+            <h3>Data Scientist</h3>
+            <p class="muted">Built a news‑emotion stock observation system; data pipelines and evaluation loops with measurable impact.</p>
+          </article>
+          <article class="card delay-3">
+            <div class="when">Jul 2021 — Oct 2021 · City Maas</div>
+            <h3>Data Science Intern</h3>
+            <p class="muted">Developed an image captioning model for visually impaired users; experimented with CNN‑RNN variants.</p>
+          </article>
         </div>
-        <!-- award-area-end  -->
+      </div>
+    </section>
 
-
-
-        <!-- ====== testimonial-area-start
-        ==================================================== -->
-        <div class="testimonial-area position-relative over-hidden">
-            <div class="container">
-                <div class="testimonial-bg section-bg pt-170 pb-170 position-relative">
-                    <div class="row align-items-start justify-content-center">
-                        <div class="col-xl-7 col-lg-7 col-md-12  col-sm-12 col-12">
-                            <div class="position-relative">
-                                <div class="title">
-                                    <span class="theme-color text-uppercase d-block mb-6">Testimonials</span>
-                                    <h2 class="mb-20">What People Say</h2>
-                                </div><!-- /title -->
-                            </div>
-                            <div class="testimonial-wrapper position-relative mt-40 pb-50">
-                                <div class="quit d-inline-block position-absolute left-0">
-                                    <img class="theme-color" src="images/testimonial/testimonial-icon.webp" alt="quote">
-                                </div>
-                                <div class="testimonial-active pl-80 pr-90">
-                                  <div class="testimonial-content">
-                                      <blockquote class="testimonial-text position-relative mb-0 font-italic openS-font-family text-color">
-                                        I have taught Abrar, supervised him on his MSc dissertation and worked with him on a research project focusing on emotions discovery and analysis and their effect on trading decisions......... Working with Abrar, I noticed how he likes challenges and always aims to solve them using creative data science approaches. He constantly develops his skills, whether it is related to data science, Python or cloud computing. I can happily testify for his excellent team working skills and working ethics, and I am happy to be approached for further information.
-                                      </blockquote>
-                                          <div class="testi-info d-flex align-items-center mt-40">
-                                          <div class="testi-avatar mr-25">
-                                              <img class="rounded-circle"
-                                                  src="images/testimonial/am.jpg" alt="author image 3">
-                                          </div><!-- /testi-avatar -->
-                                          <div class="avatar-info">
-                                              <h5 class="mb-1 text-capitalize">Dr. Alaa Marshan</h5>
-                                              <p class="meta-text-color mb-0">Senior Lecturer in Intelligent Data Analysis, University of Surrey<br>Former Lecturer, Brunel University</p>
-                                          </div>
-                                      </div>
-                                  </div><!-- /testimonial-content -->
-
-                                    <div class="testimonial-content">
-                                        <blockquote class="testimonial-text position-relative mb-0 font-italic openS-font-family text-color">
-                                          Hi Abrar,
-Very happy to recommend you after the work you did for Advanced Logic Analytics Limited in conjunction with Brunel University.
-The project you did for us was very well done and your skills as a Data Scientist where very good, you grew into the project over the time you worked with us and Brunel.
-When you get to the next stage with a potential employer, I would be happy to speak to them or provide a reference.
-Best Nick</blockquote>
-                                        <div class="testi-info d-flex align-items-center mt-40">
-                                            <div class="testi-avatar mr-25">
-                                                <img class="rounded-circle"
-                                                    src="images/testimonial/author-img.webp" alt="author image 1">
-                                            </div><!-- /testi-avatar -->
-                                            <div class="avatar-info">
-                                                <h5 class="mb-1 text-capitalize">Nick Ellis</h5>
-                                                <p class="meta-text-color mb-0">Managing Director, Advanced Logic Analytics</p>
-                                            </div>
-                                        </div>
-                                    </div><!-- /testimonial-content -->
-                                    <div class="testimonial-content">
-                                        <blockquote class="testimonial-text position-relative mb-0 font-italic openS-font-family text-color">
-                                          Abrar is a skilled programmer and data scientist who works well as part of a team.
-                                          Abrar acquires knowledge effectively and always demonstrates excellent work across a number of platforms (including cloud).
-                                      </blockquote>
-                                        <div class="testi-info d-flex align-items-center mt-40">
-                                            <div class="testi-avatar mr-25">
-                                                <img class="rounded-circle"
-                                                    src="images/testimonial/db.webp" alt="author image 2">
-                                            </div><!-- /testi-avatar -->
-                                            <div class="avatar-info">
-                                                <h5 class="mb-1 text-capitalize">Dr. David Bell</h5>
-                                                <p class="meta-text-color mb-0">CTO, Heco Analytics Limited</p>
-                                            </div>
-                                        </div>
-                                    </div><!-- /testimonial-content -->
-
-                                </div>
-                            </div><!-- /testimonial-wrapper -->
-                        </div><!-- /col -->
-                        <div class="col-xl-5 col-lg-5 col-md-12 col-sm-11 col-12">
-                            <div class="testimonial-img position-relative z-index1" data-aos="fade-left"
-                                data-aos-duration="1500">
-                                <img class="border-radius10" src="images/testimonial/c.webp" alt="author image ">
-                            </div><!-- /testimonial-img -->
-                        </div><!-- /col -->
-                    </div><!-- /row -->
-
-                    <div class="intro-feature-text-style testimonial-text-style position-absolute d-none d-md-inline-block">
-                        <span class="d-inline-block">Testim</span>
-                    </div><!-- /intro-feature-text -->
-
-                </div><!-- /testimonial-bg -->
-            </div><!-- /container -->
-
+    <!-- EDUCATION -->
+    <section id="education" class="section">
+      <div class="wrap">
+        <div class="head"><i></i><h2>Education</h2></div>
+        <div class="grid g2">
+          <article class="card delay-1">
+            <div class="when">2020 - 2021 · Brunel University London</div>
+            <h3>MSc Data Science & Analytics</h3>
+            <p class="muted">ML, Quantitative Analysis, Visualization, HPC, Ethics & Governance, Digital Strategy.</p>
+          </article>
+          <article class="card delay-2">
+            <div class="when">2015 - 2019 · North South University</div>
+            <h3>BSc Computer Science & Engineering</h3>
+            <p class="muted">87% average. Capstone: ANPR (Top‑20 showcase).</p>
+          </article>
         </div>
-        <!-- testimonial-area-end -->
+      </div>
+    </section>
 
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="wrap">
+        <div class="head"><i></i><h2>Projects</h2></div>
 
-        <!-- ====== brand-area-start
-        ==================================================== -->
-        <div class="brand-area brand-height over-hidden">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12  col-md-12  col-sm-12 col-12">
-                        <ul class="brand-active  mt-70 mb-90">
-                            <li class="d-inline-block position-relative over-hidden">
-                                <a class="single-brand single-brand-out pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img1.webp" alt="brand logo 1">
-                                </a>
-                                <a class="single-brand single-brand-hover pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img1.webp" alt="brand logo 1">
-                                </a>
-                            </li>
-                            <li class="d-inline-block position-relative over-hidden">
-                                <a class="single-brand single-brand-out pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img2.webp" alt="brand logo 2">
-                                </a>
-                                <a class="single-brand single-brand-hover pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img2.webp" alt="brand logo 2">
-                                </a>
-                            </li>
-                            <li class="d-inline-block position-relative over-hidden">
-                                <a class="single-brand single-brand-out pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img3.webp" alt="brand logo 3">
-                                </a>
-                                <a class="single-brand single-brand-hover pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img3.webp" alt="brand logo 3">
-                                </a>
-                            </li>
-                            <li class="d-inline-block position-relative over-hidden">
-                                <a class="single-brand single-brand-out pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img4.webp" alt="brand logo 4">
-                                </a>
-                                <a class="single-brand single-brand-hover pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img4.webp" alt="brand logo 4">
-                                </a>
-                            </li>
-
-                            <li class="d-inline-block position-relative over-hidden">
-                                <a class="single-brand single-brand-out pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img1.webp" alt="brand logo 1">
-                                </a>
-                                <a class="single-brand single-brand-hover pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img1.webp" alt="brand logo 1">
-                                </a>
-                            </li>
-                            <li class="d-inline-block position-relative over-hidden">
-                                <a class="single-brand single-brand-out pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img2.webp" alt="brand logo 2">
-                                </a>
-                                <a class="single-brand single-brand-hover pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img2.webp" alt="brand logo 2">
-                                </a>
-                            </li>
-                            <li class="d-inline-block position-relative over-hidden">
-                                <a class="single-brand single-brand-out pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img3.webp" alt="brand logo 3">
-                                </a>
-                                <a class="single-brand single-brand-hover pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img3.webp" alt="brand logo 3">
-                                </a>
-                            </li>
-                            <li class="d-inline-block position-relative over-hidden">
-                                <a class="single-brand single-brand-out pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img4.webp" alt="brand logo 4">
-                                </a>
-                                <a class="single-brand single-brand-hover pt-20 d-block text-center transition3"
-                                    href="index.html">
-                                    <img class="img" src="images/brand/brand_img4.webp" alt="brand logo 4">
-                                </a>
-                            </li>
-                        </ul>
-                    </div><!-- /col -->
-                </div><!-- /row -->
-                <div class="theme-border-bottom"></div>
-            </div><!-- /container -->
+        <div class="filters" role="tablist" aria-label="Filter projects">
+          <button class="chip" data-filter="All" aria-pressed="true">All</button>
+          <button class="chip" data-filter="LLMs">LLMs</button>
+          <button class="chip" data-filter="NLP">NLP</button>
+          <button class="chip" data-filter="Chrome Extension">Chrome Extension</button>
         </div>
-        <!-- brand-area-end  -->
+
+        <div class="rail" tabindex="0">
+          <div class="row" id="projRow">
+            <article class="proj" data-tags="LLMs,Data Science">
+              <div class="media">
+                <img src="https://www.abrarfahim.co.uk/images/portfolio/port-img11.webp" alt="Verbix preview" />
+                <span class="meta">Live</span>
+              </div>
+              <div class="body">
+                <h3 style="margin:0 0 8px;font-size:20px">Verbix - Practical AI Apps</h3>
+                <p class="muted" style="margin:0">Job Helper (Gemini) and story→movie via semantic search.</p>
+                <div class="tags"><span class="tag">LLMs</span><span class="tag">Vector Search</span><span class="tag">Python</span></div>
+                <p style="margin:12px 0 0"><a href="https://www.verbix.co.uk/" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Open ↗</a></p>
+              </div>
+            </article>
+
+            <article class="proj" data-tags="NLP,Data Science">
+              <div class="media">
+                <img src="https://www.abrarfahim.co.uk/images/portfolio/emotion_ai.webp" alt="Emotion AI for trading" />
+                <span class="meta">KTP</span>
+              </div>
+              <div class="body">
+                <h3 style="margin:0 0 8px;font-size:20px">Emotion AI for Trading</h3>
+                <p class="muted" style="margin:0">Emotion‑driven analytics; improved correlations (up to ~43%).</p>
+                <div class="tags"><span class="tag">FinTech</span><span class="tag">NLP</span></div>
+                <p style="margin:12px 0 0"><a href="https://www.brunel.ac.uk/research/projects/emotion-ai-for-trading-on-financial-markets" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Project page ↗</a></p>
+              </div>
+            </article>
+
+            <article class="proj" data-tags="NLP,Data Science">
+              <div class="media">
+                <img src="https://www.abrarfahim.co.uk/images/portfolio/port-img444.webp" alt="Image captioning" />
+                <span class="meta">MSc A+</span>
+              </div>
+              <div class="body">
+                <h3 style="margin:0 0 8px;font-size:20px">Image Captioning for Accessibility</h3>
+                <p class="muted" style="margin:0">Six CNN‑RNN variants; best BLEU ≈ 0.54; improvements proposed.</p>
+                <div class="tags"><span class="tag">CV</span><span class="tag">NLP</span></div>
+                <p style="margin:12px 0 0"><a href="https://drive.google.com/file/d/1BbL6WjCjF-AO-JOmg_DpJJ6t3_4sd7f3/view" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Report ↗</a></p>
+              </div>
+            </article>
+
+            <article class="proj" data-tags="Chrome Extension">
+              <div class="media">
+                <img src="https://www.abrarfahim.co.uk/images/quickreach.png" alt="quickreach for linkedin" />
+                <span class="meta">Chrome Extension</span>
+              </div>
+              <div class="body">
+                <h3 style="margin:0 0 8px;font-size:20px">QuickReach for Linkedin</h3>
+                <p class="muted" style="margin:0">Send instant Linkedin DM from drafts</p>
+                <div class="tags"><span class="tag">Linkedin DM</span><span class="tag">Communication</span></div>
+                <p style="margin:12px 0 0"><a href="https://chromewebstore.google.com/detail/quickreach-for-linkedin/cmejfoncckaegjgkdekeifmmdkidhbba" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Install ↗</a></p>
+              </div>
+            </article>
 
 
-                <!-- ====== contact-area-start
-                ==================================================== -->
-                <div id="contact" class="contact-area over-hidden mb-160 mt-155">
-                    <div id="hero-btn" class="contact-wrapper position-relative">
-                        <div class="container">
-                            <div class="row align-items-start">
-                                <div class="col-xl-12 col-lg-12  col-md-12  col-sm-12 col-12">
-                                    <div class="title text-center">
-                                        <span class="theme-color text-uppercase d-block mb-6">Contact Me</span>
-                                        <h2>Let’s Start A New Project</h2>
-                                    </div><!-- /title -->
-                                </div><!-- /col -->
-                            </div><!-- /row -->
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-5 col-md-12  col-sm-12 col-12">
-                                    <div class="contact-wrapper mt-70">
-                                        <ul class="contact-info-content">
-                                            <li
-                                                class="contact-location s-contact mb-20 transition-3 d-lg-flex align-items-center">
-                                                <div class="contact-icon d-inline-block text-center theme-bg mr-30">
-                                                    <span class="text-white d-inline-block">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </span>
-                                                </div><!-- /contact-icon -->
-                                                <div class="contact-text d-inline-block">
-                                                    <h4 class="mb-2">Location</h4>
-                                                    <p class="text-color mb-0">London, UK</p>
-                                                </div>
-                                            </li><!-- /contact-location -->
-                                            <li
-                                                class="contact-phone s-contact mb-20 transition-3 d-lg-flex  align-items-center">
-                                                <div class="contact-icon d-inline-block text-center theme-bg mr-30">
-                                                    <span class="text-white d-inline-block">
-                                                        <i class="fas fa-envelope"></i>
-                                                    </span>
-                                                </div><!-- /contact-icon -->
-                                                <div class="contact-text d-inline-block">
-                                                    <h4 class="mb-2">Email</h4>
-                                                    <p class="mb-0">
-                                                        <a class="text-color primary-hover d-block"
-                                                            href="#">abrar-personal@outlook.com</a>
-                                                    </p>
-                                                </div>
-                                            </li><!-- /contact-phone -->
-                                        </ul><!-- /contact-info-content -->
-                                    </div><!-- /contact-wrapper -->
-                                </div><!-- /col -->
-                            </div><!-- /row -->
-
-                        </div><!-- /container -->
-                    </div><!-- /contact-wrapper -->
-                </div>
-                <!-- contact-area-end  -->
+            <article class="proj" data-tags="Chrome Extension">
+              <div class="media">
+                <img src="https://www.abrarfahim.co.uk/images/ss.png" alt="sentiment scope" />
+                <span class="meta">Chrome Extension</span>
+              </div>
+              <div class="body">
+                <h3 style="margin:0 0 8px;font-size:20px">Sentiment Scope</h3>
+                <p class="muted" style="margin:0">Emotional trajectory from news</p>
+                <div class="tags"><span class="tag">Time‑series</span><span class="tag">Dashboards</span></div>
+                <p style="margin:12px 0 0"><a href="https://chromewebstore.google.com/detail/sentiment-scope/gmoenhampdaoefjhjkdccceioohkhmap" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Install ↗</a></p>
+              </div>
+            </article>
 
 
-    </main>
+            <article class="proj" data-tags="Chrome Extension">
+              <div class="media">
+                <img src="https://www.abrarfahim.co.uk/images/webpage_summarizer.png" alt="webpage summarizer" />
+                <span class="meta">Chrome Extension</span>
+              </div>
+              <div class="body">
+                <h3 style="margin:0 0 8px;font-size:20px">Webpage Summarizer</h3>
+                <p class="muted" style="margin:0">A powerful Chrome extension that provides instant, precise summaries of any webpage.</p>
+                <div class="tags"><span class="tag">one click summary</span><span class="tag">AI</span></div>
+                <p style="margin:12px 0 0"><a href="https://chromewebstore.google.com/detail/webpage-summarizer/mlhoabnedbnggedofccedbfchklhdfac" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">Install ↗</a></p>
+              </div>
+            </article>
 
-
-    <!-- ====== footer-area-start
-    ============================================ -->
-    <footer>
-        <div class="footer-area over-hidden pt-110 mb-80">
-            <div class="footer-top">
-                <div class="container">
-                                <div class="copyright-text">
-                                    <p class="mb-0">All rights reserved
-                                        <a href="https://www.abrarfahim.co.uk/" class="c-theme primary-color f-600">Abrar Fahim</a>
-                                        © 2024
-                                    </p>
-                    </div><!-- /row -->
-                </div><!-- /container -->
-            </div>
+          </div>
         </div>
-    </footer>
-    <!-- footer-area-end  -->
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="section">
+      <div class="wrap">
+        <div class="head"><i></i><h2>Testimonials</h2></div>
+        <div class="grid g3">
+          <figure class="card delay-1" style="margin:0">
+            <blockquote class="muted" style="margin:0">“Abrar likes challenges and solves them with creative data‑science approaches. Excellent teamwork and work ethics.”</blockquote>
+            <figcaption class="muted" style="margin-top:16px">- Dr. Alaa Marshan, University of Surrey</figcaption>
+          </figure>
+          <figure class="card delay-2" style="margin:0">
+            <blockquote class="muted" style="margin:0">“The project was very well done. Abrar delivered solid results. Happy to provide a reference.”</blockquote>
+            <figcaption class="muted" style="margin-top:16px">- Nick Ellis, Advanced Logic Analytics</figcaption>
+          </figure>
+          <figure class="card delay-3" style="margin:0">
+            <blockquote class="muted" style="margin:0">“Skilled programmer and data scientist. Excellent work across platforms, including cloud.”</blockquote>
+            <figcaption class="muted" style="margin-top:16px">- Dr. David Bell, Heco Analytics</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="wrap">
+        <div class="head"><i></i><h2>Contact</h2></div>
+        <div class="grid g3">
+          <div class="card delay-1">
+            <h3 style="margin:0 0 16px">Say hello</h3>
+            <ul class="list">
+              <li>📍 London, United Kingdom</li>
+              <li>✉️ <a href="mailto:abrar-personal@outlook.com" style="color:var(--accent);font-weight:500">abrar-personal@outlook.com</a></li>
+              <li>🔗 <a href="https://www.linkedin.com/in/abrar-fahim/" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">LinkedIn</a></li>
+              <li>🐙 <a href="https://github.com/fahimabrar" target="_blank" rel="noreferrer noopener" style="color:var(--accent);font-weight:500">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="card delay-2">
+            <h3 style="margin:0 0 16px">Quick form</h3>
+            <form class="form" action="https://formspree.io/f/your-id" method="POST">
+              <label class="sr" for="name">Name</label>
+              <input class="input" id="name" name="name" placeholder="Your name" required />
+              <label class="sr" for="email">Email</label>
+              <input class="input" id="email" type="email" name="email" placeholder="Your email" required />
+              <label class="sr" for="msg">Message</label>
+              <textarea class="input" id="msg" name="message" rows="4" placeholder="Hi Abrar, I need help with..." required></textarea>
+              <button class="btn btn-accent" type="submit">Send</button>
+              <p class="muted" style="margin:12px 0 0">Prefer email? <a href="mailto:abrar-personal@outlook.com" style="color:var(--accent);font-weight:500">abrar-personal@outlook.com</a></p>
+            </form>
+          </div>
+          <div class="card delay-3">
+            <h3 style="margin:0 0 16px">Availability</h3>
+            <p class="muted">Open to impactful roles & collaborations across LLMs, NLP, and data platforms.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Abrar Fahim. All rights reserved.</footer>
+
+  <script>
+    // Theme toggle with localStorage
+    (function(){
+      const root = document.documentElement;
+      const key = 'themePref';
+      const saved = localStorage.getItem(key);
+      if(saved){ root.setAttribute('data-theme', saved); }
+      else { root.setAttribute('data-theme', 'dark'); }
+      const btn = document.getElementById('themeToggle');
+      function updateIcon(){ btn.textContent = root.getAttribute('data-theme') === 'light' ? '☀️' : '🌙'; }
+      updateIcon();
+      btn.addEventListener('click', function(){
+        const cur = root.getAttribute('data-theme');
+        const next = cur === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem(key, next);
+        updateIcon();
+      });
+    })();
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Projects filter
+    (function(){
+      const chips = Array.from(document.querySelectorAll('.chip'));
+      const cards = Array.from(document.querySelectorAll('.proj'));
+      function apply(filter){
+        cards.forEach(c=>{
+          const tags = (c.getAttribute('data-tags')||'').split(',').map(s=>s.trim());
+          const show = filter === 'All' || tags.includes(filter);
+          c.style.display = show ? '' : 'none';
+        });
+      }
+      chips.forEach(ch=>{
+        ch.addEventListener('click', ()=>{
+          chips.forEach(x=>x.setAttribute('aria-pressed','false'));
+          ch.setAttribute('aria-pressed','true');
+          apply(ch.getAttribute('data-filter'));
+        });
+      });
+    })();
+
+    // Scroll animation for header
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('topbar');
+      if (window.scrollY > 50) { header.classList.add('scrolled'); }
+      else { header.classList.remove('scrolled'); }
+    });
+
+    // Initialize particles
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.querySelector('.animated-background');
+      const particleCount = 5;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+
+        // Random properties
+        const size = Math.random() * 200 + 100;
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const duration = Math.random() * 30 + 20;
+        const delay = Math.random() * 10;
+
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${left}%`;
+        particle.style.top = `${top}%`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `-${delay}s`;
+
+        container.appendChild(particle);
+      }
+    });
+  </script>
 
 
-
-    <!-- ================== All js here ================ -->
+  <!-- ================== All js here ================ -->
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="script.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
@@ -1406,7 +645,5 @@ Best Nick</blockquote>
     <script src="js/jquery.meanmenu.min.js"></script>
     <script src="js/main.js"></script>
 
-
 </body>
-
 </html>
