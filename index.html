@@ -368,29 +368,35 @@ html[data-theme="dark"] .chatbot-container .chatbot-bubble::after { border-color
 html[data-theme="dark"] #chatbot-popup .chatlogs::-webkit-scrollbar { width: 10px; }
 html[data-theme="dark"] #chatbot-popup .chatlogs::-webkit-scrollbar-track { background: var(--chat-dark-bg); }
 html[data-theme="dark"] #chatbot-popup .chatlogs::-webkit-scrollbar-thumb { background: var(--chat-dark-line); border-radius: 8px; }
+
+
+/* === Targeted layout fixes === */
+
+/* 1) Keep the header bar layout intact */
+.wrap.bar {
+  display: flex;             /* preserve original flex header */
+  align-items: center;
+  justify-content: space-between;
+  /* keep height from your stylesheet; this just ensures it's not overridden */
+}
+
+/* 2) Only apply clearfix/flow-root to typical content wraps */
+section .wrap,
+main .wrap,
+footer .wrap {
+  display: flow-root;        /* modern clearfix, prevents collapse when floats exist */
+}
+
+/* 3) Ensure sections stack normally and don't overlay each other */
+.section { position: relative; z-index: 0; }
+
+/* 4) Guard against legacy float bleed in rows/grids */
+.row::after, .grid::after { content: ""; display: table; clear: both; }
 </style>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Abrar Fahim - Data Scientist | LLMs &amp; NLP Specialist</title>
 <meta content="Abrar Fahim · Data Scientist in London focused on LLMs, NLP, Cloud and ML." name="description"/>
-<style>
-/* Extra: ring layout used in HERO specials */
-.ring {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: 12px;
-  place-items: center;
-  text-align: center;
-}
-.ring > div {
-  border: 1px solid var(--line);
-  background: var(--panel);
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-weight: 600;
-  transition: var(--transition);
-}
-.ring > div:hover { background: var(--accent); color: #061307; border-color: transparent; }
-</style></head>
+</head>
 <body>
 <!-- Animated Background -->
 <div class="animated-background">
@@ -776,44 +782,30 @@ html[data-theme="dark"] #chatbot-popup .chatlogs::-webkit-scrollbar-thumb { back
     });
   </script>
 <!-- ================== All js here ================ -->
-
-
-
-
-
+<script src="js/vendor/modernizr-3.5.0.min.js"></script>
+<script src="script.js"></script>
+<script src="js/vendor/jquery-1.12.4.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <!-- knob-js -->
-
-
-
-
-
-
-
-
-
-
-
+<script src="js/jquery-appear.js"></script>
+<script src="js/jquery-knob.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.fancybox.min.js"></script>
+<script src="js/waypoint.js"></script>
+<script src="js/isotope.pkgd.min.js"></script>
+<script src="js/image-loaded.min.js"></script>
+<script src="js/counterup-min.js"></script>
+<script src="js/one-page-nav-min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/parallax.js"></script>
 <!-- map js -->
-
-
-
-
-
-
-
-<script>
-// Chatbot toggle (open/close)
-(function(){
-  const toggle = document.getElementById('chatbot-toggle');
-  const popup = document.getElementById('chatbot-popup');
-  if (toggle && popup) {
-    toggle.addEventListener('click', ()=>{
-      popup.classList.toggle('hidden');
-      // focus the input when opened
-      const input = popup.querySelector('#user-input');
-      if (!popup.classList.contains('hidden') && input) input.focus();
-    });
-  }
-})();
-</script></body>
+<script src="js/leaflet.js"></script>
+<script src="js/typer.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/ajax-form.js"></script>
+<script src="js/vanilla-tilt.min.js"></script>
+<script src="js/jquery.meanmenu.min.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>
