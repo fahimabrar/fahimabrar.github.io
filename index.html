@@ -1,51 +1,42 @@
 <!DOCTYPE html>
 
-<html data-theme="dark" lang="en">
+<html data-theme="light" lang="en">
 
 <head>
     <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Professional blue accent */
-            --accent: #2563eb;
-            /* blue-600 */
-            --accent-dark: #1d4ed8;
-            /* blue-700 */
+            /* LinkedIn professional blue accent */
+            --accent: #0A66C2;
+            --accent-dark: #004182;
 
-            /* Dark, premium base */
-            --bg: #0b1220;
-            /* deep ink */
-            --tile: rgba(255, 255, 255, 0.04);
-            --panel: rgba(255, 255, 255, 0.06);
+            /* Clean white base */
+            --bg: #FFFFFF;
+            --tile: #FFFFFF;
+            --panel: rgba(10, 102, 194, 0.04);
 
-            /* Text */
-            --ink: rgba(255, 255, 255, 0.92);
-            --muted: rgba(255, 255, 255, 0.66);
+            /* Professional text colors */
+            --ink: #0F172A;
+            --muted: #64748B;
 
-            /* Borders / shadow */
-            --line: rgba(255, 255, 255, 0.10);
-            --shadow: 0 14px 40px rgba(0, 0, 0, 0.30);
+            /* Subtle borders and shadows */
+            --line: rgba(10, 102, 194, 0.12);
+            --shadow: 0 8px 32px rgba(10, 102, 194, 0.12);
 
             /* Motion + radius */
             --transition: all 0.25s cubic-bezier(.2, .8, .2, 1);
-            --border-radius: 18px;
+            --border-radius: 16px;
 
-            /* brand colors */
+            /* Brand colors */
             --linkedin: #0A66C2;
-            --linkedin-hover: #084f96;
-            --github: #111827;
-            --github-hover: #0b1220;
-            --email: #EA4335;
-            --email-hover: #C5362C;
-
-            /* chatbot */
-            --chat-accent: #2563eb;
-            --chat-accent-hover: #1d4ed8;
-            --chat-dark-bg: #0b1220;
-            --chat-dark-panel: rgba(255, 255, 255, 0.06);
-            --chat-dark-line: rgba(255, 255, 255, 0.10);
-            --chat-dark-ink: rgba(255, 255, 255, 0.92);
-            --chat-dark-muted: rgba(255, 255, 255, 0.66);
+            --linkedin-hover: #004182;
+            --github: #0F172A;
+            --github-hover: #1E293B;
+            --email: #0A66C2;
+            --email-hover: #004182;
         }
 
         /* Desktop: fixed header */
@@ -64,28 +55,15 @@
             }
         }
 
-        /* Auto light mode */
-        @media (prefers-color-scheme: light) {
-            html[data-theme="auto"] {
-                --bg: #f6f7fb;
-                --tile: #ffffff;
-                --panel: rgba(15, 23, 42, 0.04);
-                --ink: #0f172a;
-                --muted: #475569;
-                --line: rgba(15, 23, 42, 0.10);
-                --shadow: 0 16px 36px rgba(2, 6, 23, 0.10);
-            }
-        }
-
-        /* Explicit light */
-        html[data-theme="light"] {
-            --bg: #f6f7fb;
-            --tile: #ffffff;
-            --panel: rgba(15, 23, 42, 0.04);
-            --ink: #0f172a;
-            --muted: #475569;
-            --line: rgba(15, 23, 42, 0.10);
-            --shadow: 0 16px 36px rgba(2, 6, 23, 0.10);
+        /* Dark theme */
+        html[data-theme="dark"] {
+            --bg: #0F172A;
+            --tile: #1E293B;
+            --panel: rgba(10, 102, 194, 0.08);
+            --ink: #F1F5F9;
+            --muted: #94A3B8;
+            --line: rgba(10, 102, 194, 0.15);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.40);
         }
 
         * {
@@ -97,15 +75,13 @@
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 80px;
-            overflow-x: hidden;
-            width: 100%;
         }
 
         body {
             margin: 0;
             background: var(--bg);
             color: var(--ink);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-size: 16px;
             line-height: 1.6;
             overflow-x: hidden;
@@ -191,7 +167,7 @@
         }
 
         .tag-core {
-            border-color: rgba(99, 102, 241, 0.30);
+            border-color: rgba(10, 102, 194, 0.30);
             color: color-mix(in srgb, var(--ink) 90%, #c7d2fe);
         }
 
@@ -279,25 +255,6 @@
             background-size: 80px 80px;
             color: color-mix(in srgb, var(--ink) 18%, transparent);
             z-index: -1;
-        }
-
-        /* Cursor spotlight - toned down */
-        @media (hover: hover) and (pointer: fine) {
-            body::after {
-                content: "";
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: radial-gradient(520px circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
-                        color-mix(in srgb, var(--accent) 16%, transparent),
-                        transparent 45%);
-                z-index: 9999;
-                pointer-events: none;
-                will-change: background;
-                transition: background 0.08s ease;
-            }
         }
 
         /* =========================================
@@ -575,7 +532,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 100px 0 60px;
+            padding: 40px 0 60px;
             position: relative;
         }
 
@@ -642,8 +599,6 @@
             font-size: 14px;
             font-weight: 560;
             margin-bottom: 16px;
-            animation: none;
-            /* no pulsing in professional theme */
         }
 
         .h1 {
@@ -895,11 +850,6 @@
             position: relative;
         }
 
-        /* Removed gamer-style glowing frame */
-        .proj::before {
-            display: none;
-        }
-
         .proj:hover {
             transform: translateY(-4px);
             box-shadow: 0 22px 50px rgba(0, 0, 0, 0.30);
@@ -911,9 +861,7 @@
             height: 240px;
             overflow: hidden;
             border-bottom: 1px solid var(--line);
-            background: linear-gradient(135deg,
-                    color-mix(in srgb, var(--accent) 10%, transparent),
-                    transparent);
+            background: var(--bg);
         }
 
         .proj .media img {
@@ -932,12 +880,13 @@
             top: 16px;
             left: 16px;
             background: color-mix(in srgb, var(--bg) 82%, transparent);
-            color: #fff;
+            color: var(--ink);
             border: 1px solid var(--line);
             border-radius: 999px;
             padding: 6px 12px;
             font-size: 12px;
             z-index: 2;
+            font-weight: 600;
         }
 
         .proj .body {
@@ -1129,7 +1078,7 @@
             display: flex;
             gap: 24px;
             width: max-content;
-            animation: marquee-scroll 60s linear infinite;
+            animation: marquee-scroll 25s linear infinite;
             padding: 20px 0;
         }
 
@@ -1146,6 +1095,7 @@
                     color-mix(in srgb, var(--tile) 92%, transparent),
                     color-mix(in srgb, var(--tile) 78%, transparent));
             border-radius: var(--border-radius);
+            cursor: pointer;
             padding: 28px;
             box-shadow: var(--shadow);
             transition: var(--transition);
@@ -1158,6 +1108,23 @@
             transform: translateY(-4px);
             box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28);
             border-color: color-mix(in srgb, var(--accent) 25%, var(--line));
+        }
+
+        .marquee-card blockquote {
+            max-height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-card blockquote::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, var(--tile));
+            pointer-events: none;
         }
 
         @keyframes marquee-scroll {
@@ -1206,10 +1173,10 @@
    CHATBOT (scoped + dark mode)
    ========================================= */
         .chatbot-container {
+            display: none !important;
             position: fixed;
             bottom: 20px;
             right: 20px;
-            display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 1001;
@@ -1396,68 +1363,68 @@
 
         /* Dark mode for chatbot */
         html[data-theme="dark"] .chatbot-popup {
-            background: var(--chat-dark-bg);
-            color: var(--chat-dark-ink);
-            border: 1px solid var(--chat-dark-line);
+            background: var(--bg);
+            color: var(--ink);
+            border: 1px solid var(--line);
         }
 
         html[data-theme="dark"] #chatbot-popup .chatbox {
-            background: var(--chat-dark-bg);
-            color: var(--chat-dark-ink);
+            background: var(--bg);
+            color: var(--ink);
         }
 
         html[data-theme="dark"] #chatbot-popup .chatlogs {
-            background: var(--chat-dark-bg);
-            color: var(--chat-dark-ink);
+            background: var(--bg);
+            color: var(--ink);
         }
 
         html[data-theme="dark"] #chatbot-popup .chat .chat-message {
-            background: var(--chat-accent);
+            background: var(--accent);
             color: #ffffff;
         }
 
         html[data-theme="dark"] #chatbot-popup .chat.bot .chat-message {
-            background: var(--chat-dark-panel);
-            color: var(--chat-dark-ink);
+            background: var(--panel);
+            color: var(--ink);
         }
 
         html[data-theme="dark"] #chatbot-popup .chat-form {
-            background: var(--chat-dark-bg);
-            border-top: 1px solid var(--chat-dark-line);
+            background: var(--bg);
+            border-top: 1px solid var(--line);
         }
 
         html[data-theme="dark"] #chatbot-popup .chat-form input {
-            background: var(--chat-dark-panel);
-            color: var(--chat-dark-ink);
-            border: 1px solid var(--chat-dark-line);
+            background: var(--panel);
+            color: var(--ink);
+            border: 1px solid var(--line);
         }
 
         html[data-theme="dark"] #chatbot-popup .chat-form input::placeholder {
-            color: var(--chat-dark-muted);
+            color: var(--muted);
         }
 
         html[data-theme="dark"] #chatbot-popup .chat-form button {
-            background: var(--chat-accent);
+            background: var(--accent);
             color: #ffffff;
         }
 
         html[data-theme="dark"] #chatbot-popup .chat-form button:hover {
-            background: var(--chat-accent-hover);
+            background: var(--accent-dark);
         }
 
         html[data-theme="dark"] .chatbot-container .chatbot-button {
-            background: var(--chat-dark-bg);
-            border-color: var(--chat-accent);
+            background: var(--bg);
+            border-color: var(--accent);
             box-shadow: 0 12px 26px rgba(0, 0, 0, 0.40);
         }
 
         html[data-theme="dark"] .chatbot-container .chatbot-bubble {
-            background: var(--chat-accent);
+            background: var(--accent);
             color: #ffffff;
         }
 
         html[data-theme="dark"] .chatbot-container .chatbot-bubble::after {
-            border-color: transparent transparent transparent var(--chat-accent);
+            border-color: transparent transparent transparent var(--accent);
         }
 
         html[data-theme="dark"] #chatbot-popup .chatlogs::-webkit-scrollbar {
@@ -1465,11 +1432,11 @@
         }
 
         html[data-theme="dark"] #chatbot-popup .chatlogs::-webkit-scrollbar-track {
-            background: var(--chat-dark-bg);
+            background: var(--bg);
         }
 
         html[data-theme="dark"] #chatbot-popup .chatlogs::-webkit-scrollbar-thumb {
-            background: var(--chat-dark-line);
+            background: var(--line);
             border-radius: 8px;
         }
 
@@ -1551,7 +1518,7 @@
             inset: 0;
             background: rgba(0, 0, 0, 0.65);
             backdrop-filter: blur(6px);
-            z-index: 2000;
+            z-index: 10000;
             display: grid;
             place-items: center;
             opacity: 0;
@@ -1577,6 +1544,7 @@
             transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
+            box-shadow: none;
         }
 
         .modal-backdrop.open .modal-content {
@@ -1597,9 +1565,11 @@
         }
 
         .modal-close {
-            position: absolute;
+            position: sticky;
             top: 16px;
-            right: 16px;
+            margin-left: auto;
+            margin-right: 16px;
+            margin-top: 16px;
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -1611,6 +1581,7 @@
             transition: background 0.2s;
             display: grid;
             place-items: center;
+            flex-shrink: 0;
         }
 
         .modal-close:hover {
@@ -1830,13 +1801,8 @@
                 display: none !important;
             }
         }
-        /* TEMPORARILY DISABLE CHATBOT */
-.chatbot-container,
-.chatbot-popup {
-    display: none !important;
-}
-
     </style>
+      <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Abrar Fahim - Data Scientist | LLMs &amp; NLP Specialist</title>
     <meta content="Abrar Fahim · Data Scientist in London focused on LLMs, NLP, Cloud and ML." name="description" />
@@ -1885,7 +1851,7 @@
                     </svg>
                     <span>Download CV</span>
                 </a>
-                <button aria-label="Toggle theme" class="btn btn-ghost" id="themeToggle" type="button">🌙</button>
+                <button aria-label="Toggle theme" class="btn btn-ghost" id="themeToggle" type="button">Dark</button>
             </div>
         </div>
     </header>
@@ -1897,7 +1863,7 @@
                 <div class="hero-grid">
                     <!-- Intro -->
                     <div class="tile span-7 delay-1">
-                        <div class="kicker">✨ Open to Work</div>
+                        <div class="kicker">Open to Work</div>
                         <h1 class="h1">Hello, I'm Abrar - I turn <span style="color:var(--accent)">LLMs</span> &amp;
                             <span style="color:var(--accent)">NLP</span> into production value.
                         </h1>
@@ -2063,10 +2029,8 @@
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <span class="timeline-date">Jan 2023 - Present</span>
-                            <h3>Consultant Data Scientist @ Heco Analytics</h3>
-                            <p class="muted">Developed AI tools for health economics using LLMs, topic modeling, and
-                                AWS.
-                                Prototype → production features.</p>
+                            <h3>Data Scientist @ HecoAnalytics</h3>
+                            <p class="muted">Built advanced RAG pipelines for health economists, reducing report generation time by 40%. Reproduced real analyst reports with BERTScore > 0.83. Developed AI meeting summarizer with persona-specific outputs. Automated company profiles and data ingestion with Python. Applied topic modeling and rule-based fact extraction to streamline literature reviews.</p>
                         </div>
                     </div>
 
@@ -2074,11 +2038,9 @@
                     <div class="timeline-item delay-2">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
-                            <span class="timeline-date">Dec 2021 - Jan 2023</span>
-                            <h3>Data Scientist @ Advanced Logic Analytics</h3>
-                            <p class="muted">Built a news‑emotion stock observation system; data pipelines and
-                                evaluation
-                                loops with measurable impact.</p>
+                            <span class="timeline-date">Dec 2021 - Dec 2022</span>
+                            <h3>Data Scientist @ Brunel University London &amp; Industry Partner</h3>
+                            <p class="muted">Led development of a stock market behavior analytics tool utilizing two million financial articles. Worked in a cross-functional team, taking the tool from ideation to production. Measured emotion in news articles to predict stock price movements, resulting in a more predictive trading strategy.</p>
                         </div>
                     </div>
 
@@ -2132,12 +2094,13 @@
                         <div class="kicker">Live SaaS Platform</div>
                         <h3>Jobcraft.Tech</h3>
                         <p class="muted" style="font-size:18px; line-height:1.7;">
-                            An all-in-one job application tracking and preparation platform.
-                            Users can organize applications, analyze their CVs against job descriptions using AI,
-                            and generate tailored cover letters instantly.
+                            A comprehensive job search platform that streamlines the application process with AI-powered tools.
+                            Track all your job applications in one place, get intelligent CV analysis with gap identification,
+                            generate personalized cover letters, prepare for interviews with AI assistance, and access custom
+                            video playlists tailored to your target roles.
                         </p>
                         <div class="featured-metric">
-                            🚀 200+ Active Users
+                            200+ Active Users
                         </div>
                         <div class="tech-stack" style="gap:8px; margin-bottom:24px;">
                             <div class="ring">
@@ -2178,7 +2141,7 @@
                             data-title="Tuscan AI - RAG Chat Platform" data-tags="AI, RAG, SaaS"
                             data-image="https://www.abrarfahim.co.uk/images/Screenshot%202025-12-04%20181144.png"
                             data-link="https://www.tuscanai.com/"
-                            data-details="A production-ready RAG-based chat platform that helps website owners capture leads and automate support. It features daily conversation summaries sent to owners and integrated meeting booking capabilities.">
+                            data-details="<div class='modal-section'><div class='modal-section-title'>Platform Overview</div><div class='modal-section-content'><p>Tuscan AI is an enterprise-grade RAG (Retrieval Augmented Generation) chatbot engine designed for businesses seeking to automate customer support and maximize lead capture opportunities.</p><p>The platform seamlessly integrates with any website, providing intelligent, context-aware responses while capturing valuable business intelligence from every conversation.</p></div></div><div class='modal-section'><div class='modal-section-title'>Core Features</div><div class='modal-section-content'><ul><li><strong>Intelligent Lead Capture:</strong> Automatically collects email addresses and contact information during natural conversations</li><li><strong>Meeting Scheduler Integration:</strong> Built-in calendar booking system allowing prospects to schedule meetings directly through the chat</li><li><strong>Automated Daily Summaries:</strong> Email digests sent to stakeholders at preferred times with conversation insights and lead information</li><li><strong>Production-Ready Architecture:</strong> Scalable infrastructure built for real-world deployment and high-traffic scenarios</li></ul></div></div><div class='modal-section'><div class='modal-section-title'>Business Value</div><div class='modal-section-content'><p>Tuscan AI bridges the gap between customer engagement and business automation, ensuring no lead is missed while reducing manual support overhead. The platform transforms website chat from a cost center into a revenue-generating channel.</p></div></div>">
                             <div class="media">
                                 <img alt="Tuscan AI"
                                     src="https://www.abrarfahim.co.uk/images/Screenshot%202025-12-04%20181144.png" />
@@ -2197,14 +2160,14 @@
                             data-title="MyUkTest.co.uk" data-tags="Content, Automation, EdTech"
                             data-image="https://www.abrarfahim.co.uk/images/myuktest.jpg"
                             data-link="https://www.myuktest.co.uk/"
-                            data-details="A platform offering free Life in the UK mock tests and paid courses. Features an automated content pipeline using AI and ElevenLabs for TTS to generate bulk TikTok/YouTube quiz videos (8k+ followers). Profitable PDF sales (200+ copies).">
+                            data-details="<div class='modal-section'><div class='modal-section-title'>About the Platform</div><div class='modal-section-content'><p>MyUkTest.co.uk is a profitable EdTech platform providing free, ad-free Life in the UK mock tests. Built to solve the problem of expensive and ad-heavy test preparation websites, it offers a clean, user-focused learning experience.</p><p>The platform demonstrates a sustainable business model with revenue generated through premium PDF study guides and social media outreach, eliminating the need for intrusive advertising.</p></div></div><div class='modal-section'><div class='modal-section-title'>Key Achievements</div><div class='modal-section-content'><ul><li><strong>Profitable Business:</strong> Successfully monetized through 160+ PDF study guide sales</li><li><strong>Social Media Growth:</strong> 8,000+ TikTok followers and 300+ YouTube subscribers</li><li><strong>Full Automation:</strong> AI-powered content pipeline for social media and quiz generation</li><li><strong>User Acquisition:</strong> All users acquired through organic social media outreach</li></ul></div></div><div class='modal-section'><div class='modal-section-title'>Technical Implementation</div><div class='modal-section-content'><p><strong>Technology Stack:</strong> Flask (Backend), ElevenLabs (Voice hooks), Amazon Polly (Quiz audio)</p><p><strong>Content Automation:</strong> Automated video generation from static MCQ images with calculated rendering times, creating engaging TikTok and YouTube content at scale.</p><p>The platform showcases end-to-end product development from ideation to profitable execution, demonstrating skills in full-stack development, content automation, and digital marketing.</p></div></div>">
                             <div class="media">
                                 <img alt="MyUkTest" src="https://www.abrarfahim.co.uk/images/myuktest.jpg" />
                                 <span class="meta">8k+ Followers</span>
                             </div>
                             <div class="body">
                                 <h3 style="margin:0 0 8px;font-size:20px">MyUkTest.co.uk</h3>
-                                <p class="muted" style="margin:0">Automated AI Content & EdTech Platform.</p>
+                                <p class="muted" style="margin:0">Profitable EdTech platform with AI-powered content automation.</p>
                                 <div class="tags"><span class="tag">Automation</span><span class="tag">EdTech</span>
                                 </div>
                                 <p style="margin:12px 0 0;color:var(--accent);font-weight:500">View Details ↗</p>
@@ -2216,7 +2179,7 @@
                             data-title="QuickNoteShare.com" data-tags="Web Tool, Utility"
                             data-image="https://www.abrarfahim.co.uk/images/qns.jpg"
                             data-link="https://www.quicknoteshare.com/"
-                            data-details="A cross-device note-sharing tool using QR codes. Users can create password-protected or read-only rooms. Currently serving 100+ daily active users for seamless text transfer between devices.">
+                            data-details="<div class='modal-section'><div class='modal-section-title'>Product Overview</div><div class='modal-section-content'><p>QuickNoteShare solves the universal problem of transferring text between devices with a simple, elegant solution. Using QR codes, users can instantly share notes, URLs, and text snippets across any device without email, messaging apps, or cloud storage.</p><p>Designed for simplicity and privacy, the platform has grown organically to serve over 100 daily active users seeking a frictionless cross-device experience.</p></div></div><div class='modal-section'><div class='modal-section-title'>Key Features</div><div class='modal-section-content'><ul><li><strong>QR Code Generation:</strong> Instantly create shareable rooms accessible via QR scan</li><li><strong>Password Protection:</strong> Secure sensitive information with optional password-protected rooms</li><li><strong>Read-Only Mode:</strong> Share content without allowing modifications from recipients</li><li><strong>Auto-Expiry:</strong> Rooms automatically disappear after 24 hours, ensuring privacy and preventing data accumulation</li><li><strong>No Account Required:</strong> Zero friction - start sharing immediately without signup or login</li></ul></div></div><div class='modal-section'><div class='modal-section-title'>Impact</div><div class='modal-section-content'><p>With 100+ daily active users, QuickNoteShare demonstrates strong product-market fit for a common pain point. The tool is particularly popular among developers, designers, and remote workers who frequently need to move text between mobile and desktop devices.</p></div></div>">
                             <div class="media">
                                 <img alt="QuickNoteShare" src="https://www.abrarfahim.co.uk/images/qns.jpg" />
                                 <span class="meta">100+ Daily Users</span>
@@ -2233,7 +2196,7 @@
                         <article class="proj" style="cursor:pointer" onclick="openModal(this)" data-title="Reddit Radar"
                             data-tags="Extension, AI, Scraping" data-image="https://www.abrarfahim.co.uk/images/rr.jpg"
                             data-link="https://chromewebstore.google.com/detail/reddit-radar/jnglefjfeneedgjbhofpjlepmadjcjel"
-                            data-details="A Chrome extension that scrapes Reddit posts and comments to identify user pain points. Features an AI analyzer that processes discussions to extract viable business ideas and market gaps.">
+                            data-details="<div class='modal-section'><div class='modal-section-title'>Extension Overview</div><div class='modal-section-content'><p>Reddit Radar transforms Reddit discussions into actionable business intelligence. By analyzing user complaints, feature requests, and pain points across subreddit communities, it surfaces untapped market opportunities and validates business ideas before investment.</p><p>Built for entrepreneurs, product managers, and startup founders seeking data-driven market insights from authentic user conversations.</p></div></div><div class='modal-section'><div class='modal-section-title'>Core Functionality</div><div class='modal-section-content'><ul><li><strong>Automated Scraping:</strong> Extract posts and comments from any subreddit with one click</li><li><strong>AI Analysis Engine:</strong> Natural language processing identifies recurring pain points and unmet needs</li><li><strong>Business Idea Extraction:</strong> Automatically surfaces viable business opportunities from discussion patterns</li><li><strong>Market Gap Identification:</strong> Detects underserved segments and missing solutions in target markets</li><li><strong>Chrome Integration:</strong> Seamless workflow directly within Reddit browsing experience</li></ul></div></div><div class='modal-section'><div class='modal-section-title'>Use Cases</div><div class='modal-section-content'><p>Ideal for market research, competitor analysis, product validation, and trend spotting. Users can explore niche communities to discover what people genuinely struggle with, providing authentic market signals often missed by traditional research methods.</p></div></div>">
                             <div class="media">
                                 <img alt="Reddit Radar" src="https://www.abrarfahim.co.uk/images/rr.jpg" />
                                 <span class="meta">Chrome Extension</span>
@@ -2252,7 +2215,7 @@
                             data-tags="Research, AI, FinTech, NLP"
                             data-image="https://www.abrarfahim.co.uk/images/portfolio/emotion_ai.webp"
                             data-link="https://www.brunel.ac.uk/research/projects/emotion-ai-for-trading-on-financial-markets"
-                            data-details="<div class='modal-section'><div class='modal-section-title'>Background Story</div><div class='modal-section-content'><p>A collaborative research project between <strong>Brunel University London</strong> and <strong>Advanced Logic Analytics</strong> investigating the role of emotions in stock market trading decisions using AI/ML concepts.</p><p>The interplay between emotion and sentiments forms the basis of many trading decisions. This FinTech-AI project utilized novel AI and semantic techniques to develop new predictive emotion-based algorithms that analyze financial news.</p></div></div><div class='modal-section'><div class='modal-section-title'>Key Results 🎯</div><div class='modal-section-content'><p><strong style='color:var(--accent);font-size:20px'>43% Correlation Achieved</strong></p><p>Successfully achieved a <strong>43% correlation between emotion analysis and stock price movements</strong>, providing significantly more predictive power for stock trading decisions.</p><ul><li>Developed automated techniques for market-specific corpus generation supporting emotion recognition</li><li>Created novel Machine Learning algorithms for emotion detection in financial markets</li><li>Built predictive models depicting emotional journeys within trading communities</li><li>Utilized sentiment analysis to predict future market movements and improve fund performance</li></ul></div></div><div class='modal-section'><div class='modal-section-title'>Challenges</div><div class='modal-section-content'><ul><li>Understanding different market segments and the effects of emotions on these segments</li><li>Creating market-specific corpus relevant for emotion recognition in financial domain</li><li>Developing ML algorithms that accurately detect emotions from financial news and social media</li><li>Mapping emotional journeys of traders across different market conditions</li><li>Integrating developed algorithms within existing trading products</li></ul></div></div><div class='modal-section'><div class='modal-section-title'>Current Stage</div><div class='modal-section-content'><p><strong>Status:</strong> Completed (2021-2023)</p><p><strong>Partner:</strong> Advanced Logic Analytics Limited</p><p><strong>Publication:</strong> Research published in International Journal of Innovation and Technology Management (World Scientific)</p><p>The project successfully enabled ALA to create a unique solution utilizing sentiment analysis to accurately predict future market movements, improve fund performance, and enhance the company's systematic trading products marketed to the Financial Services sector.</p></div></div>">
+                            data-details="<div class='modal-section'><div class='modal-section-title'>Background Story</div><div class='modal-section-content'><p>A collaborative research project between <strong>Brunel University London</strong> and <strong>Advanced Logic Analytics</strong> investigating the role of emotions in stock market trading decisions using AI/ML concepts.</p><p>The interplay between emotion and sentiments forms the basis of many trading decisions. This FinTech-AI project utilized novel AI and semantic techniques to develop new predictive emotion-based algorithms that analyze financial news.</p></div></div><div class='modal-section'><div class='modal-section-title'>Key Results</div><div class='modal-section-content'><p><strong style='color:var(--accent);font-size:20px'>43% Correlation Achieved</strong></p><p>Successfully achieved a <strong>43% correlation between emotion analysis and stock price movements</strong>, providing significantly more predictive power for stock trading decisions.</p><ul><li>Developed automated techniques for market-specific corpus generation supporting emotion recognition</li><li>Created novel Machine Learning algorithms for emotion detection in financial markets</li><li>Built predictive models depicting emotional journeys within trading communities</li><li>Utilized sentiment analysis to predict future market movements and improve fund performance</li></ul></div></div><div class='modal-section'><div class='modal-section-title'>Challenges</div><div class='modal-section-content'><ul><li>Understanding different market segments and the effects of emotions on these segments</li><li>Creating market-specific corpus relevant for emotion recognition in financial domain</li><li>Developing ML algorithms that accurately detect emotions from financial news and social media</li><li>Mapping emotional journeys of traders across different market conditions</li><li>Integrating developed algorithms within existing trading products</li></ul></div></div><div class='modal-section'><div class='modal-section-title'>Current Stage</div><div class='modal-section-content'><p><strong>Status:</strong> Completed (2021-2023)</p><p><strong>Partner:</strong> Advanced Logic Analytics Limited</p><p><strong></p><p>The project successfully enabled ALA to create a unique solution utilizing sentiment analysis to accurately predict future market movements, improve fund performance, and enhance the company's systematic trading products marketed to the Financial Services sector.</p></div></div>">
                             <div class="media">
                                 <img alt="Emotion AI for Trading"
                                     src="https://www.abrarfahim.co.uk/images/portfolio/emotion_ai.webp" />
@@ -2273,7 +2236,7 @@
                             data-title="QuickReach for LinkedIn" data-tags="Extension, Productivity, LinkedIn"
                             data-image="https://www.abrarfahim.co.uk/images/quickreach.png"
                             data-link="https://chromewebstore.google.com/detail/quickreach-for-linkedin/cmejfoncckaegjgkdekeifmmdkidhbba"
-                            data-details="<p>A Chrome extension that streamlines LinkedIn messaging workflow, enabling users to send messages to connections with a single click.</p><p><strong>Key Features:</strong></p><ul><li>Save and manage message drafts for quick access</li><li>One-click send functionality for saved drafts</li><li>Seamless integration with LinkedIn's messaging interface</li><li>Improves productivity for LinkedIn outreach and networking</li><li>Ideal for recruiters, sales professionals, and networkers</li></ul><p><strong>Technology:</strong> Chrome Extension API, JavaScript, LinkedIn Integration</p>">
+                            data-details="<div class='modal-section'><div class='modal-section-title'>Extension Overview</div><div class='modal-section-content'><p>QuickReach streamlines LinkedIn outreach by eliminating repetitive messaging tasks. Sales professionals, recruiters, and networkers can maintain personalized messaging templates and deploy them with a single click, dramatically accelerating their outreach velocity while maintaining quality.</p><p>The extension integrates seamlessly into LinkedIn's native interface, requiring no context switching or external tools.</p></div></div><div class='modal-section'><div class='modal-section-title'>Key Features</div><div class='modal-section-content'><ul><li><strong>Draft Management:</strong> Create and organize unlimited message templates for different scenarios</li><li><strong>One-Click Deployment:</strong> Send pre-written messages instantly from any LinkedIn profile</li><li><strong>Native Integration:</strong> Works directly within LinkedIn's messaging interface without disruption</li><li><strong>Quick Access:</strong> Keyboard shortcuts and intuitive UI for maximum efficiency</li><li><strong>Template Personalization:</strong> Supports variable insertion for customized touches at scale</li></ul></div></div><div class='modal-section'><div class='modal-section-title'>Target Users</div><div class='modal-section-content'><p>Designed for professionals who send high volumes of LinkedIn messages: recruiters sourcing candidates, sales development representatives prospecting leads, entrepreneurs building networks, and anyone conducting systematic LinkedIn outreach campaigns.</p><p><strong>Technology:</strong> Chrome Extension API, JavaScript, LinkedIn Integration</p></div></div>">
                             <div class="media"
                                 style="background: linear-gradient(135deg, #0A66C2 0%, #004182 100%); display: flex; align-items: center; justify-content: center;">
                                 <img alt="QuickReach for LinkedIn"
@@ -2302,7 +2265,7 @@
                 <div class="marquee-window">
                     <div class="marquee-track">
                         <!-- 1. Nick Ellis -->
-                        <figure class="marquee-card">
+                        <figure class="marquee-card" onclick="openTestimonialModal(this)">
                             <blockquote class="muted" style="margin:0;font-style:italic">
                                 “Hi Abrar, Very happy to recommend you after the work you did for Advanced Logic
                                 Analytics
@@ -2322,7 +2285,7 @@
                         </figure>
 
                         <!-- 2. Anthony Bawa -->
-                        <figure class="marquee-card">
+                        <figure class="marquee-card" onclick="openTestimonialModal(this)">
                             <blockquote class="muted" style="margin:0;font-style:italic">
                                 “I have worked with Abrar and he is highly skilled professional with expertise Data
                                 science.
@@ -2342,7 +2305,7 @@
                         </figure>
 
                         <!-- 3. David Bell -->
-                        <figure class="marquee-card">
+                        <figure class="marquee-card" onclick="openTestimonialModal(this)">
                             <blockquote class="muted" style="margin:0;font-style:italic">
                                 “Abrar is a skilled programmer and data scientist who works well as part of a team.
                                 Abrar
@@ -2357,7 +2320,7 @@
                         </figure>
 
                         <!-- 4. Zaahir Dawood -->
-                        <figure class="marquee-card">
+                        <figure class="marquee-card" onclick="openTestimonialModal(this)">
                             <blockquote class="muted" style="margin:0;font-style:italic">
                                 “Abrar Is a high skilled programmer and an incisive data scientist who is capable of
                                 developing, deploying and maintaining computer models for a wide range of applications.
@@ -2374,7 +2337,7 @@
                         </figure>
 
                         <!-- 5. Alaa Marshan -->
-                        <figure class="marquee-card">
+                        <figure class="marquee-card" onclick="openTestimonialModal(this)">
                             <blockquote class="muted" style="margin:0;font-style:italic">
                                 “I have taught Abrar, supervised him on his MSc dissertation and worked with him on a
                                 research project focusing on emotions discovery and analysis and their effect on trading
@@ -2555,13 +2518,13 @@
                     <div class="card delay-1">
                         <h3 style="margin:0 0 16px">Say hello</h3>
                         <ul class="list">
-                            <li>📍 London, United Kingdom</li>
-                            <li>✉️ <a href="mailto:abrar-personal@outlook.com"
+                            <li>Location: London, United Kingdom</li>
+                            <li>Email: <a href="mailto:abrar-personal@outlook.com"
                                     style="color:var(--accent);font-weight:500">abrar-personal@outlook.com</a></li>
-                            <li>🔗 <a href="https://www.linkedin.com/in/abrar-fahim/" rel="noreferrer noopener"
-                                    style="color:var(--accent);font-weight:500" target="_blank">LinkedIn</a></li>
-                            <li>🐙 <a href="https://github.com/fahimabrar" rel="noreferrer noopener"
-                                    style="color:var(--accent);font-weight:500" target="_blank">GitHub</a></li>
+                            <li>LinkedIn: <a href="https://www.linkedin.com/in/abrar-fahim/" rel="noreferrer noopener"
+                                    style="color:var(--accent);font-weight:500" target="_blank">linkedin.com/in/abrar-fahim</a></li>
+                            <li>GitHub: <a href="https://github.com/fahimabrar" rel="noreferrer noopener"
+                                    style="color:var(--accent);font-weight:500" target="_blank">github.com/fahimabrar</a></li>
                         </ul>
                     </div>
                     <div class="card delay-2">
@@ -2644,7 +2607,7 @@
             if (saved) { root.setAttribute('data-theme', saved); }
             else { root.setAttribute('data-theme', 'light'); }
             const btn = document.getElementById('themeToggle');
-            function updateIcon() { btn.textContent = root.getAttribute('data-theme') === 'light' ? '☀️' : '🌙'; }
+            function updateIcon() { btn.textContent = root.getAttribute('data-theme') === 'light' ? 'Dark' : 'Light'; }
             updateIcon();
             btn.addEventListener('click', function () {
                 const cur = root.getAttribute('data-theme');
@@ -2711,13 +2674,6 @@
                 container.appendChild(particle);
             }
 
-            // Mouse Move Tracking for Spotlight
-            document.addEventListener('mousemove', (e) => {
-                const x = e.clientX;
-                const y = e.clientY;
-                document.body.style.setProperty('--cursor-x', `${x}px`);
-                document.body.style.setProperty('--cursor-y', `${y}px`);
-            });
 
             // Initialize Skills Chart
             const ctx = document.getElementById('skillsChart');
@@ -2798,8 +2754,10 @@
             // Set content
             modalTitle.textContent = title;
             modalImg.src = image;
+            modalImg.style.display = 'block';
             modalDesc.innerHTML = details;
             modalLink.href = link;
+            modalLink.style.display = 'inline-flex';
 
             // Clone tags into modal
             modalTags.innerHTML = '';
@@ -2822,6 +2780,21 @@
             // (Bubbling handled by onclick="event.stopPropagation()" on content)
             modal.classList.remove('open');
             document.body.classList.remove('modal-open');
+        }
+
+        function openTestimonialModal(element) {
+            const quote = element.querySelector('blockquote').innerHTML;
+            const name = element.querySelector('figcaption > div:first-child').textContent;
+            const title = element.querySelector('figcaption > div:last-child').textContent;
+
+            modalTitle.textContent = name;
+            modalImg.style.display = 'none';
+            modalDesc.innerHTML = '<div class="modal-section"><div class="modal-section-title">Testimonial</div><div class="modal-section-content"><blockquote style="font-style:italic;color:var(--muted);margin:0;font-size:16px;line-height:1.8">' + quote + '</blockquote></div></div><div class="modal-section"><div class="modal-section-title">About</div><div class="modal-section-content"><p><strong>' + name + '</strong><br>' + title + '</p></div></div>';
+            modalTags.innerHTML = '';
+            modalLink.style.display = 'none';
+
+            modal.classList.add('open');
+            document.body.classList.add('modal-open');
         }
 
         // Close on Escape key
