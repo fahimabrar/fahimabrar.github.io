@@ -426,24 +426,23 @@
                 width: 100%;
             }
 
-            /* Sideway scroll for projects on mobile */
+            /* Single column for projects on mobile */
             #projects .rail {
-                overflow-x: auto;
+                overflow-x: visible;
                 padding-bottom: 20px;
-                -webkit-overflow-scrolling: touch;
             }
 
             #projects .row {
                 display: flex;
-                flex-wrap: nowrap;
+                flex-direction: column;
                 gap: 20px;
                 padding: 0 20px;
-                width: max-content;
+                width: 100%;
             }
 
             #projects .proj {
-                flex: 0 0 320px;
-                width: 320px;
+                flex: 0 0 auto;
+                width: 100%;
             }
         }
 
@@ -1141,7 +1140,7 @@
             }
 
             .hero {
-                padding: 80px 0 40px;
+                padding: 20px 0 40px;
             }
 
             .section {
@@ -2251,6 +2250,10 @@
             @media (min-width: 900px) {
                 #projRow { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; }
                 #projRow .proj { width: 100% !important; }
+            }
+            @media (max-width: 899px) {
+                #projRow { display: flex !important; flex-direction: column !important; gap: 20px !important; }
+                #projRow .proj { width: 100% !important; flex: none !important; }
             }
         </style>
         <section class="section" id="projects">
