@@ -2778,6 +2778,11 @@
             });
         })();
 
+        // Prevent browser from restoring scroll position on reload
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
         // Scroll animation for header
         window.addEventListener('scroll', () => {
             const header = document.getElementById('topbar');
@@ -2787,6 +2792,11 @@
 
         // Initialize particles
         document.addEventListener('DOMContentLoaded', () => {
+            // Scroll to top on page load (fix for mobile auto-scroll issue)
+            if (!window.location.hash) {
+                window.scrollTo(0, 0);
+            }
+
             const container = document.querySelector('.animated-background');
             const particleCount = 5;
 
