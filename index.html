@@ -14,9 +14,10 @@
             --accent-dark: #004182;
 
             /* Clean white base */
-            --bg: #FFFFFF;
+            --bg: #FFFAF5;
             --tile: #FFFFFF;
             --panel: rgba(10, 102, 194, 0.04);
+            --modal-bg: #FFFFFF;
 
             /* Professional text colors */
             --ink: #0F172A;
@@ -57,13 +58,14 @@
 
         /* Dark theme */
         html[data-theme="dark"] {
-            --bg: #0F172A;
+            --bg: #1A1612;
             --tile: #1E293B;
             --panel: rgba(10, 102, 194, 0.08);
             --ink: #F1F5F9;
             --muted: #94A3B8;
             --line: rgba(10, 102, 194, 0.15);
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.40);
+            --modal-bg: #0F172A;
         }
 
         * {
@@ -1519,7 +1521,7 @@
         }
 
         .modal-content {
-            background: color-mix(in srgb, var(--bg) 96%, transparent);
+            background: color-mix(in srgb, var(--modal-bg) 96%, transparent);
             border: 1px solid var(--line);
             border-radius: 20px;
             width: 90%;
