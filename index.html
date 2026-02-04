@@ -543,6 +543,13 @@
             width: 100%;
         }
 
+        /* Mobile: show portrait above intro */
+        @media (max-width: 899px) {
+            .hero-grid .portrait-tile {
+                order: -1;
+            }
+        }
+
         @media (min-width: 900px) {
             .hero-grid {
                 grid-template-columns: repeat(12, 1fr);
@@ -646,14 +653,15 @@
             box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 15%, transparent);
             transition: var(--transition);
             transform: translateY(0);
-            display: none;
-            max-width: 280px;
-            margin: 0 auto;
+            display: block;
+            max-width: 180px;
+            margin: 24px auto;
         }
 
         @media (min-width: 900px) {
             .portrait {
-                display: block;
+                max-width: 280px;
+                margin: 0 auto;
             }
         }
 
@@ -2035,7 +2043,7 @@
                         </div>
                     </div>
                     <!-- Portrait -->
-                    <div class="tile span-5 delay-2">
+                    <div class="tile span-5 delay-2 portrait-tile">
                         <div aria-hidden="true" class="portrait">
                             <img alt="Abrar portrait" src="https://www.abrarfahim.co.uk/images/slider/profile.webp">
                             </img>
