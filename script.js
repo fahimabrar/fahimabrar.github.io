@@ -17,25 +17,6 @@
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Projects filter
-(function () {
-    const chips = Array.from(document.querySelectorAll('.chip'));
-    const cards = Array.from(document.querySelectorAll('.proj'));
-    function apply(filter) {
-        cards.forEach(c => {
-            const tags = (c.getAttribute('data-tags') || '').split(',').map(s => s.trim());
-            c.style.display = (filter === 'All' || tags.includes(filter)) ? '' : 'none';
-        });
-    }
-    chips.forEach(ch => {
-        ch.addEventListener('click', () => {
-            chips.forEach(x => x.setAttribute('aria-pressed', 'false'));
-            ch.setAttribute('aria-pressed', 'true');
-            apply(ch.getAttribute('data-filter'));
-        });
-    });
-})();
-
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 window.addEventListener('scroll', () => {
@@ -57,8 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(p);
     }
 });
-
-function toggleChat() { document.getElementById('chatbot-popup').classList.toggle('hidden'); }
 
 const modal = document.getElementById('projectModal');
 function openModal(card) {
