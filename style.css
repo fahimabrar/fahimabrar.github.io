@@ -8,7 +8,7 @@
   --accent:#0A66C2;--accent-dark:#004182;
   --bg:#FFFAF5;--tile:#FFFFFF;--tile-sunk:#F7F1EA;
   --panel:rgba(10,102,194,0.04);--modal-bg:#FFFFFF;
-  --ink:#1C2433;--ink-soft:#46536A;--muted:#6E7787;
+  --ink:#1C2433;--ink-soft:#46536A;--muted:#5C6574;
   --line:#E7DFD4;--line-soft:#F0EAE1;
   --shadow:0 1px 2px rgba(28,36,51,0.05);
   --shadow-lift:0 10px 30px rgba(28,36,51,0.10);
@@ -120,6 +120,8 @@ img{max-width:100%;display:block}a{color:inherit;text-decoration:none}button{fon
 .tile{position:relative;overflow:hidden;border-radius:var(--border-radius);border:1px solid var(--line);background:var(--tile);padding:24px;box-shadow:var(--shadow);transition:var(--transition);opacity:0;animation:fadeUp 0.6s forwards}
 .tile:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift);border-color:color-mix(in srgb,var(--ink-soft) 40%,var(--line))}
 .kicker{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--tile-sunk);color:var(--ink-soft);padding:6px 12px;border-radius:999px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:16px}
+.kicker-live{background:color-mix(in srgb,#16a34a 15%,var(--tile));border-color:color-mix(in srgb,#16a34a 40%,var(--line));color:#166534}
+html[data-theme="dark"] .kicker-live{color:#86D9A4}
 .h1{font-family:var(--display);font-size:clamp(32px,4.5vw,50px);line-height:1.06;margin:12px 0;font-weight:700;letter-spacing:-0.02em}
 .muted{color:var(--muted)}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
