@@ -42,9 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
 const modal = document.getElementById('projectModal');
 function openModal(card) {
     document.getElementById('modalTitle').textContent = card.getAttribute('data-title');
-    document.getElementById('modalImg').src = card.getAttribute('data-image');
-    document.getElementById('modalImg').style.display = 'block';
-    document.getElementById('modalImg').parentElement.style.display = 'block';
+    const modalImg = document.getElementById('modalImg');
+    modalImg.classList.remove('loaded');
+    modalImg.onload = () => modalImg.classList.add('loaded');
+    modalImg.onerror = () => modalImg.classList.add('loaded');
+    modalImg.src = card.getAttribute('data-image');
+    if (modalImg.complete && modalImg.naturalWidth) modalImg.classList.add('loaded');
+    modalImg.style.display = 'block';
+    modalImg.parentElement.style.display = 'block';
     document.getElementById('modalDesc').innerHTML = card.getAttribute('data-details');
     document.getElementById('modalLink').href = card.getAttribute('data-link');
     document.getElementById('modalLink').style.display = 'inline-flex';
