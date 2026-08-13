@@ -157,7 +157,7 @@ html[data-theme="dark"] .kicker-live{color:#86D9A4}
   .hire-split .kicker{margin:0 0 16px}
   .hire-split p{margin-left:0;margin-right:0}
   .hire-actions{justify-content:flex-start}
-  .hire-photo{margin:0;width:100%;max-width:300px;aspect-ratio:2/3;justify-self:start;border-radius:var(--border-radius)}
+  .hire-photo{margin:-40px 0 -40px -32px;width:calc(100% + 32px);height:calc(100% + 80px);max-width:none;aspect-ratio:auto;align-self:stretch;border-radius:0}
   .hire-photo img{object-position:center}
 }
 .facts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
