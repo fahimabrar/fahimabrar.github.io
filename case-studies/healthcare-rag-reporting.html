@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Case Study: AI Reporting Over Research Documents, 40% Faster Reports | Abrar Fahim</title>
+    <meta name="description" content="How HecoAnalytics' health economists cut report generation time by 40% with a production RAG pipeline: source-cited answers over research documents, accuracy evaluated (BERTScore > 0.83) before rollout." />
+    <meta name="author" content="Abrar Fahim" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta property="og:title" content="Case Study: AI Reporting Over Research Documents, 40% Faster Reports" />
+    <meta property="og:description" content="A production RAG pipeline for health economists: source-cited answers, accuracy evaluated before rollout, report time cut 40%." />
+    <meta property="og:url" content="https://www.abrarfahim.co.uk/case-studies/healthcare-rag-reporting.html" />
+    <meta property="og:type" content="article" />
+    <link rel="canonical" href="https://www.abrarfahim.co.uk/case-studies/healthcare-rag-reporting.html" />
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article",
+     "headline":"AI Reporting Over Research Documents for HecoAnalytics",
+     "description":"A production RAG pipeline for health economists with source-cited answers and pre-rollout accuracy evaluation. Report generation time cut by 40%, in production for 2+ years.",
+     "datePublished":"2026-07-25",
+     "dateModified":"2026-08-13",
+     "mainEntityOfPage":"https://www.abrarfahim.co.uk/case-studies/healthcare-rag-reporting.html",
+     "author":{"@type":"Person","@id":"https://www.abrarfahim.co.uk/#person","name":"Abrar Fahim","url":"https://www.abrarfahim.co.uk"}}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://www.abrarfahim.co.uk/"},
+      {"@type":"ListItem","position":2,"name":"Case Studies","item":"https://www.abrarfahim.co.uk/case-studies/"},
+      {"@type":"ListItem","position":3,"name":"AI Reporting Over Research Documents"}
+    ]}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @media(min-width:900px){main{padding-top:80px}}
+        .cs-wrap{max-width:820px;margin:0 auto;padding:48px 20px 20px}
+        .cs-kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:18px 0 10px}
+        .cs-body h1{font-family:var(--display);font-size:clamp(28px,4vw,42px);line-height:1.12;letter-spacing:-0.02em;margin:0 0 12px}
+        .cs-meta{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);margin-bottom:32px}
+        .cs-body h2{font-family:var(--display);font-size:24px;letter-spacing:-0.01em;margin:44px 0 14px}
+        .cs-body h3{font-family:var(--display);font-size:18px;margin:28px 0 10px}
+        .cs-body p{font-size:16.5px;line-height:1.75;color:var(--ink-soft);margin:0 0 18px}
+        .cs-body ul,.cs-body ol{font-size:16.5px;line-height:1.75;color:var(--ink-soft);margin:0 0 18px;padding-left:22px}
+        .cs-body li{margin-bottom:8px}
+        .cs-body strong{color:var(--ink)}
+        .cs-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:0 0 32px}
+        .cs-stat{border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));background:color-mix(in srgb,var(--accent) 6%,var(--tile));border-radius:14px;padding:20px 18px;text-align:center}
+        .cs-stat .n{font-family:var(--display);font-weight:700;font-size:30px;letter-spacing:-0.02em;color:var(--accent)}
+        .cs-stat .l{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4}
+        .cs-snapshot{border:1px solid var(--line);background:var(--tile);border-radius:14px;padding:24px;margin:0 0 8px}
+        .cs-snapshot dl{display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin:0}
+        .cs-snapshot dt{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+        .cs-snapshot dd{margin:4px 0 0;font-size:14.5px;color:var(--ink);font-weight:500}
+        @media(max-width:560px){.cs-snapshot dl{grid-template-columns:1fr}}
+        .cs-callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--tile);border-radius:10px;padding:18px 20px;margin:26px 0}
+        .cs-callout p{margin:0;font-size:15.5px}
+        .cs-quote{border:1px solid var(--line);background:var(--tile);border-radius:14px;padding:26px 28px;margin:30px 0;font-style:italic;font-size:17px;line-height:1.7;color:var(--ink-soft)}
+        .cs-quote .who{font-style:normal;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);margin-top:14px}
+        .cs-phase{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:0 0 14px;background:var(--tile)}
+        .cs-phase .ph{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+        .cs-phase p{margin:0;font-size:15px}
+        .cs-stack{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+        .cs-stack span{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--tile);border-radius:999px;padding:5px 12px;color:var(--ink-soft)}
+        .cs-cta{border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));background:color-mix(in srgb,var(--accent) 6%,var(--tile));border-radius:14px;padding:28px;margin:44px 0 10px;text-align:center}
+        .cs-cta p{margin:0 0 16px;font-size:16px}
+        .back-link{font-family:var(--display);font-weight:600;font-size:14px;color:var(--accent);text-decoration:none}
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+
+    <header class="topbar" id="topbar">
+        <div class="wrap bar">
+            <a aria-label="Home" class="brand" href="../index.html"><div class="brand-badge">AF</div><div><strong>Abrar Fahim</strong><small>AI Consultant · MSc · London, UK</small></div></a>
+            <nav aria-label="Primary" class="nav" id="mainNav"><a href="../index.html#hire">Work with me</a><a href="../index.html#services">Services</a><a class="active" href="index.html">Case studies</a><a href="../index.html#contact">Contact</a></nav>
+            <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+            <div class="actions">
+                <button aria-label="Toggle theme" class="btn btn-ghost" id="themeToggle" type="button">Dark</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <article class="cs-wrap cs-body">
+            <a class="back-link" href="index.html">&larr; All case studies</a>
+            <div class="cs-kicker">Case Study · Healthcare Analytics · HecoAnalytics</div>
+            <h1>Reports that took months now take days</h1>
+            <div class="cs-meta">DOCUMENT INTELLIGENCE · RAG PIPELINE · IN PRODUCTION FOR 2+ YEARS</div>
+
+            <div class="cs-results">
+                <div class="cs-stat"><div class="n">40%</div><div class="l">reduction in report generation time</div></div>
+                <div class="cs-stat"><div class="n">&gt; 0.83</div><div class="l">BERTScore on evaluation data</div></div>
+                <div class="cs-stat"><div class="n">100%</div><div class="l">of answers cite their source documents</div></div>
+                <div class="cs-stat"><div class="n">2+ yrs</div><div class="l">in production and daily use</div></div>
+            </div>
+
+            <div class="cs-snapshot">
+                <dl>
+                    <div><dt>Client</dt><dd>HecoAnalytics, health economics &amp; market access</dd></div>
+                    <div><dt>Users</dt><dd>Health economists producing client reports</dd></div>
+                    <div><dt>Solution</dt><dd>AI document search + reporting</dd></div>
+                    <div><dt>Stack</dt><dd>Python · LLMs · RAG · AWS</dd></div>
+                    <div><dt>My role</dt><dd>Data Scientist: design, build, evaluation and deployment</dd></div>
+                    <div><dt>Status</dt><dd>In production</dd></div>
+                </dl>
+            </div>
+
+            <h2>The challenge</h2>
+            <p>Health economists were spending hours searching through research papers, reports and studies to find the information needed for client reports.</p>
+            <p>And the firm could not rely solely on AI and wait to catch hallucinated results: every answer had to come from a peer-reviewed journal.</p>
+            <p>The information already existed. Finding, checking and restating it was what consumed the time.</p>
+            <p>A standard AI chatbot wasn't enough. In healthcare analytics, answers needed to be <strong>accurate, traceable and based on the firm's own research</strong>.</p>
+
+            <h2>The solution</h2>
+            <p>I built an AI system that searches the company's research documents and uses the relevant evidence to generate answers.</p>
+            <p>Every answer includes its source, so the economist can quickly check where the information came from.</p>
+            <p>Before deployment, I tested different models and configurations against real questions from the team to measure accuracy.</p>
+            <p>The system was then deployed into the client's reporting workflow.</p>
+
+            <div class="cs-stack">
+                <span>Python</span><span>RAG</span><span>LLM evaluation</span><span>BERTScore / ROUGE</span><span>AWS</span><span>Vector search</span>
+            </div>
+
+            <h2>The results</h2>
+
+            <h3>40% faster report generation</h3>
+            <p>The system handles much of the time-consuming work of finding and extracting evidence, allowing economists to spend more time on analysis and judgement.</p>
+
+            <h3>Trusted and used in production</h3>
+            <p>The system has been running for 2+ years and is used across client-facing workflows.</p>
+
+            <h3>Evidence-backed AI</h3>
+            <p>Answers are linked back to their source documents, making the output easier to verify and trust.</p>
+
+            <div class="cs-callout">
+                <p><strong>The key wasn't simply adding AI. It was making the answers verifiable.</strong></p>
+            </div>
+
+            <div class="cs-quote">
+                "Abrar is a skilled programmer and data scientist who works well as part of a team. Abrar acquires knowledge effectively and always demonstrates excellent work across a number of platforms (including cloud)."
+                <div class="who">DAVID BELL · CTO, HECOANALYTICS · READER IN COMPUTER SCIENCE, BRUNEL UNIVERSITY OF LONDON</div>
+            </div>
+
+            <h2>Why it worked</h2>
+            <ul>
+                <li><strong>Source citations.</strong> Users can verify the information.</li>
+                <li><strong>Human in the loop.</strong> AI enhances the health economists' work, but they stay in the driving seat.</li>
+                <li><strong>Measured before deployment.</strong> Accuracy was tested on real client tasks.</li>
+                <li><strong>Built around existing documents.</strong> No need to replace the team's knowledge base.</li>
+                <li><strong>Expanded over time.</strong> The same foundations were later used for summarisation and other research tools.</li>
+            </ul>
+
+            <div class="cs-cta">
+                <p><strong>Could this work for your business?</strong><br>If your team spends hours searching through documents, reports, policies or research for information you already have, there may be a simpler way. I'll tell you honestly whether AI can help, or whether the documents need fixing first.</p>
+                <form action="https://formspree.io/f/mqaloqae" class="form" method="POST" style="max-width:480px;margin:0 auto;text-align:left">
+                    <input type="hidden" name="_subject" value="Case study enquiry: Document Intelligence / RAG">
+                    <input type="hidden" name="source" value="https://www.abrarfahim.co.uk/case-studies/healthcare-rag-reporting.html">
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <label class="sr" for="name">Name</label><input class="input" id="name" name="name" placeholder="Your name" required>
+                    <label class="sr" for="email">Email</label><input class="input" id="email" name="email" placeholder="Your email" required type="email">
+                    <label class="sr" for="msg">Message</label><textarea class="input" id="msg" name="message" placeholder="Hi Abrar, our team spends too long on..." required rows="4"></textarea>
+                    <button class="btn btn-accent" type="submit">Send</button>
+                </form>
+            </div>
+
+            <p style="margin-top:28px"><a class="back-link" href="automated-content-engine.html">Next case study: an automated content engine, 10K followers in 3 months &rarr;</a></p>
+        </article>
+    </main>
+
+    <footer>© <span id="year"></span> Abrar Fahim. All rights reserved. · <a href="index.html" style="color:var(--accent)">Case studies</a> · <a href="../articles/index.html" style="color:var(--accent)">Articles</a></footer>
+
+    <script>
+    (function () {
+        var root = document.documentElement;
+        var saved = localStorage.getItem('themePref');
+        root.setAttribute('data-theme', saved ? saved : 'light');
+        var btn = document.getElementById('themeToggle');
+        function updateIcon() { btn.textContent = root.getAttribute('data-theme') === 'light' ? 'Dark' : 'Light'; }
+        updateIcon();
+        btn.addEventListener('click', function () {
+            var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            root.setAttribute('data-theme', next);
+            localStorage.setItem('themePref', next);
+            updateIcon();
+        });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        window.addEventListener('scroll', function () {
+            document.getElementById('topbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        var navToggle = document.getElementById('navToggle');
+        var mainNav = document.getElementById('mainNav');
+        navToggle.addEventListener('click', function () { navToggle.classList.toggle('open'); mainNav.classList.toggle('open'); });
+    })();
+    </script>
+    <script data-goatcounter="https://abrar-fahim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

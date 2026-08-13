@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Case Study: Automated Content Engine, 10K Followers in 3 Months | Abrar Fahim</title>
+    <meta name="description" content="How MyUKTest.co.uk grew to 10K TikTok followers in 3 months and £1,500+ in revenue with a fully automated video pipeline: 100+ videos produced and published with zero manual recording." />
+    <meta name="author" content="Abrar Fahim" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta property="og:title" content="Case Study: Automated Content Engine, 10K Followers in 3 Months" />
+    <meta property="og:description" content="An automated video pipeline that produced 100+ videos with zero manual recording, grew a TikTok channel to 10K followers and still generates revenue." />
+    <meta property="og:url" content="https://www.abrarfahim.co.uk/case-studies/automated-content-engine.html" />
+    <meta property="og:type" content="article" />
+    <link rel="canonical" href="https://www.abrarfahim.co.uk/case-studies/automated-content-engine.html" />
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article",
+     "headline":"An Automated Content Engine for MyUKTest.co.uk",
+     "description":"An automated video pipeline (ElevenLabs, Amazon Polly, HTML Canvas) that produced 100+ videos with zero manual recording, grew a TikTok channel to 10K followers in 3 months and generated £1,500+ in revenue.",
+     "datePublished":"2026-07-25",
+     "dateModified":"2026-08-13",
+     "mainEntityOfPage":"https://www.abrarfahim.co.uk/case-studies/automated-content-engine.html",
+     "author":{"@type":"Person","@id":"https://www.abrarfahim.co.uk/#person","name":"Abrar Fahim","url":"https://www.abrarfahim.co.uk"}}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://www.abrarfahim.co.uk/"},
+      {"@type":"ListItem","position":2,"name":"Case Studies","item":"https://www.abrarfahim.co.uk/case-studies/"},
+      {"@type":"ListItem","position":3,"name":"An Automated Content Engine"}
+    ]}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @media(min-width:900px){main{padding-top:80px}}
+        .cs-wrap{max-width:820px;margin:0 auto;padding:48px 20px 20px}
+        .cs-kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:18px 0 10px}
+        .cs-body h1{font-family:var(--display);font-size:clamp(28px,4vw,42px);line-height:1.12;letter-spacing:-0.02em;margin:0 0 12px}
+        .cs-meta{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);margin-bottom:32px}
+        .cs-body h2{font-family:var(--display);font-size:24px;letter-spacing:-0.01em;margin:44px 0 14px}
+        .cs-body h3{font-family:var(--display);font-size:18px;margin:28px 0 10px}
+        .cs-body p{font-size:16.5px;line-height:1.75;color:var(--ink-soft);margin:0 0 18px}
+        .cs-body ul,.cs-body ol{font-size:16.5px;line-height:1.75;color:var(--ink-soft);margin:0 0 18px;padding-left:22px}
+        .cs-body li{margin-bottom:8px}
+        .cs-body strong{color:var(--ink)}
+        .cs-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:0 0 32px}
+        .cs-stat{border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));background:color-mix(in srgb,var(--accent) 6%,var(--tile));border-radius:14px;padding:20px 18px;text-align:center}
+        .cs-stat .n{font-family:var(--display);font-weight:700;font-size:30px;letter-spacing:-0.02em;color:var(--accent)}
+        .cs-stat .l{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4}
+        .cs-snapshot{border:1px solid var(--line);background:var(--tile);border-radius:14px;padding:24px;margin:0 0 8px}
+        .cs-snapshot dl{display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin:0}
+        .cs-snapshot dt{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+        .cs-snapshot dd{margin:4px 0 0;font-size:14.5px;color:var(--ink);font-weight:500}
+        @media(max-width:560px){.cs-snapshot dl{grid-template-columns:1fr}}
+        .cs-callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--tile);border-radius:10px;padding:18px 20px;margin:26px 0}
+        .cs-callout p{margin:0;font-size:15.5px}
+        .cs-phase{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:0 0 14px;background:var(--tile)}
+        .cs-phase .ph{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+        .cs-phase p{margin:0;font-size:15px}
+        .cs-stack{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+        .cs-stack span{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--tile);border-radius:999px;padding:5px 12px;color:var(--ink-soft)}
+        .cs-flow{border:1px solid var(--line);background:var(--tile);border-radius:14px;padding:22px 24px;margin:0 0 18px;font-family:var(--mono);font-size:13.5px;line-height:2;color:var(--ink-soft);overflow-x:auto;white-space:nowrap}
+        .cs-flow b{color:var(--accent);font-weight:700}
+        .cs-cta{border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));background:color-mix(in srgb,var(--accent) 6%,var(--tile));border-radius:14px;padding:28px;margin:44px 0 10px;text-align:center}
+        .cs-cta p{margin:0 0 16px;font-size:16px}
+        .back-link{font-family:var(--display);font-weight:600;font-size:14px;color:var(--accent);text-decoration:none}
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+
+    <header class="topbar" id="topbar">
+        <div class="wrap bar">
+            <a aria-label="Home" class="brand" href="../index.html"><div class="brand-badge">AF</div><div><strong>Abrar Fahim</strong><small>AI Consultant · MSc · London, UK</small></div></a>
+            <nav aria-label="Primary" class="nav" id="mainNav"><a href="../index.html#hire">Work with me</a><a href="../index.html#services">Services</a><a class="active" href="index.html">Case studies</a><a href="../index.html#contact">Contact</a></nav>
+            <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+            <div class="actions">
+                <button aria-label="Toggle theme" class="btn btn-ghost" id="themeToggle" type="button">Dark</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <article class="cs-wrap cs-body">
+            <a class="back-link" href="index.html">&larr; All case studies</a>
+            <div class="cs-kicker">Case Study · Education Business · MyUKTest.co.uk</div>
+            <h1>10K followers in 3 months with an automated content engine</h1>
+            <div class="cs-meta">CONTENT &amp; GROWTH AUTOMATION · MY OWN VENTURE · LIVE AND STILL GENERATING REVENUE</div>
+
+            <div class="cs-results">
+                <div class="cs-stat"><div class="n">10K</div><div class="l">TikTok followers in 3 months</div></div>
+                <div class="cs-stat"><div class="n">100+</div><div class="l">videos produced and published automatically</div></div>
+                <div class="cs-stat"><div class="n">0</div><div class="l">minutes of manual recording</div></div>
+                <div class="cs-stat"><div class="n">£1,500+</div><div class="l">revenue generated, with sales continuing</div></div>
+            </div>
+
+            <div class="cs-snapshot">
+                <dl>
+                    <div><dt>Business</dt><dd><a href="https://www.myuktest.co.uk" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">MyUKTest.co.uk ↗</a>, Life in the UK Test preparation</dd></div>
+                    <div><dt>Market</dt><dd>Competitive, dominated by established websites</dd></div>
+                    <div><dt>Solution</dt><dd>Automated content production + distribution</dd></div>
+                    <div><dt>Channel</dt><dd><a href="https://www.tiktok.com/@lifeintheuk_latest" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">@lifeintheuk_latest on TikTok ↗</a></dd></div>
+                    <div><dt>Status</dt><dd>Live and still generating revenue</dd></div>
+                    <div><dt>Built by</dt><dd>Me, for my own venture</dd></div>
+                </dl>
+            </div>
+            <p class="cs-meta" style="margin-top:10px">This one is my own business, so every number is first-hand. The whole system is public: you can watch the output on TikTok right now.</p>
+
+            <h2>The challenge</h2>
+            <p>I built a Life in the UK Test preparation website, but there was one problem: <strong>nobody could find it</strong>.</p>
+            <p>The market was already dominated by established websites with years of SEO behind them. Competing on Google would take too long, and paid advertising didn't make sense for a low-priced product.</p>
+            <p>The obvious alternative was social media. But creating and uploading videos every day would take hours, and I did not want to show my face.</p>
+            <div class="cs-callout">
+                <p><strong>So I automated the process.</strong></p>
+            </div>
+
+            <h2>The solution</h2>
+            <p>I built a system that turns test questions into finished short-form videos.</p>
+            <div class="cs-flow">Question bank <b>&rarr;</b> Voiceover <b>&rarr;</b> Video <b>&rarr;</b> Automatic upload <b>&rarr;</b> TikTok</div>
+            <p>I created a bank of <strong>600+ questions and answers</strong>, which became the foundation for the quiz website, the videos and the paid products.</p>
+            <p>The content engine then automatically:</p>
+            <ul>
+                <li>creates the voiceover</li>
+                <li>generates the video visuals</li>
+                <li>combines everything into a finished video</li>
+                <li>publishes the video</li>
+            </ul>
+
+            <h3>Under the hood</h3>
+            <ul>
+                <li><strong>ElevenLabs</strong> voices the intro, where production value matters most.</li>
+                <li><strong>Amazon Polly</strong> voices the quiz question, the answer and the explanation.</li>
+                <li><strong>HTML Canvas</strong> turns the text into image frames: question, options, answer reveal.</li>
+                <li>The system then <strong>stitches the images with the audio</strong>, timing each frame to the length of the narration, so on screen the question and options appear to change and the answer reveals itself.</li>
+            </ul>
+            <p>This meant I could produce content at scale without manually recording a single video.</p>
+
+            <div class="cs-stack">
+                <span>ElevenLabs</span><span>Amazon Polly</span><span>HTML Canvas</span><span>Python</span><span>Bunny video hosting</span><span>Etsy</span><span>TikTok</span>
+            </div>
+
+            <h2>Turning attention into revenue</h2>
+            <p>The audience wasn't the end goal. Followers were directed towards paid products, including:</p>
+            <ul>
+                <li><strong>223+ PDF sales</strong> on <a href="https://www.etsy.com/uk/shop/LifeintheUKTest" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Etsy ↗</a></li>
+                <li><strong>30+ course sales</strong> through my own platform</li>
+            </ul>
+            <p>When Udemy rejected the course because of its AI-generated voice, I simply moved the course to my own platform instead, with the videos served through Bunny private video hosting.</p>
+
+            <h2>The results</h2>
+            <ul>
+                <li><strong>10,000 TikTok followers in 3 months.</strong></li>
+                <li><strong>100+ videos published without manual recording.</strong></li>
+                <li><strong>£1,500+ in revenue</strong>, with sales continuing after the initial build.</li>
+            </ul>
+            <p>More importantly, I created a repeatable system:</p>
+            <div class="cs-flow">Create once <b>&rarr;</b> automate production <b>&rarr;</b> distribute at scale <b>&rarr;</b> convert attention into sales</div>
+
+            <h2>Why it worked</h2>
+            <ul>
+                <li><strong>A different route to market.</strong> Instead of competing directly with established SEO players, I went where the feed rewards volume and consistency.</li>
+                <li><strong>Automation made consistency possible</strong> without spending hours creating content.</li>
+                <li><strong>One content library powered multiple products:</strong> the quiz website, the videos, the PDFs and the course.</li>
+                <li><strong>The system kept working after the initial build</strong>, creating ongoing traffic and sales.</li>
+            </ul>
+
+            <div class="cs-cta">
+                <p><strong>Could this work for your business?</strong><br>If you need more visibility but don't have the time or resources to build a content team, tell me what you're selling. It could be driving theory test prep, or a simple course you currently sell through Google Drive. I can build a website like MyUKTest.co.uk where you host your videos behind a paywall and charge as much as you want for the course. I'll tell you honestly whether automation could make the numbers work.</p>
+                <form action="https://formspree.io/f/mqaloqae" class="form" method="POST" style="max-width:480px;margin:0 auto;text-align:left">
+                    <input type="hidden" name="_subject" value="Case study enquiry: Content Engine">
+                    <input type="hidden" name="source" value="https://www.abrarfahim.co.uk/case-studies/automated-content-engine.html">
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <label class="sr" for="name">Name</label><input class="input" id="name" name="name" placeholder="Your name" required>
+                    <label class="sr" for="email">Email</label><input class="input" id="email" name="email" placeholder="Your email" required type="email">
+                    <label class="sr" for="msg">Message</label><textarea class="input" id="msg" name="message" placeholder="Hi Abrar, we need more visibility for..." required rows="4"></textarea>
+                    <button class="btn btn-accent" type="submit">Send</button>
+                </form>
+            </div>
+
+            <p style="margin-top:28px"><a class="back-link" href="client-intake-automation.html">Next case study: WhatsApp lead capture &amp; tracking, every enquiry followed up &rarr;</a></p>
+        </article>
+    </main>
+
+    <footer>© <span id="year"></span> Abrar Fahim. All rights reserved. · <a href="index.html" style="color:var(--accent)">Case studies</a> · <a href="../articles/index.html" style="color:var(--accent)">Articles</a></footer>
+
+    <script>
+    (function () {
+        var root = document.documentElement;
+        var saved = localStorage.getItem('themePref');
+        root.setAttribute('data-theme', saved ? saved : 'light');
+        var btn = document.getElementById('themeToggle');
+        function updateIcon() { btn.textContent = root.getAttribute('data-theme') === 'light' ? 'Dark' : 'Light'; }
+        updateIcon();
+        btn.addEventListener('click', function () {
+            var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            root.setAttribute('data-theme', next);
+            localStorage.setItem('themePref', next);
+            updateIcon();
+        });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        window.addEventListener('scroll', function () {
+            document.getElementById('topbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        var navToggle = document.getElementById('navToggle');
+        var mainNav = document.getElementById('mainNav');
+        navToggle.addEventListener('click', function () { navToggle.classList.toggle('open'); mainNav.classList.toggle('open'); });
+    })();
+    </script>
+    <script data-goatcounter="https://abrar-fahim.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
