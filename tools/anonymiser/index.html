@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Anonymiser | UK Law</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f2d4e'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%239a7c3a'%3E%E2%9A%96%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="vendor/fonts/fonts.css">
+<style>
+  :root {
+    --bg:        #faf8f4;
+    --surface:   #ffffff;
+    --surface2:  #f3f0ea;
+    --border:    #e0dbd0;
+    --border2:   #ccc7bb;
+    --text:      #18160f;
+    --muted:     #7a7468;
+    --accent:    #1d4a7a;
+    --accent-lt: #eaf1f8;
+    --accent2:   #0f2d4e;
+    --gold:      #9a7c3a;
+    --gold-lt:   #fdf6e3;
+    --green:     #166534;
+    --green-lt:  #f0fdf4;
+    --red:       #991b1b;
+    --red-lt:    #fef2f2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 17px;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 0 40px;
+    height: 64px;
+    background: var(--accent2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-badge {
+    background: var(--gold);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .privacy-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #d7e4f2;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 11px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .header-actions { display: flex; gap: 10px; align-items: center; }
+
+  /* ── Live network indicator ── */
+  .net-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
+    max-width: 360px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .net-btn .net-light { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; background: #9ca3af; box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+  .net-btn.idle  { border-color: rgba(74,222,128,0.5); }
+  .net-btn.idle  .net-light { background: #22c55e; box-shadow: 0 0 8px rgba(34,197,94,0.8); }
+  .net-btn.busy  { background: rgba(220,38,38,0.35); border-color: rgba(248,113,113,0.8); }
+  .net-btn.busy  .net-light { background: #ef4444; box-shadow: 0 0 10px rgba(239,68,68,0.9); animation: pulse 0.7s infinite alternate; }
+  .net-btn.warn  { background: rgba(220,38,38,0.55); border-color: #fca5a5; }
+  .net-btn.warn  .net-light { background: #ef4444; }
+  .net-btn.unknown .net-light { background: #d1d5db; }
+
+  .net-panel {
+    position: fixed;
+    top: 70px;
+    right: 40px;
+    width: 460px;
+    max-width: calc(100vw - 32px);
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+    z-index: 95;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .net-panel.visible { display: flex; }
+  .net-panel-head {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .net-panel-head h4 { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--accent2); }
+  .net-panel-head button {
+    background: transparent; border: 1.5px solid var(--border2); border-radius: 5px;
+    padding: 4px 10px; cursor: pointer; font-family: 'Crimson Pro', serif; font-size: 14px; color: var(--muted);
+  }
+  .net-panel-head button:hover { border-color: var(--accent); color: var(--accent); }
+  .net-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .net-stat { text-align: center; }
+  .net-stat b { display: block; font-family: 'JetBrains Mono', monospace; font-size: 18px; color: var(--text); }
+  .net-stat span { font-size: 12.5px; color: var(--muted); }
+  .net-stat.good b { color: var(--green); }
+  .net-stat.bad  b { color: var(--red); }
+  .net-note { padding: 10px 18px; font-size: 13.5px; color: var(--muted); line-height: 1.55; border-bottom: 1px solid var(--border); }
+  .net-log { max-height: 300px; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; }
+  .net-row { display: grid; grid-template-columns: 62px 74px 1fr; gap: 8px; padding: 6px 18px; border-bottom: 1px solid var(--border); align-items: center; }
+  .net-row .t { color: var(--muted); }
+  .net-row .src { border-radius: 3px; padding: 1px 6px; text-align: center; font-size: 10.5px; }
+  .net-row .src.network { background: var(--red-lt);   color: var(--red); }
+  .net-row .src.cache   { background: var(--green-lt); color: var(--green); }
+  .net-row .src.inflight{ background: var(--gold-lt);  color: var(--gold); }
+  .net-row .src.error   { background: #f3f4f6;         color: var(--muted); }
+  .net-row .src.external{ background: var(--red);      color: #fff; }
+  .net-row .u { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); }
+  .net-empty { padding: 18px; text-align: center; color: var(--muted); font-size: 14px; font-style: italic; }
+
+  /* ── Buttons ── */
+  .btn {
+    padding: 9px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Crimson Pro', serif;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.15s;
+    letter-spacing: 0.01em;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+  }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .btn-primary  { background: var(--gold);  color: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+  .btn-primary:hover:not(:disabled) { background: #7a6128; }
+  .btn-primary.restore { background: var(--surface2); color: var(--accent); border: 1.5px solid var(--border2); box-shadow: none; }
+  .btn-primary.restore:hover:not(:disabled) { background: var(--accent-lt); }
+
+  .btn-green    { background: var(--green); color: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+  .btn-green:hover  { background: #0f4020; }
+  .btn-green.copied { background: #14532d; }
+
+  .btn-pdf {
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+  .btn-pdf:hover   { background: #7f1d1d; }
+  .btn-pdf:disabled {
+    background: #d1d5db;
+    color: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 1;
+  }
+  .btn-pdf.loading { background: #7f1d1d; cursor: wait; }
+  .btn-upload { background: #c0392b; border: 1px solid rgba(255,255,255,0.2); }
+  .btn-upload:hover { background: #991b1b; }
+  .btn-upload .pdf-icon { flex-shrink: 0; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.25)); }
+
+  .btn-ghost {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.22); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--border2);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Layout ── */
+  .app {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: auto 1fr;
+    height: calc(100vh - 64px);
+    overflow: hidden;
+  }
+
+  /* ── Results toolbar ── */
+  .toolbar {
+    grid-column: 1 / -1;
+    padding: 12px 40px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: none;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .toolbar.visible { display: flex; }
+  .toolbar .spacer { flex: 1; }
+
+  .source-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    padding: 8px 14px;
+    background: var(--accent-lt);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 320px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── Document panel ── */
+  .doc-panel {
+    padding: 36px 44px;
+    overflow-y: auto;
+    background: var(--bg);
+  }
+  .doc-panel::-webkit-scrollbar { width: 5px; }
+  .doc-panel::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  /* ── Input stage ── */
+  .input-stage { max-width: 960px; margin: 0 auto; }
+
+  .input-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .input-head h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--text);
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .input-head h2 .icon { font-size: 28px; }
+  .input-head p {
+    color: var(--muted);
+    font-size: 16.5px;
+    line-height: 1.7;
+    max-width: 720px;
+  }
+
+  #text-input {
+    width: 100%;
+    min-height: 360px;
+    resize: vertical;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    line-height: 1.75;
+    padding: 18px 20px;
+    border: 1.5px solid var(--border2);
+    border-radius: 7px;
+    background: var(--bg);
+    color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  #text-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-lt);
+    background: var(--surface);
+  }
+  #text-input::placeholder { color: #a8a294; }
+
+  .input-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .char-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .input-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .btn-identify { padding: 11px 24px; font-size: 17px; }
+
+  /* Local engine panel: what is downloaded, progress, offline status */
+  .engine-panel {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .engine-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .engine-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent2);
+  }
+  .engine-sub { font-size: 14.5px; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+  .engine-toggle { display: inline-flex; align-items: center; gap: 7px; cursor: pointer; color: var(--text); font-size: 15px; white-space: nowrap; }
+  .engine-toggle input { accent-color: var(--accent); width: 15px; height: 15px; }
+
+  .engine-list { display: flex; flex-direction: column; gap: 8px; }
+  .engine-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 9px 12px;
+  }
+  .engine-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border2); flex-shrink: 0; margin-top: 6px; }
+  .engine-dot.loading { background: var(--gold); animation: pulse 1s infinite alternate; }
+  .engine-dot.ready   { background: var(--green); }
+  .engine-dot.failed  { background: var(--red); }
+  @keyframes pulse { from { opacity: 0.4; } to { opacity: 1; } }
+  .engine-body { flex: 1; min-width: 0; }
+  .engine-name { font-size: 15px; color: var(--text); font-weight: 600; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .engine-size { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); font-weight: 400; }
+  .engine-meta { font-size: 13px; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+  .engine-meta.ok { color: var(--green); }
+  .engine-meta.bad { color: var(--red); }
+  .engine-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 7px; }
+  .engine-bar div { height: 100%; background: var(--gold); border-radius: 3px; transition: width 0.25s; }
+  .engine-bar.indeterminate div { width: 40%; animation: slide 1.1s infinite linear; }
+  @keyframes slide { from { margin-left: -40%; } to { margin-left: 100%; } }
+
+  .engine-banner { display: none; padding: 11px 14px; border-radius: 6px; font-size: 15px; line-height: 1.6; }
+  .engine-banner.visible { display: block; }
+  .engine-banner.ok   { background: var(--green-lt); border: 1px solid #bbe5c8; color: var(--green); }
+  .engine-banner.info { background: var(--gold-lt);  border: 1px solid #ead9a8; color: #6b5527; }
+  .engine-banner.warn { background: var(--red-lt);   border: 1px solid #f1c3c3; color: var(--red); }
+
+  .engine-details summary { cursor: pointer; font-size: 14px; color: var(--accent); font-weight: 600; }
+  .engine-details ul { margin: 10px 0 0 18px; font-size: 14px; color: var(--muted); line-height: 1.65; display: flex; flex-direction: column; gap: 6px; }
+  .engine-details li strong { color: var(--text); }
+  .engine-details code { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+  .engine-list.side .engine-item { padding: 7px 10px; }
+  .engine-list.side .engine-name { font-size: 14px; }
+  .engine-list.side .engine-meta { font-size: 12px; }
+  .side-banner { font-size: 13px; line-height: 1.55; margin-top: 10px; padding: 9px 11px; border-radius: 6px; display: none; }
+  .side-banner.visible { display: block; }
+  .side-banner.ok   { background: var(--green-lt); color: var(--green); }
+  .side-banner.info { background: var(--gold-lt);  color: #6b5527; }
+  .side-banner.warn { background: var(--red-lt);   color: var(--red); }
+
+  .or-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--muted);
+    font-size: 14px;
+    font-style: italic;
+  }
+  .or-divider::before, .or-divider::after {
+    content: ""; flex: 1; height: 1px; background: var(--border);
+  }
+
+  .pdf-hint {
+    border: 2px dashed var(--border2);
+    border-radius: 7px;
+    padding: 14px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 15.5px;
+    background: var(--bg);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pdf-hint:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-lt); }
+  .pdf-hint strong { color: var(--accent); font-weight: 600; }
+
+  .privacy-note {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    text-align: center;
+    font-style: italic;
+  }
+
+  #doc-content {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 2.2;
+    background: var(--surface);
+    padding: 36px 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  #doc-content:empty { display: none; }
+
+  .results-foot {
+    position: sticky;
+    bottom: -36px;
+    margin: 16px -44px -36px;
+    padding: 14px 44px 20px;
+    background: linear-gradient(to bottom, rgba(250,248,244,0) 0%, var(--bg) 28%);
+  }
+
+  /* ── Tokens ── */
+  .pii-token {
+    border-radius: 3px;
+    padding: 1px 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: opacity 0.15s, transform 0.1s;
+    display: inline;
+  }
+  .pii-token:hover { opacity: 0.65; transform: scale(0.97); }
+  .pii-token.redacted {
+    background: var(--accent-lt) !important;
+    color: var(--accent) !important;
+    border: 1.5px solid var(--border2) !important;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .word-token {
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 0 2px;
+    transition: background 0.1s;
+  }
+  .word-token:hover { background: var(--gold-lt); outline: 1px dashed var(--gold); }
+  .word-token.manually-redacted {
+    color: var(--accent);
+    font-style: italic;
+    background: var(--accent-lt);
+    font-weight: 500;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    border-left: 1px solid var(--border);
+    background: var(--surface);
+    padding: 24px 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border2); }
+
+  .s-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+  }
+
+  .instructions {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    padding: 14px 16px;
+    background: var(--gold-lt);
+    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    font-family: 'Crimson Pro', serif;
+  }
+
+  /* ── Export buttons ── */
+  .export-section { display: flex; flex-direction: column; gap: 8px; }
+
+  .btn-export-full {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Crimson Pro', serif;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.15s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .btn-export-full.pdf-btn { background: var(--red); color: #fff; }
+  .btn-export-full.pdf-btn:hover   { background: #7f1d1d; }
+  .btn-export-full.pdf-btn.loading { background: #7f1d1d; cursor: wait; }
+  .btn-export-full.pdf-btn:disabled {
+    background: #d1d5db;
+    color: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  .btn-export-full.txt-btn { background: var(--accent); color: #fff; }
+  .btn-export-full.txt-btn:hover { background: var(--accent2); }
+
+  .btn-copy-big {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Crimson Pro', serif;
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--green);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.15s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .btn-copy-big:hover  { background: #0f4020; }
+  .btn-copy-big.copied { background: #14532d; }
+
+  .btn-audit {
+    width: 100%;
+    padding: 9px;
+    border-radius: 6px;
+    background: transparent;
+    border: 1.5px solid var(--border2);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'Crimson Pro', serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .btn-audit:hover { border-color: var(--accent); color: var(--accent); }
+
+  .export-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* ── Legend & stats ── */
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-family: 'Crimson Pro', serif;
+    color: var(--text);
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .legend-count {
+    margin-left: auto;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--surface2);
+    padding: 1px 7px;
+    border-radius: 10px;
+  }
+  .legend-empty {
+    font-size: 15px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .redacted-list { display: flex; flex-direction: column; gap: 4px; max-height: 200px; overflow-y: auto; }
+  .redacted-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    background: var(--surface2);
+    border-radius: 5px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    gap: 6px;
+    border: 1px solid var(--border);
+  }
+  .r-orig { color: var(--muted); text-decoration: line-through; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100px; }
+  .r-ph   { color: var(--accent); flex-shrink: 0; font-weight: 500; }
+
+  .stat {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Crimson Pro', serif;
+  }
+  .stat span:last-child { color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+
+  /* ── Loading ── */
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    flex-direction: column;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 17px;
+    font-family: 'Crimson Pro', serif;
+    text-align: center;
+  }
+  .loading small { font-size: 13px; font-family: 'JetBrains Mono', monospace; }
+  .spinner {
+    width: 34px; height: 34px;
+    border: 2px solid var(--border2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Drag overlay ── */
+  .drop-overlay {
+    position: fixed; inset: 0;
+    background: rgba(15,45,78,0.55);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 90;
+    pointer-events: none;
+  }
+  .drop-overlay.visible { display: flex; }
+  .drop-overlay div {
+    background: var(--surface);
+    border: 3px dashed var(--accent);
+    border-radius: 12px;
+    padding: 40px 60px;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--accent2);
+  }
+
+  /* ── Popup ── */
+  .popup-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.25);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100;
+  }
+  .popup {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 360px; width: 90%;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  }
+  .popup h3  { font-family: 'Playfair Display', serif; color: var(--accent2); margin-bottom: 10px; font-size: 21px; }
+  .popup p   { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 22px; font-family: 'Crimson Pro', serif; }
+  .popup-btns { display: flex; gap: 10px; justify-content: flex-end; }
+  .popup .btn-cancel {
+    background: transparent; color: var(--text);
+    border: 1.5px solid var(--border2); padding: 9px 20px;
+    border-radius: 5px; cursor: pointer;
+    font-family: 'Crimson Pro', serif; font-size: 16px; font-weight: 600;
+    transition: all 0.15s;
+  }
+  .popup .btn-cancel:hover { border-color: var(--accent); color: var(--accent); }
+  .popup .btn-confirm {
+    background: var(--accent); color: #fff; padding: 9px 20px;
+    border-radius: 5px; border: none; cursor: pointer;
+    font-family: 'Crimson Pro', serif; font-size: 16px; font-weight: 600;
+    transition: all 0.15s;
+  }
+  .popup .btn-confirm:hover { background: var(--accent2); }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed; bottom: 28px; right: 28px;
+    background: var(--accent2); color: #fff;
+    padding: 12px 20px; border-radius: 8px;
+    font-size: 15px; z-index: 999;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    font-family: 'Crimson Pro', serif;
+    animation: fadeIn 0.2s;
+    max-width: 420px;
+  }
+  .toast.green { background: var(--green); }
+  .toast.red   { background: var(--red); }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── Narrow screens ── */
+  @media (max-width: 900px) {
+    header { padding: 0 16px; }
+    .logo { font-size: 20px; }
+    .privacy-pill { display: none; }
+    .net-btn { max-width: 150px; }
+    .net-panel { right: 16px; }
+    .app {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      height: auto;
+      overflow: visible;
+    }
+    .toolbar { padding: 12px 16px; flex-wrap: wrap; }
+    .doc-panel { padding: 20px 16px; overflow: visible; }
+    .results-foot { position: static; margin: 16px 0 0; padding: 0; background: none; }
+    .input-card { padding: 22px 18px; }
+    .sidebar { border-left: none; border-top: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    PDF Anonymiser
+    <span class="logo-badge">UK Law · Browser</span>
+    <span class="privacy-pill" id="privacy-pill" title="All processing happens in this browser tab. No document data is sent anywhere.">🔒 Runs locally · nothing uploaded</span>
+  </div>
+  <div class="header-actions">
+    <button class="net-btn unknown" id="net-btn" onclick="toggleNetPanel()" title="Live network monitor. Green: no network activity. Red: a request is in progress. Click for the full log.">
+      <span class="net-light"></span><span id="net-text">Network monitor starting</span>
+    </button>
+    <input type="file" id="file-input" accept=".pdf" onchange="uploadFile(this.files[0])" style="display:none">
+    <button class="btn btn-pdf btn-upload" id="upload-btn" onclick="pickPdf()">
+      <svg class="pdf-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#fff"/>
+        <path d="M14 2v6h6" fill="#e5c7c7"/>
+        <text x="12" y="17.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="6.5" font-weight="700" fill="#991b1b">PDF</text>
+      </svg>
+      Upload PDF
+    </button>
+    <button class="btn btn-ghost" id="reset-btn" onclick="resetApp()" style="display:none">↺ New Document</button>
+  </div>
+</header>
+
+<div class="app">
+
+  <!-- Results toolbar: appears once text or a PDF has been analysed -->
+  <div class="toolbar" id="toolbar">
+    <span class="source-badge" id="source-badge"></span>
+    <button class="btn btn-outline" id="edit-btn" onclick="editText()" style="display:none">✎ Edit Text</button>
+    <span class="spacer"></span>
+    <button class="btn btn-green" id="copy-btn" onclick="copyClean()">📋 Copy Text</button>
+    <button class="btn btn-primary" id="export-btn" onclick="exportClean()">⬇ Export TXT</button>
+    <button class="btn btn-pdf" id="pdf-btn" onclick="downloadPDF()">📄 Download PDF</button>
+  </div>
+
+  <!-- Document panel -->
+  <div class="doc-panel">
+
+    <!-- Input stage: type / paste text -->
+    <div class="input-stage" id="input-stage">
+      <div class="input-card">
+        <div class="input-head">
+          <h2><span class="icon">⚖</span> Identify personal information</h2>
+          <p>
+            Type or paste any text below (a letter, an email, an attendance note),
+            then click <strong>Identify Personal Info</strong>. Detected names, dates,
+            addresses and reference numbers will be highlighted for you to redact
+            before sending to an AI assistant.
+          </p>
+        </div>
+
+        <textarea id="text-input" placeholder="Paste or type your text here…" spellcheck="false"
+                  oninput="updateCharCount()"></textarea>
+
+        <div class="input-foot">
+          <span class="char-count" id="char-count">0 characters</span>
+          <div class="input-actions">
+            <button class="btn btn-outline" onclick="clearInput()">Clear</button>
+            <button class="btn btn-primary btn-identify" id="identify-btn" onclick="analyseText()">
+              🔍 Identify Personal Info
+            </button>
+          </div>
+        </div>
+
+        <div class="engine-panel" id="engine-panel">
+          <div class="engine-head">
+            <div>
+              <div class="engine-title">🔒 Local engine</div>
+              <div class="engine-sub" id="engine-summary">Checking what is already stored in this browser</div>
+            </div>
+            <label class="engine-toggle" title="Uses a small AI model (about 110 MB, downloaded once and kept in this browser) to find people's names, organisations and places. Patterns such as postcodes, phone numbers and dates are always detected.">
+              <input type="checkbox" id="ai-toggle" onchange="toggleAi(this.checked)"> AI name detection
+            </label>
+          </div>
+
+          <div class="engine-list" id="engine-list"></div>
+          <div class="engine-banner" id="engine-banner"></div>
+
+          <details class="engine-details">
+            <summary>What is downloaded, from where, and what is never sent</summary>
+            <ul>
+              <li><strong>Downloaded once, then stored in this browser:</strong> the PDF reader and writer libraries;
+                  the OCR engine and English language data, fetched only the first time you open a scanned PDF;
+                  and, when the box above is ticked, the name-detection model and its runtime. Every one of these
+                  is served from this site, the same address you are on now. No third-party server is contacted.
+                  They are public, open-source components (pdf.js, pdf-lib, tesseract.js, Transformers.js and the
+                  bert-base-NER model), and the requests carry no information about you or your documents.</li>
+              <li><strong>Never sent anywhere:</strong> your text, your PDFs, the detected items, your redactions,
+                  the exported files and the audit log. They exist only in this tab and in this browser's storage
+                  on this computer.</li>
+              <li><strong>Check for yourself:</strong> press F12, open the Network tab, then paste text or upload a
+                  PDF. Once the components above are stored, you will see no requests at all. You can also switch
+                  the internet off and keep working.</li>
+              <li><strong>Remove everything:</strong> clear this site's data in your browser settings. The app will
+                  simply download the components again next time.</li>
+            </ul>
+          </details>
+        </div>
+
+        <div class="or-divider">or</div>
+
+        <div class="pdf-hint" onclick="pickPdf()">
+          <strong>Upload a PDF:</strong> click here or drop a PDF anywhere on this page.
+          Scanned PDFs are OCR'd automatically.
+        </div>
+
+        <p class="privacy-note">
+          Everything runs inside this browser tab. Your text and documents are never uploaded.
+          To check, open the browser's developer tools (F12), Network tab, and watch: no requests are made while you work.
+        </p>
+      </div>
+    </div>
+
+    <div id="doc-content"></div>
+
+    <!-- Results footer: same position as the Identify button above -->
+    <div class="input-foot results-foot" id="results-foot" style="display:none">
+      <span class="char-count" id="results-summary"></span>
+      <div class="input-actions">
+        <button class="btn btn-primary btn-identify" id="anon-btn" onclick="anonymiseAll()">
+          🛡 Anonymise All
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+
+    <div>
+      <div class="s-title">How to use</div>
+      <div class="instructions">
+        1. Paste or type text, then click <em>Identify Personal Info</em>, or upload a PDF.<br>
+        2. Coloured highlights show detected PII. Click any to redact it, or click <em>Anonymise All</em> to redact every item at once.<br>
+        3. Click any other word to redact it manually.<br>
+        4. Copy or download the anonymised text.
+      </div>
+    </div>
+
+    <div id="legend-section" style="display:none">
+      <div class="s-title">Detected PII</div>
+      <div id="legend-list"></div>
+    </div>
+
+    <div id="stats-section" style="display:none">
+      <div class="s-title">Document</div>
+      <div id="stats-list"></div>
+    </div>
+
+    <div id="redacted-section" style="display:none">
+      <div class="s-title">Redacted <span id="redacted-count"
+           style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--surface2);padding:1px 7px;border-radius:10px;font-weight:400;letter-spacing:0">0</span></div>
+      <div class="redacted-list" id="redacted-list"></div>
+    </div>
+
+    <div id="copy-section" style="display:none">
+      <div class="s-title">Export</div>
+      <div class="export-section">
+        <button class="btn-export-full pdf-btn" id="pdf-big-btn" onclick="downloadPDF()">
+          📄 Download Redacted PDF
+        </button>
+        <button class="btn-export-full txt-btn" onclick="exportClean()">
+          ⬇ Export Anonymised TXT
+        </button>
+        <button class="btn-copy-big" id="copy-big-btn" onclick="copyClean()">
+          📋 Copy Anonymised Text
+        </button>
+        <p class="export-note" id="export-note"></p>
+      </div>
+    </div>
+
+    <div>
+      <div class="s-title">Local engine</div>
+      <div class="engine-list side" id="engine-list-side"></div>
+      <div class="side-banner" id="engine-side-banner"></div>
+    </div>
+
+    <div>
+      <div class="s-title">Audit log</div>
+      <button class="btn-audit" id="audit-btn" onclick="downloadAudit()">⬇ Download audit log (CSV)</button>
+      <p class="export-note" style="margin-top:8px">Kept in this browser only. One row per export.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Network monitor panel -->
+<div class="net-panel" id="net-panel">
+  <div class="net-panel-head">
+    <h4>Network activity this session</h4>
+    <div style="display:flex;gap:6px">
+      <button onclick="clearNetLog()">Clear</button>
+      <button onclick="toggleNetPanel()">Close</button>
+    </div>
+  </div>
+  <div class="net-stats">
+    <div class="net-stat" id="net-stat-network"><b>0</b><span>fetched from network</span></div>
+    <div class="net-stat" id="net-stat-cache"><b>0</b><span>served from stored copy</span></div>
+    <div class="net-stat good" id="net-stat-external"><b>0</b><span>external hosts contacted</span></div>
+  </div>
+  <div class="net-note" id="net-note"></div>
+  <div class="net-log" id="net-log"><div class="net-empty">No requests yet</div></div>
+</div>
+
+<!-- Drag-over overlay -->
+<div class="drop-overlay" id="drop-overlay"><div>Drop PDF to analyse</div></div>
+
+<!-- Confirmation popup -->
+<div class="popup-overlay" id="popup" style="display:none">
+  <div class="popup">
+    <h3>Confirm redaction</h3>
+    <p id="popup-msg"></p>
+    <div class="popup-btns">
+      <button class="btn-cancel" onclick="closePopup(false)">Cancel</button>
+      <button class="btn-confirm" onclick="closePopup(true)">Redact it</button>
+    </div>
+  </div>
+</div>
+
+<!-- Libraries, served from this site (see vendor/). Cached for offline use by sw.js -->
+<script src="vendor/pdfjs/pdf.min.js"></script>
+<script src="vendor/pdf-lib/pdf-lib.min.js"></script>
+<script src="vendor/tesseract/tesseract.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

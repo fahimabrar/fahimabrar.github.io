@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 441" width="800" height="441" role="img" aria-label="PII Anonymiser: redact personal data in your browser before using AI">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f2d4e"/>
+      <stop offset="1" stop-color="#1d4a7a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="441" fill="url(#bg)"/>
+
+  <!-- document -->
+  <g transform="translate(70,70)">
+    <rect x="0" y="0" width="300" height="300" rx="10" fill="#faf8f4"/>
+    <rect x="30" y="34" width="150" height="12" rx="3" fill="#ccc7bb"/>
+    <rect x="30" y="66" width="240" height="10" rx="3" fill="#e0dbd0"/>
+    <rect x="30" y="90" width="90" height="10" rx="3" fill="#e0dbd0"/>
+    <rect x="126" y="86" width="96" height="18" rx="4" fill="#111"/>
+    <rect x="228" y="90" width="42" height="10" rx="3" fill="#e0dbd0"/>
+    <rect x="30" y="114" width="240" height="10" rx="3" fill="#e0dbd0"/>
+    <rect x="30" y="138" width="60" height="10" rx="3" fill="#e0dbd0"/>
+    <rect x="96" y="134" width="130" height="18" rx="4" fill="#111"/>
+    <rect x="30" y="162" width="200" height="10" rx="3" fill="#e0dbd0"/>
+    <rect x="30" y="186" width="240" height="10" rx="3" fill="#e0dbd0"/>
+    <rect x="30" y="206" width="80" height="18" rx="4" fill="#111"/>
+    <rect x="116" y="210" width="154" height="10" rx="3" fill="#e0dbd0"/>
+    <rect x="30" y="234" width="170" height="10" rx="3" fill="#e0dbd0"/>
+    <rect x="30" y="258" width="220" height="10" rx="3" fill="#e0dbd0"/>
+  </g>
+
+  <!-- text -->
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#ffffff">
+    <text x="420" y="130" font-size="44" font-weight="700">PII Anonymiser</text>
+    <text x="420" y="172" font-size="20" fill="#d7e4f2">Redact personal data before it reaches an AI</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#ffffff">
+    <circle cx="430" cy="224" r="6" fill="#22c55e"/><text x="448" y="230">Runs entirely in the browser</text>
+    <circle cx="430" cy="262" r="6" fill="#22c55e"/><text x="448" y="268">Nothing uploaded, works offline</text>
+    <circle cx="430" cy="300" r="6" fill="#22c55e"/><text x="448" y="306">Names, dates, NI, postcodes, bank details</text>
+    <circle cx="430" cy="338" r="6" fill="#22c55e"/><text x="448" y="344">Redacted PDF and clean text export</text>
+  </g>
+  <g transform="translate(420,372)">
+    <rect x="0" y="0" width="230" height="36" rx="18" fill="#9a7c3a"/>
+    <text x="115" y="24" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">Built for UK law firms</text>
+  </g>
+</svg>
