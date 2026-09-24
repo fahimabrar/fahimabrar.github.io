@@ -287,8 +287,16 @@ function netLogPush(source, url) {
   if (NET.log.length > MAX_LOG) NET.log.length = MAX_LOG;
 }
 
+// Scripts injected by the user's own browser extensions (ad blockers, the
+// Google Analytics opt-out add-on, password managers) have extension:// URLs.
+// They belong to the browser, not to this app, and must not count as external.
+function isExtensionUrl(u) {
+  return /^(chrome|moz|safari-web|ms-browser)-extension:/i.test(String(u || ""));
+}
+
 function handleNet(msg) {
   if (!msg || msg.type !== "net") return;
+  if (isExtensionUrl(msg.url)) return;
   NET.lastActivity = Date.now();
   if (msg.phase === "start") {
     NET.inflight.set(msg.id, { url: msg.url, t: Date.now() });
@@ -403,6 +411,7 @@ function installPageMonitor() {
     const po = new PerformanceObserver(list => {
       for (const e of list.getEntries()) {
         if (e.initiatorType === "fetch" || seen.has(e.name)) continue;   // fetches are counted above
+        if (isExtensionUrl(e.name)) continue;                             // the user's browser extensions
         seen.add(e.name);
         let external = false;
         try { external = new URL(e.name).origin !== location.origin; } catch (x) {}
