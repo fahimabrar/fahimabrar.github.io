@@ -1,0 +1,793 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Endorsed Founders Casebook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a filterable case library (grid of cards + slide-in dossier), then a milestone matrix, refusal patterns and a self-assessment. Civic/legal-document tone: cool slate neutrals, ink navy, endorsement green as the single accent. */
+:root{
+  --bg:#f4f6f8; --surface:#ffffff; --surface-2:#e9edf1; --line:#d3dae2; --line-strong:#aeb9c6;
+  --fg:#15202b; --fg-2:#4a5a6b; --fg-3:#78889a;
+  --ink:#1b3a5c; --ink-soft:#dde6f0;
+  --accent:#1f7a5c; --accent-soft:#dcefe6; --accent-fg:#ffffff;
+  --warn:#b8681a; --warn-soft:#f7e8d3;
+  --bad:#a63d3d; --bad-soft:#f5dcdc;
+  --display:"Newsreader",Georgia,"Times New Roman",serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(21,32,43,.06),0 8px 24px rgba(21,32,43,.08);
+  --r:6px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a22; --surface:#1a242e; --surface-2:#22303c; --line:#2f3f4d; --line-strong:#465a6c;
+    --fg:#e6ecf2; --fg-2:#aebbc8; --fg-3:#7d8d9c;
+    --ink:#9cc0e6; --ink-soft:#1e3147;
+    --accent:#4fbf96; --accent-soft:#1b3b31; --accent-fg:#0d1a15;
+    --warn:#e0a05a; --warn-soft:#3d2d18;
+    --bad:#e07a7a; --bad-soft:#3f2222;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a22; --surface:#1a242e; --surface-2:#22303c; --line:#2f3f4d; --line-strong:#465a6c;
+  --fg:#e6ecf2; --fg-2:#aebbc8; --fg-3:#7d8d9c;
+  --ink:#9cc0e6; --ink-soft:#1e3147;
+  --accent:#4fbf96; --accent-soft:#1b3b31; --accent-fg:#0d1a15;
+  --warn:#e0a05a; --warn-soft:#3d2d18;
+  --bad:#e07a7a; --bad-soft:#3f2222;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,4.5vw,3.1rem);letter-spacing:-.01em}
+h2{font-size:1.7rem;margin-bottom:6px}
+h3{font-size:1.2rem}
+p{margin:0}
+a{color:var(--ink)}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+.lede{font-size:1.08rem;color:var(--fg-2);max-width:62ch}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Header */
+header.top{padding-block:36px 28px;border-bottom:1px solid var(--line);display:grid;gap:14px}
+.top .meta{display:flex;flex-wrap:wrap;gap:10px 22px;color:var(--fg-2);font-size:.9rem}
+.top .meta b{color:var(--fg);font-weight:600}
+nav.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+nav.jump a{text-decoration:none;font-size:.86rem;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--fg-2);background:var(--surface)}
+nav.jump a:hover{border-color:var(--line-strong);color:var(--fg)}
+
+/* Criteria strip */
+.criteria{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px}
+.criteria>div{background:var(--surface);padding:18px 20px;min-width:0}
+.criteria h3{display:flex;align-items:baseline;gap:10px}
+.criteria h3 .k{font-family:var(--mono);font-size:.75rem;color:var(--accent);font-weight:500}
+.criteria .rule{font-size:.88rem;color:var(--fg-2);margin-top:8px;font-style:italic;font-family:var(--display);font-size:1rem}
+.criteria .test{font-size:.86rem;color:var(--fg-2);margin-top:8px}
+.criteria .test b{color:var(--fg)}
+@media (max-width:760px){.criteria{grid-template-columns:1fr}}
+
+section{padding-top:48px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 24px;margin-bottom:18px}
+.sec-head p{color:var(--fg-2);max-width:60ch}
+
+/* Filters */
+.filters{display:grid;gap:12px;padding:16px;background:var(--surface);border:1px solid var(--line);margin-bottom:18px}
+.frow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.frow .lab{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3);min-width:88px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:.84rem;color:var(--fg-2);line-height:1.3}
+.chip:hover{border-color:var(--line-strong);color:var(--fg)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+:root[data-theme="dark"] .chip[aria-pressed="true"]{color:#0d1620}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"]{color:#0d1620}}
+.frow input[type=search]{flex:1 1 200px;min-width:0;border:1px solid var(--line);background:var(--bg);color:var(--fg);padding:8px 12px;border-radius:var(--r);font:inherit}
+.fsum{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.86rem;color:var(--fg-2)}
+.linkbtn{background:none;border:0;padding:0;color:var(--ink);text-decoration:underline;font-size:.86rem}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;text-align:left;display:grid;gap:10px;align-content:start;min-width:0;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--line-strong);transform:translateY(-1px)}
+.card .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card .sector{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3)}
+.card .route{font-size:.7rem;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;white-space:nowrap}
+.card .route.old{background:var(--warn-soft);color:var(--warn)}
+.card h3{font-size:1.25rem}
+.card .one{color:var(--fg-2);font-size:.9rem}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.72rem;padding:2px 8px;border-radius:3px;background:var(--surface-2);color:var(--fg-2)}
+.card .ms{display:flex;gap:4px;align-items:center;margin-top:2px}
+.card .ms span{font-family:var(--mono);font-size:.68rem;color:var(--fg-3);margin-right:4px}
+.dot{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line-strong);display:inline-grid;place-items:center;font-size:.55rem;font-family:var(--mono);color:var(--fg-3)}
+.dot.on{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.empty{padding:40px;text-align:center;color:var(--fg-3);border:1px dashed var(--line);border-radius:var(--r)}
+
+/* Drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,16,22,.45);z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(680px,100%);background:var(--surface);z-index:50;box-shadow:var(--shadow);display:grid;grid-template-rows:auto auto 1fr;overflow:hidden;padding-top:env(safe-area-inset-top,0px)}
+.drawer .dh{padding:18px 22px 12px;border-bottom:1px solid var(--line);display:grid;gap:6px}
+.drawer .dh .row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.drawer h2{font-size:1.9rem;margin:0}
+.drawer .close{border:1px solid var(--line);background:var(--surface);border-radius:999px;width:34px;height:34px;display:grid;place-items:center;flex:none}
+.drawer .facts{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:.86rem;margin-top:6px}
+.drawer .facts dt{color:var(--fg-3);font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;padding-top:3px}
+.drawer .facts dd{margin:0;color:var(--fg-2);min-width:0}
+.tabs{display:flex;border-bottom:1px solid var(--line);padding-inline:22px;gap:2px;overflow-x:auto}
+.tabs button{border:0;background:none;padding:12px 12px 10px;color:var(--fg-2);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;font-size:.9rem}
+.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent);font-weight:600}
+.panel{overflow-y:auto;padding:20px 22px 40px;display:grid;gap:14px;align-content:start}
+.panel .what{font-family:var(--display);font-size:1.1rem;color:var(--fg)}
+.panel ul{margin:0;padding-left:18px;display:grid;gap:8px}
+.panel li{color:var(--fg-2)}
+.panel li b{color:var(--fg);font-weight:600}
+.verdict{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;background:var(--accent-soft);border-left:3px solid var(--accent);font-size:.9rem;color:var(--fg)}
+.msl{display:grid;gap:8px}
+.msl .m{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 10px;border:1px solid var(--line);border-radius:var(--r);font-size:.88rem;color:var(--fg-3)}
+.msl .m.on{border-color:var(--accent);color:var(--fg);background:var(--surface)}
+.msl .m .n{font-family:var(--mono);font-size:.75rem;color:var(--fg-3);padding-top:2px}
+.msl .m.on .n{color:var(--accent);font-weight:500}
+.msl .m small{display:block;color:var(--fg-2);margin-top:2px}
+.srcs{font-size:.86rem;display:grid;gap:6px}
+.srcs a{word-break:break-word}
+.caveat{font-size:.8rem;color:var(--fg-3);border-top:1px solid var(--line);padding-top:12px}
+.prevnext{display:flex;justify-content:space-between;gap:10px;margin-top:8px}
+.prevnext button{border:1px solid var(--line);background:var(--surface);padding:8px 12px;border-radius:var(--r);font-size:.86rem;color:var(--fg-2)}
+@media (prefers-reduced-motion:no-preference){.drawer{animation:slide .22s ease-out}@keyframes slide{from{transform:translateX(24px);opacity:0}to{transform:none;opacity:1}}}
+body.locked{overflow:hidden}
+
+/* Matrix */
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:720px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+thead th{font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--fg-3);font-weight:500;background:var(--surface-2);position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+td.c,th.c{text-align:center}
+td.name button{background:none;border:0;padding:0;text-align:left;color:var(--ink);font-weight:600;text-decoration:underline dotted;text-underline-offset:3px}
+td.sec{color:var(--fg-3);font-size:.78rem}
+tfoot td{font-family:var(--mono);font-size:.78rem;color:var(--fg-2);background:var(--surface-2);font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.82rem;color:var(--fg-2);margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.mkey{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px;margin-top:14px}
+.mkey div{font-size:.84rem;color:var(--fg-2);padding:8px 10px;border-left:2px solid var(--line-strong)}
+.mkey b{font-family:var(--mono);font-size:.75rem;color:var(--fg);margin-right:6px}
+
+/* Refusals */
+.ref{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}
+@media (max-width:860px){.ref{grid-template-columns:1fr}}
+.rtable table{min-width:560px}
+.rtable td:first-child{font-weight:600;color:var(--fg)}
+.rtable td.crit{font-family:var(--mono);font-size:.72rem;color:var(--fg-3);white-space:nowrap}
+.rtable td.how button{background:none;border:0;padding:0;color:var(--ink);text-decoration:underline dotted;text-underline-offset:3px;font-size:.84rem}
+.cases{display:grid;gap:10px}
+.rcase{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.rcase summary{cursor:pointer;padding:12px 14px;display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:600;list-style:none}
+.rcase summary::-webkit-details-marker{display:none}
+.rcase summary .st{font-size:.7rem;padding:2px 8px;border-radius:999px;font-weight:600;white-space:nowrap}
+.st.no{background:var(--bad-soft);color:var(--bad)}
+.st.yes{background:var(--accent-soft);color:var(--accent)}
+.st.turn{background:var(--warn-soft);color:var(--warn)}
+.rcase .body{padding:0 14px 14px;color:var(--fg-2);font-size:.9rem;display:grid;gap:8px}
+.rcase .body ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.rcase .body .src{font-size:.78rem;color:var(--fg-3)}
+
+/* Assessment */
+.assess{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:start}
+@media (max-width:900px){.assess{grid-template-columns:1fr}}
+.qgroup{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:14px;margin-bottom:12px}
+.qgroup h3{display:flex;gap:10px;align-items:baseline}
+.qgroup h3 .k{font-family:var(--mono);font-size:.72rem;color:var(--accent)}
+.q{display:grid;gap:8px}
+.q p{font-size:.93rem}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts label{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:.84rem;color:var(--fg-2);cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.opts input{position:absolute;opacity:0;width:0;height:0}
+.opts label:has(input:checked){background:var(--ink);border-color:var(--ink);color:#fff}
+:root[data-theme="dark"] .opts label:has(input:checked){color:#0d1620}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .opts label:has(input:checked){color:#0d1620}}
+.opts label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.result{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:16px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
+.bars{display:grid;gap:10px}
+.bar{display:grid;grid-template-columns:86px 1fr 40px;gap:10px;align-items:center;font-size:.86rem}
+.bar .lab{color:var(--fg-2)}
+.bar .trk{height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.bar .fil{height:100%;background:var(--accent);width:0;transition:width .3s}
+.bar .fil.mid{background:var(--warn)}
+.bar .fil.low{background:var(--bad)}
+.bar .num{font-family:var(--mono);font-size:.78rem;color:var(--fg-2);text-align:right;font-variant-numeric:tabular-nums}
+.vtitle{font-family:var(--display);font-size:1.35rem}
+.vbody{color:var(--fg-2);font-size:.92rem}
+.vbody ul{margin:6px 0 0;padding-left:18px;display:grid;gap:4px}
+.comps{display:grid;gap:6px}
+.comps button{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:8px 10px;font-size:.86rem;color:var(--fg-2)}
+.comps button b{color:var(--ink)}
+.comps button:hover{border-color:var(--line-strong)}
+.reset{background:none;border:1px solid var(--line);padding:6px 12px;border-radius:var(--r);font-size:.84rem;color:var(--fg-2);justify-self:start}
+.note{font-size:.8rem;color:var(--fg-3)}
+
+/* Graduate pathway */
+.grad{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;align-items:start}
+@media (max-width:900px){.grad{grid-template-columns:1fr}}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:14px}
+.calc label{display:grid;gap:6px;font-size:.9rem;color:var(--fg-2)}
+.calc input[type=month],.calc select{border:1px solid var(--line);background:var(--bg);color:var(--fg);padding:8px 10px;border-radius:var(--r);font:inherit;max-width:100%}
+.calc .kv{display:grid;grid-template-columns:1fr auto;gap:6px 14px;font-size:.9rem;border-top:1px solid var(--line);padding-top:12px}
+.calc .kv dt{color:var(--fg-2)}
+.calc .kv dd{margin:0;font-family:var(--mono);font-size:.84rem;text-align:right;font-variant-numeric:tabular-nums}
+.calc .kv dd.hi{color:var(--accent);font-weight:500}
+.calc .kv dd.warnc{color:var(--warn);font-weight:500}
+.tl{display:grid;gap:0;position:relative;margin-top:4px}
+.tl .ph{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.tl .ph:last-child{border-bottom:1px solid var(--line)}
+.tl .when{font-family:var(--mono);font-size:.76rem;color:var(--fg-3);padding-top:3px;font-variant-numeric:tabular-nums}
+.tl .ph b{display:block;color:var(--fg);font-weight:600;margin-bottom:2px}
+.tl .ph p{font-size:.88rem;color:var(--fg-2)}
+.tl .ph.key .when{color:var(--accent)}
+.routes table{min-width:640px}
+.routes td:first-child{font-weight:600;color:var(--fg)}
+.routes td{font-size:.86rem;color:var(--fg-2)}
+.routes td.sett{font-family:var(--mono);font-size:.8rem;white-space:nowrap}
+.routes tr.na td{color:var(--fg-3)}
+.routes tr.na td:first-child{text-decoration:line-through;color:var(--fg-3)}
+.nofit{margin-top:18px;padding:14px 16px;border-left:3px solid var(--warn);background:var(--warn-soft);display:grid;gap:6px;font-size:.9rem}
+.nofit b{color:var(--fg)}
+.nofit p{color:var(--fg-2)}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:.82rem;color:var(--fg-3);display:grid;gap:6px}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">UK Innovator Founder visa · study casebook</p>
+  <h1>Endorsed Founders Casebook</h1>
+  <p class="lede">Fourteen businesses that were endorsed, examined against the three tests an endorsing body applies: innovative, viable, scalable. Plus the refusals, the settlement maths, and a way to score an idea before it goes near an endorser.</p>
+  <div class="meta">
+    <span><b>14</b> endorsed cases</span>
+    <span><b>4</b> refusal studies</span>
+    <span>Rules as at <b>6 Oct 2026</b></span>
+    <span>Appendix Innovator Founder · <span style="font-family:var(--mono);font-size:.82em">INNF 5–17</span></span>
+  </div>
+  <nav class="jump" aria-label="Sections">
+    <a href="#library">Case library</a>
+    <a href="#matrix">Settlement matrix</a>
+    <a href="#refusals">Why applications fail</a>
+    <a href="#assess">Score an idea</a>
+    <a href="#graduate">Graduate pathway</a>
+  </nav>
+</header>
+
+<div class="criteria" role="list">
+  <div role="listitem">
+    <h3><span class="k">INNF 5.2(a)</span>Innovative</h3>
+    <p class="rule">"A genuine, original business plan that meets new or existing market needs and/or creates a competitive advantage."</p>
+    <p class="test"><b>What endorsers test:</b> is there something proprietary, defensible and absent from the UK market? Did the founder build it, or only describe it?</p>
+  </div>
+  <div role="listitem">
+    <h3><span class="k">INNF 5.2(b)</span>Viable</h3>
+    <p class="rule">"Realistic and achievable based on the applicant's available resources; the applicant has, or is actively developing, the skills, knowledge, experience and market awareness to run it."</p>
+    <p class="test"><b>What endorsers test:</b> does the CV match the business? Is there enough money? Customer validation, MVP, early revenue?</p>
+  </div>
+  <div role="listitem">
+    <h3><span class="k">INNF 5.2(c)</span>Scalable</h3>
+    <p class="rule">"Evidence of structured planning and of potential for job creation and growth into national and international markets."</p>
+    <p class="test"><b>What endorsers test:</b> hiring plan, a revenue model that grows faster than cost, export potential, a credible route to 2 of the 7 settlement milestones.</p>
+  </div>
+</div>
+
+<section id="library">
+  <div class="sec-head">
+    <div><p class="eyebrow">Case library</p><h2>What actually got endorsed</h2></div>
+    <p>Filter by sector or by the kind of innovation. Open a case for the full dossier. Milestone dots show which of the 7 settlement criteria the business could plausibly meet at year 3.</p>
+  </div>
+  <div class="filters">
+    <div class="frow"><span class="lab">Sector</span><div id="f-sector" class="frow" style="gap:6px"></div></div>
+    <div class="frow"><span class="lab">Innovation</span><div id="f-kind" class="frow" style="gap:6px"></div></div>
+    <div class="frow"><span class="lab">Route</span><div id="f-route" class="frow" style="gap:6px"></div></div>
+    <div class="frow"><span class="lab">Search</span><input id="f-search" type="search" placeholder="founder, technology, sector, milestone…" aria-label="Search cases"></div>
+    <div class="fsum"><span id="f-count"></span><button class="linkbtn" id="f-clear">Clear filters</button></div>
+  </div>
+  <div id="grid" class="grid"></div>
+</section>
+
+<section id="matrix">
+  <div class="sec-head">
+    <div><p class="eyebrow">Settlement after 3 years</p><h2>Which 2 of 7 milestones each case can reach</h2></div>
+    <p>Settlement needs an endorsement confirming at least two of these. Deep-tech cases lean on investment, R&amp;D and jobs; consumer and software cases lean on customers and revenue. Plan the route at the start.</p>
+  </div>
+  <div class="tbl"><table id="mtable" aria-label="Milestone matrix"></table></div>
+  <div class="legend"><span><i class="dot on"></i> plausible by year 3</span><span><i class="dot"></i> unlikely for this business</span><span>Click a name to open its dossier.</span></div>
+  <div class="mkey" id="mkey"></div>
+</section>
+
+<section id="refusals">
+  <div class="sec-head">
+    <div><p class="eyebrow">Refusal patterns</p><h2>Why applications fail</h2></div>
+    <p>Every refusal reason practitioners report, mapped to the criterion it breaks and to the endorsed cases that show how to avoid it.</p>
+  </div>
+  <div class="ref">
+    <div class="tbl rtable"><table id="rtable" aria-label="Refusal reasons"></table></div>
+    <div class="cases" id="rcases"></div>
+  </div>
+</section>
+
+<section id="assess">
+  <div class="sec-head">
+    <div><p class="eyebrow">Self-assessment</p><h2>Score an idea before it meets an endorser</h2></div>
+    <p>Nine questions, three per criterion, drawn from what separated the endorsed cases from the refused ones. Nothing is stored or sent anywhere. This is a screening aid, not advice.</p>
+  </div>
+  <div class="assess">
+    <form id="qform" autocomplete="off"></form>
+    <aside class="result" aria-live="polite">
+      <div class="bars" id="bars"></div>
+      <div><p class="vtitle" id="vtitle">Answer the questions to see a readout.</p><div class="vbody" id="vbody"></div></div>
+      <div id="compwrap" hidden><p class="eyebrow" style="margin-bottom:6px">Closest endorsed cases</p><div class="comps" id="comps"></div></div>
+      <button type="button" class="reset" id="qreset">Reset answers</button>
+      <p class="note">Scores are a rough reading of evidence strength, not a prediction. A high score with a weak interview still fails.</p>
+    </aside>
+  </div>
+</section>
+
+<section id="graduate">
+  <div class="sec-head">
+    <div><p class="eyebrow">Graduate pathway</p><h2>From a UK master's to a founder visa</h2></div>
+    <p>For an overseas graduate finishing a UK degree in a technical field. University ranking is irrelevant to every route below. What matters is the subject, being in the UK already, and the date the Graduate visa is applied for.</p>
+  </div>
+  <div class="grad">
+    <div class="calc">
+      <label for="g-start">Month the course starts
+        <input type="month" id="g-start" value="2027-01" min="2024-01" max="2030-12">
+      </label>
+      <label for="g-end">Month the course ends (results issued)
+        <input type="month" id="g-end" value="2029-01" min="2025-01" max="2032-12">
+      </label>
+      <label for="g-level">Qualification
+        <select id="g-level"><option value="masters">Bachelor's or master's</option><option value="phd">PhD / doctorate</option></select>
+      </label>
+      <label for="g-place" style="grid-template-columns:auto 1fr;align-items:center;gap:10px">
+        <input type="checkbox" id="g-place" checked style="margin:0;width:16px;height:16px">
+        <span>Includes a 12-month assessed work placement</span>
+      </label>
+      <dl class="kv" id="g-kv"></dl>
+      <div class="tl" id="g-tl"></div>
+      <p class="note">Assumes the Graduate visa is applied for in the month the course ends. Applications on or before 31 Dec 2026 get 24 months (36 for doctorates); from 1 Jan 2027, 18 months (36 for doctorates). A placement must be an integral, assessed part of the course and no more than 50% of its length at degree level. Decision point allows ~4 months for endorsement (4–6 weeks) plus an in-country decision (up to 8 weeks). Rules projected forward; they changed three times in 2026.</p>
+    </div>
+    <div>
+      <div class="tbl routes"><table aria-label="Routes for a UK tech graduate">
+        <thead><tr><th>Route</th><th>What it needs</th><th>Settlement</th><th>Fit for this graduate</th></tr></thead>
+        <tbody>
+          <tr><td>Graduate → Innovator Founder</td><td>Endorsement (innovative, viable, scalable); B2 English in all four skills; in-country switch from Student or Graduate allowed since 25 Nov 2025; £1,270 maintenance waived after 12 months in the UK</td><td class="sett">3 yrs</td><td>Strong if the business sits on the master's subject. The Graduate visa is the evidence-building window; the university spin-out pattern is the model.</td></tr>
+          <tr><td>Graduate → Skilled Worker</td><td>Sponsored job at RQF 6; new entrant salary £33,400 (standard £41,700), capped at 4 years including Graduate time; B2 English; employer pays the Immigration Skills Charge</td><td class="sett">5 yrs*</td><td>The default. Target employers that already hold a sponsor licence. Most exposed to the earned-settlement proposals.</td></tr>
+          <tr><td>Global Talent (digital technology)</td><td>Tech Nation endorsement as 'exceptional promise': shipped products, open-source contributions, publications, recognition from the field</td><td class="sett">5 yrs (3 for talent)</td><td>Possible for a strong graduate who builds a public portfolio during the Graduate visa. No sponsor, no salary floor.</td></tr>
+          <tr class="na"><td>High Potential Individual</td><td>Degree from a non-UK top-50 university within the last 5 years</td><td class="sett">none</td><td>Not available: UK degree holders are excluded, whatever the ranking.</td></tr>
+          <tr class="na"><td>Skilled Worker self-sponsorship</td><td>Own UK company sponsors the founder</td><td class="sett">—</td><td>Effectively ended. Sponsor guidance of 20 May 2026 refuses or revokes a licence where the business exists "mainly to facilitate the entry or residence" of the sponsored person.</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note" style="margin-top:8px">* Current rule. The earned-settlement consultation (closed 12 Feb 2026) proposes a 10-year baseline for work routes, adjustable by contribution; Innovator Founder and Global Talent are proposed to keep their shorter periods. No Statement of Changes has been laid yet.</p>
+      <div class="nofit">
+        <b>If the business idea does not pass the three tests</b>
+        <p>Since May 2026 there is no owner-operator fallback. The options are: take a sponsored role with someone else's company (Skilled Worker), build a portfolio toward Global Talent, or spend the Graduate visa turning the idea into one that does pass: customer evidence, a prototype, a patent search, a co-founder for any skills gap. Say this early; it saves the client an endorsement fee and a consultant's bill.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>The criteria analysis is the author's reading of public information (company sites, press, funding announcements, the endorser's portfolio). Endorsing bodies do not publish their assessments. Innovator International's portfolio mixes Innovator Founder and Scale-up endorsements and does not say which founder was endorsed. Cases marked "old route" date from around 2020 under the previous Innovator or Start-up visa.</p>
+  <p>Primary sources: <a href="https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-innovator-founder">Appendix Innovator Founder</a> · <a href="https://www.gov.uk/innovator-founder-visa">GOV.UK guidance</a> · <a href="https://www.innovatorinternational.com/client-stories/">Innovator International client stories</a> · <a href="https://tom-bradford.com/innovator-founder-visa-examples-of-innovation/">Tom Bradford, examples of innovation</a> · <a href="https://migrantentrepreneur.substack.com/p/the-ultimate-guide-to-the-endorsement">Migrant Entrepreneur endorsement guide</a> · <a href="https://thestartuprace.com/innovator-founder-endorsement-case-studies/">The Startup Race case studies</a> · <a href="https://www.davidsonmorris.com/graduate-route-reduced-to-18-months/">DavidsonMorris, Graduate route reduced to 18 months</a> · <a href="https://www.lewissilkin.com/insights/2026/05/21/home-office-updates-sponsor-guidance-for-work-routes-102mvi6">Lewis Silkin, sponsor guidance update 20 May 2026</a>.</p>
+</footer>
+</div>
+
+<div id="scrim" class="scrim" hidden></div>
+<aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="d-name" hidden>
+  <div class="dh">
+    <div class="row">
+      <div>
+        <p class="eyebrow" id="d-sector"></p>
+        <h2 id="d-name"></h2>
+      </div>
+      <button class="close" id="d-close" aria-label="Close">✕</button>
+    </div>
+    <dl class="facts" id="d-facts"></dl>
+  </div>
+  <div class="tabs" role="tablist" id="d-tabs">
+    <button role="tab" data-tab="over" aria-selected="true">Overview</button>
+    <button role="tab" data-tab="inn">Innovative</button>
+    <button role="tab" data-tab="via">Viable</button>
+    <button role="tab" data-tab="sca">Scalable</button>
+    <button role="tab" data-tab="ms">Settlement</button>
+    <button role="tab" data-tab="les">Lessons</button>
+  </div>
+  <div class="panel" id="d-panel"></div>
+</aside>
+
+<script>
+const MILESTONES=[
+ {n:1,s:"£50k+ invested",d:"At least £50,000 invested into the business and actively spent furthering it"},
+ {n:2,s:"Customers doubled",d:"Customer numbers at least doubled in 3 years and above the mean for comparable UK businesses"},
+ {n:3,s:"R&D + UK IP filed",d:"Significant research and development and an application for UK intellectual property protection"},
+ {n:4,s:"£1m revenue",d:"Minimum gross annual revenue of £1 million in the last full year of accounts"},
+ {n:5,s:"£500k incl. £100k exports",d:"Gross revenue of £500,000 with at least £100,000 from exporting overseas"},
+ {n:6,s:"10 FTE jobs",d:"Equivalent of at least 10 full-time jobs for settled workers"},
+ {n:7,s:"5 jobs at £25k+",d:"Equivalent of at least 5 full-time jobs for settled workers at a mean salary of £25,000 or more"}
+];
+
+const CASES=[
+{id:"neworbit",name:"NewOrbit",sector:"Aerospace",kind:["Proprietary technology"],route:"current",year:"Founded 2021",founders:"Anatolii Papulov (CEO), Ruslan Rakhimov (CTO, ex spacecraft researcher)",base:"Reading",endorser:"Innovator International",status:"€16m Series A (Jun 2026), led by Voyager Ventures. First satellite NEO-1 due 2028.",
+ one:"Satellites that hold a very low Earth orbit (180–300 km) using an air-breathing ion thruster.",tags:["deep tech","pre-revenue","VC-backed","hardware"],
+ what:"Builds satellites for very low Earth orbit, roughly three times lower than conventional LEO. At that height atmospheric drag normally pulls a satellite down within weeks; NewOrbit's air-breathing electric propulsion uses atmospheric particles as propellant so the satellite can stay up for five years or more. Lower orbit means sharper imagery and lower-latency communications from smaller, cheaper spacecraft.",
+ inn:["<b>New to the commercial market.</b> Press calls VLEO 'the orbit band space has ignored for 60 years'. No commercial operator flies there.","<b>Own engineering.</b> The CTO's spacecraft research is the origin of the idea; this is not integration of someone else's hardware.","<b>Measurable advantage.</b> Better resolution and latency at lower cost than existing LEO constellations."],
+ via:["<b>Founder-market fit.</b> A spacecraft researcher building spacecraft.","<b>Resources.</b> Venture funding; a pre-revenue deep-tech plan has to show money, and this one did.","<b>Staged plan.</b> Demonstrator → NEO-1 → constellation is the 'structured planning' the rules ask for."],
+ sca:["<b>Platform, not product.</b> One propulsion bus carries imaging, comms or sensing payloads for many customers.","<b>Global by nature.</b> Earth observation, telecoms and defence buyers worldwide; export revenue is built in.","<b>Skilled jobs.</b> Hardware engineering roles clear the £25k mean-salary bar easily."],
+ ms:[1,3,7],msnote:"Revenue milestones are out of reach for a pre-launch space company. The investment, R&D/IP and jobs routes carry it. This is why the '2 of 7' design matters for deep tech.",
+ les:["A pre-revenue deep-tech business can be endorsed if the technology is genuinely new and the founder is the technologist.","Funding evidence does the work that customer traction does elsewhere.","Plan the settlement route from day one: this business was never going to hit revenue in three years."],
+ src:[["EU-Startups: NewOrbit raises €16m","https://www.eu-startups.com/2026/06/uk-based-neworbit-raises-e16-million-to-build-commercial-satellites-for-very-low-earth-orbit-vleo/"],["TNW: flying satellites where nobody else can","https://thenextweb.com/news/neworbit-vleo-satellite-series-a-european-space"],["Innovator International portfolio","https://www.innovatorinternational.com/client-stories/"]]},
+
+{id:"granlab",name:"Granlab",sector:"Biotech",kind:["Patent / IP"],route:"current",year:"Belfast, team of 6",founders:"Dr Pragya Sharma — MD and structural biochemist, PhD Queen's University Belfast",base:"Belfast",endorser:"Innovator International",status:"Lab facilities and investment secured (2025). Flagship GL-1 targeting UK and US launch in 2026.",
+ one:"Patent-pending, steroid-free topical treatments for psoriasis and eczema.",tags:["life sciences","patent pending","female-founded","Northern Ireland"],
+ what:"Develops steroid-free topical treatments for chronic inflammatory skin conditions. The flagship formulation GL-1 is positioned as a cosmeceutical, which shortens the route to market compared with a licensed medicine, and is formulated and tested across skin tones. The founder's motivation was her grandmother's psoriasis; the science is her own PhD research.",
+ inn:["<b>Novel formulation with a patent application</b>, grown from the founder's own research. Proprietary science, not a rebrand.","<b>Recognised gap.</b> Long-term steroid use is a known problem in dermatology; existing 'natural' alternatives lack rigour.","<b>Colour-inclusive testing</b> is a second differentiator in a market that historically tested on lighter skin."],
+ via:["<b>Strongest possible founder-market fit:</b> an MD and biochemist with a dermatology PhD building a dermatology product.","<b>Regulatory realism.</b> Cosmeceutical first, medicine later, makes a three-year plan credible.","<b>Resources and team.</b> Investment, a lab, and growth from sole founder to six staff."],
+ sca:["<b>Ships anywhere.</b> Simultaneous UK and US launch is direct export potential.","<b>Platform.</b> One steroid-free approach yields a range of products for different conditions.","<b>Jobs already created</b> in skilled scientific roles."],
+ ms:[1,3,7,5],msnote:"R&D and IP is near-certain. Jobs at £25k+ is close already with six scientific staff. Export revenue becomes possible after the US launch.",
+ les:["If you have a PhD or deep technical expertise, the business should sit squarely on it.","Choose a regulatory route that fits a three-year window and say so in the plan.","A patent application evidences innovation now and secures milestone 3 later."],
+ src:[["Irish Times: Belfast start-up pioneers treatment","https://www.irishtimes.com/business/innovation/2025/08/14/belfast-start-up-pioneers-breakthrough-treatment-for-chronic-skin-conditions/"],["NI Chamber: lab facilities and investment","https://www.northernirelandchamber.com/member-news/homegrown-belfast-dermatology-startup-granlab-secures-laboratory-facilities-and-investment-to-accelerate-growth-2025-06-18/"],["Granlab","https://www.granlab.co/"]]},
+
+{id:"ankar",name:"Ankar AI",sector:"AI & software",kind:["Proprietary technology"],route:"current",year:"Founded 2023, London",founders:"Wiem Gharbi and Tamar Gomez, former Palantir leaders",base:"London",endorser:"Innovator International",status:"~$24m raised: £3m seed (Index, May 2025), $20m Series A (Atomico, Dec 2025). Customers include L'Oréal and US law firm Vorys.",
+ one:"An AI operating system for patent and R&D teams, from prior-art search to drafting and enforcement.",tags:["enterprise SaaS","legal tech","VC-backed"],
+ what:"Inventors submit an idea; the platform assesses originality against prior art, finds gaps, drafts the patent application and later monitors for infringement and licensing opportunities. Models are fine-tuned on scientific and legal data. Reported productivity gain for users is around 40%.",
+ inn:["<b>LLMs applied to a specific, expensive, document-heavy workflow</b> that was previously manual.","<b>Proprietary depth.</b> Models fine-tuned on scientific and legal corpora plus end-to-end workflow software. Not a thin wrapper on a general chatbot, which is a common refusal reason for AI start-ups.","<b>Clear advantage</b> over IP search databases and billable law-firm hours."],
+ via:["<b>Directly relevant founders.</b> Palantir builds complex enterprise data software; this is the same discipline aimed at IP.","<b>Enterprise customers early.</b> L'Oréal and Vorys are among the best viability evidence an endorser can see.","<b>Tier-one VC funding</b> means external due diligence has already been passed."],
+ sca:["<b>SaaS economics:</b> near-zero marginal cost per customer.","<b>Global buyers.</b> Corporate R&D and IP firms everywhere; the Series A was explicitly for US expansion.","<b>Rapid, well-paid hiring</b> in engineering and sales."],
+ ms:[1,2,4,5,6,7],msnote:"Almost every milestone is reachable. This is what a fully-funded enterprise software business looks like against the settlement rules.",
+ les:["For an AI business the endorser will ask what is proprietary. Fine-tuned models, proprietary data and deep workflow integration are good answers; 'we call an API' is not.","Enterprise pilots or paying customers before endorsement transform the viability argument.","A recognised technology employer on the CV helps, but the plan must still show the founder's own contribution to the idea."],
+ src:[["UKTN: Ankar £3m seed","https://www.uktech.news/ai/ankar-ai-patent-platform-3m-seed-round-20250528"],["Artificial Lawyer: Ankar bags $20m","https://www.artificiallawyer.com/2025/12/17/ankar-bags-20m-for-ai-driven-patent-platform/"],["Ankar AI","https://ankar.ai/"]]},
+
+{id:"tyten",name:"TYTEN",sector:"AI & software",kind:["New application / model"],route:"current",year:"Founded 2024, London (formerly Fixo AI)",founders:"Vladimir Pushmin (CEO), Sergey Nasonov (CTO), Tom Petrides (CCO)",base:"London",endorser:"Innovator International",status:"£750k pre-seed (Nov 2025) co-led by Fuel Ventures and Concrete Ventures, with Antler.",
+ one:"AI for facilities management: automated help desks plus on-site diagnostic guidance for technicians.",tags:["vertical SaaS","proptech","accelerator","pivot"],
+ what:"Software for facilities-management firms and property managers. One half triages maintenance requests, assigns contractors and runs the job through to invoice. The other half guides engineers on site to diagnose faults and fix them first time. The pitch is faster work orders, more repairs per team, higher first-time-fix rates.",
+ inn:["<b>AI applied to a vertical still run on phone calls and spreadsheets.</b> Innovation as 'new application creating competitive advantage', which the rules expressly allow.","<b>Back office plus field diagnostics in one product</b> is the differentiator; rivals do one or the other.","<b>Data moat grows with use:</b> every diagnosed fault improves the model."],
+ via:["<b>Three founders covering domain, technology and sales.</b> Exactly the balance endorsers look for; a sole non-technical founder outsourcing development is a classic refusal.","<b>Investor and accelerator validation</b> from UK funds and Antler.","<b>Pivot handled.</b> The rename from Fixo shows repositioning; endorsers accept pivots that are notified and approved."],
+ sca:["<b>SaaS:</b> one platform, many clients.","<b>Same problem in every developed economy</b>, so international expansion is natural.","<b>Hiring funded</b> by the pre-seed round."],
+ ms:[1,2,7,3],msnote:"Customers doubled is realistic for early SaaS from a small base. IP is possible but UK software patents are harder; a method or design filing would be needed.",
+ les:["Unglamorous industries with outdated processes offer clear, explainable innovation.","Build a founding team that covers domain, tech and commercial, and show it in the CVs.","If you rename or redirect the business after endorsement, tell the endorser before the contact-point meeting."],
+ src:[["Innovator International: TYTEN","https://www.innovatorinternational.com/client-stories/tyten/"],["Startup Mag: Tyten £750k pre-seed","https://www.startupmag.co.uk/funding/tyten-2025-ai-pre-seed-funding/"],["TYTEN","https://tyten.ai/"]]},
+
+{id:"cas",name:"Carbon Asset Solutions",sector:"Climate & agri",kind:["Patent / IP"],route:"current",year:"UK, USA, Canada, Australia",founders:"Hamish Macdonald (public-facing lead)",base:"UK",endorser:"Innovator International",status:"MoU with UK Centre for Ecology & Hydrology to build UK-wide soil intelligence and carbon-market infrastructure.",
+ one:"Patented in-field soil-carbon measurement plus a digital verification platform for carbon markets.",tags:["climate tech","patented hardware","public-sector partner","overseas tech to UK"],
+ what:"Measurement, reporting and verification of soil carbon. Farmers who sequester carbon can sell credits only if the carbon can be measured credibly. CAS uses Mobile Inelastic Neutron Scattering, developed with the US Department of Agriculture, to measure soil carbon at the atomic level across a large soil volume without digging. A digital MRV platform sits on top; the same data also drives precision-agriculture decisions.",
+ inn:["<b>Patented hardware</b> that does what core sampling cannot: non-destructive, high-volume, accurate in-field measurement.","<b>Solves the credibility problem</b> that has held back soil-carbon markets. Meeting an existing need and creating advantage, in the words of the rules.","<b>Full stack:</b> physical measurement plus digital verification, not just a sensor."],
+ via:["<b>Proven elsewhere.</b> Operational in several countries; the UK plan is deployment, not a research bet.","<b>UKCEH partnership</b> is powerful validation: a UK public research body chose to work with them.","<b>Policy-driven demand</b> (net zero, agricultural subsidy reform) with identifiable buyers."],
+ sca:["<b>Scales with hectares:</b> each campaign generates saleable data and credits.","<b>Carbon markets are international by design.</b>","<b>Jobs</b> in field operations, data science and project management."],
+ ms:[1,3,5,7],msnote:"Patented technology and ongoing R&D with UKCEH cover milestone 3. Multi-country operations make export revenue plausible.",
+ les:["Bringing a proven overseas technology to the UK can qualify as a new UK business if the UK entity is new and the applicant founded it. Innovation is judged against the UK market.","A partnership with a UK university or public body is some of the strongest viability evidence available.","Alignment with government priorities makes the scalability story easier to argue."],
+ src:[["Carbon Asset Solutions","https://carbonassetsolutions.com/"],["IDTechEx profile","https://www.idtechex.com/en/research-article/carbon-asset-solutions/32192"],["Innovator International portfolio","https://www.innovatorinternational.com/client-stories/"]]},
+
+{id:"neol",name:"NEOL Copper Technologies",sector:"Manufacturing",kind:["Patent / IP","Proprietary technology"],route:"current",year:"UK",founders:"Not public",base:"UK",endorser:"Innovator International",status:"10W-30 heavy-duty diesel lubricant passed a 464-hour endurance test in an 11.8-litre Cummins engine. Greenbackers 'Deal of the Week'.",
+ one:"No-SAPS technical lubricants built on CuGlide, a proprietary copper-filming additive.",tags:["hard science","clean tech","licensing model","independent testing"],
+ what:"Develops and manufactures technical lubricants built on CuGlide, a copper-filming technology that polishes the friction surface at the molecular level and deposits copper ions to stop hydrogen wear. The formulations are free of sulphated ash, phosphorus and sulphur, cutting emissions. Tested in heavy-duty diesel, marine, motorcycle, rail, gears and greases. Revenue from finished lubricants, lubrication-as-a-service and licensing the additive to other manufacturers.",
+ inn:["<b>Proprietary chemistry</b> that eliminates a known wear mechanism. 'Hard science', in the company's phrase, and testable.","<b>Meets an emerging need:</b> no-SAPS formulations suit tightening emissions regulation.","<b>Objective evidence.</b> Independent engine testing beats adjectives in a business plan."],
+ via:["<b>Well past MVP:</b> formulated, manufactured and tested in a real engine.","<b>Identifiable buyers</b> with a measurable cost problem: fleets, plants, railways, mines.","<b>Investor interest</b> via a clean-tech network shows the funding plan is realistic."],
+ sca:["<b>Licensing</b> lets a chemistry company scale through global lubricant majors without building factories.","<b>Worldwide commodity market;</b> export is inherent.","<b>Skilled manufacturing and lab roles.</b>"],
+ ms:[1,3,5,7],msnote:"R&D and IP is the core of the business. Licensing and overseas fleet customers make export revenue plausible.",
+ les:["If your innovation is physical or chemical, get it independently tested and put the numbers in the plan.","A licensing model answers the 'how does this scale beyond you?' question for manufacturing businesses.","Tie the product to regulation to give scalability an external driver."],
+ src:[["Innovator International: Neol","https://www.innovatorinternational.com/client-stories/neol-copper-technologies/"],["AZoM: no-SAPS heavy-duty lubricant","https://www.azom.com/news.aspx?newsID=62944"],["Greenbackers profile","https://greenbackers.com/greenbackers-deal-of-the-week-profile-neol-copper-technologies"]]},
+
+{id:"peratera",name:"Peratera",sector:"Fintech",kind:["Business model / market"],route:"current",year:"Peratera UK Ltd",founders:"Not public",base:"UK",endorser:"Innovator International",status:"FCA-authorised Electronic Money Institution. Live: multi-currency accounts, payments to 190+ countries in 50+ currencies, cards. No fixed fees.",
+ one:"Business banking for cross-border online companies that high-street banks under-serve.",tags:["regulated","EMI","payments","business-model innovation"],
+ what:"A banking alternative for e-commerce sellers, affiliate networks, fintechs and other digital platforms operating across several countries. Customers open named multi-currency accounts, send and receive international payments, convert at mid-market rates and issue cards from one platform. Revenue is per-transaction fees with no opening, monthly or minimum charges.",
+ inn:["<b>Innovation in model and market, not technology.</b> A purpose-built account for an underserved segment that banks often refuse. The rules accept innovation that 'meets existing market needs and/or creates a competitive advantage'.","<b>Pricing as advantage:</b> no fixed fees, mid-market FX.","<b>One regulated platform</b> combining accounts, payments, FX and cards for a specific segment."],
+ via:["<b>FCA authorisation is the standout evidence.</b> An EMI licence requires capital, compliance systems, fit-and-proper directors and a plan the regulator has reviewed.","<b>Live product with customers</b> across e-commerce and fintech.","<b>The licence proves</b> the operational and regulatory knowledge the sector demands."],
+ sca:["<b>Scales with transaction volume</b> at low marginal cost.","<b>190+ countries</b> means revenue is international from day one.","<b>Compliance, engineering and support jobs</b> typically above £25k."],
+ ms:[1,2,5,7],msnote:"EMI capital requirements alone exceed £50k. Cross-border fees count as export earnings.",
+ les:["Regulated businesses can turn the licence into evidence: FCA, MHRA, Ofgem or CAA approval shows a regulator has already tested competence and resources.","Innovation need not be technological, but you must name the underserved segment and prove it is underserved.","Expect a precise question on how you differ from Wise, Revolut Business and Airwallex."],
+ src:[["Peratera","https://peratera.com/"],["Payments Association directory","https://thepaymentsassociation.org/directory/peratera-uk-ltd/"],["EMI register profile","https://thebanks.eu/emis/peratera-uk-355543"]]},
+
+{id:"tankx",name:"TankX",sector:"Fintech",kind:["Proprietary technology"],route:"current",year:"London office est. 2024",founders:"Erdener Tamer",base:"London",endorser:"Innovator International",status:"$50m monthly volume (2024) to $1bn monthly (2025). Expanding the stack into FX and fixed income.",
+ one:"High-frequency trading firm and market maker in digital assets, opening a new UK entity.",tags:["trading","traction metrics","overseas firm, new UK entity","AML scrutiny"],
+ what:"A proprietary trading firm and liquidity provider. It quotes bid and ask prices on exchanges, earning the spread and making markets more efficient. The edge is technology: low-latency infrastructure and statistical models. The stated strategy is to carry the same stack into traditional FX and fixed-income markets.",
+ inn:["<b>Proprietary algorithms and infrastructure.</b> In this sector the IP is the models and the engineering, not patents.","<b>Applying crypto-native HFT to traditional asset classes</b> is the growth innovation.","<b>Measurable advantage:</b> 20x growth in monthly volume in a year shows the technology works."],
+ via:["<b>Founder with trading and technology background</b> building a trading firm.","<b>Already trading at scale</b>, so viability is demonstrated, not projected.","<b>Structure matters.</b> A new UK company founded by the applicant, with real UK operations, can qualify even inside a wider group; a transferee running a branch cannot."],
+ sca:["<b>Volume scales with capital and technology</b>, not headcount.","<b>Global markets by definition;</b> London gives access to European and institutional counterparties.","<b>Quant, engineering and compliance roles</b> are high-salary."],
+ ms:[1,4,5,7],msnote:"At $1bn monthly volume, £1m gross revenue is plausible. Trading revenue from overseas venues counts as export.",
+ les:["Hard traction numbers can carry an application where the innovation is proprietary and cannot be disclosed in detail.","If you bring an existing overseas business to the UK, make the UK company genuinely new, with you as founder and its own operations.","Expect AML and regulatory scrutiny in crypto-adjacent businesses; Envestors runs full KYC as part of its process."],
+ src:[["Innovator International: TankX","https://www.innovatorinternational.com/client-stories/tankx/"],["TankX","https://tankx.co/"],["TankX on Medium","https://medium.com/tankx/about"]]},
+
+{id:"yeti",name:"Yeti Coach",sector:"Consumer & sport",kind:["Proprietary technology","New application / model"],route:"current",year:"UK",founders:"Not public",base:"UK",endorser:"Innovator International",status:"Live platform; resort camera partnerships; self-described 'world's first Sport GPT'.",
+ one:"AI ski coaching from uploaded video or resort-installed cameras.",tags:["computer vision","B2B2C","niche but global","consumer app"],
+ what:"A skier uploads a run, or is filmed by fixed cameras on partner slopes, and within minutes gets a professional-standard technique analysis and a personalised training plan. Two models: B2C uploads, and B2B2C where resorts install the camera system and skiers buy their multi-angle footage and analysis online.",
+ inn:["<b>Computer vision trained on ski technique</b>, replacing an instructor at £60–£100+ an hour.","<b>The resort 'smart slope' network</b> is distinct from upload-only apps and from sensor products like Carv, and creates a physical moat.","<b>Democratises an expensive service</b>, a recognised innovation pattern."],
+ via:["<b>A working product</b> users can try: the clearest viability evidence for a consumer app.","<b>Resort partnerships</b> show industry validation.","<b>In-house ML capability</b> would have been tested; a plan to outsource the AI is the pattern that fails (see refusals)."],
+ sca:["<b>An export business run from the UK:</b> customers in the Alps, North America and Japan, with almost no UK ski market.","<b>B2B2C gives recurring revenue</b> and a sales channel that brings users to the platform.","<b>'Sport GPT' signals a platform:</b> the same technology for golf, tennis, running."],
+ ms:[1,2,3,5],msnote:"Nearly all revenue would be export revenue. Customers doubled is achievable but must be documented against sector benchmarks.",
+ les:["A niche consumer product can be endorsed if the technology is real and the market, though niche, is international.","Build a route to market into the plan; 'we'll do digital marketing' alone draws scepticism.","Frame the long-term vision as a platform while keeping the three-year plan on one sport."],
+ src:[["Innovator International: Yeti Coach","https://www.innovatorinternational.com/client-stories/yeti-coach/"],["Insight: Hitting the slopes with AI","https://insight.innovatorinternational.com/hitting-the-slopes-with-ai-elite-ski-coaching-for-everyone/"],["Yeti.Coach","https://info.rosa.yeti.coach/"]]},
+
+{id:"rawq",name:"RawQ",sector:"Food & drink",kind:["Product formulation"],route:"current",year:"Founded 2023, London",founders:"Arina Kuzmina (CEO, IIN nutrition coach) and Daria Medvedev (COO, 12 years professional tennis)",base:"London",endorser:"Innovator International",status:"Launched summer 2023. Official performance-bar partner of esports team M80. Press in Maddyness and TechRound.",
+ one:"Buckwheat-based energy bars with ~70% less sugar, built for sustained energy without a crash.",tags:["non-tech","D2C","athlete provenance","launched before endorsement"],
+ what:"Energy bars formulated to avoid the sugar spike and crash of date- or glucose-based bars. The base is buckwheat, a gluten-free pseudo-grain that stabilises blood sugar. First developed to solve on-court energy crashes for tennis champion Daniil Medvedev, then commercialised.",
+ inn:["<b>An energy bar is not technology.</b> The innovation is a specific, testable product difference: buckwheat base, 70% less sugar, no crash, validated by an elite athlete.","<b>Competitor analysis</b> would have had to show no equivalent buckwheat performance bar on the UK market.","<b>Brand story and athlete provenance</b> are a competitive advantage the rules recognise."],
+ via:["<b>Lived founder-market fit:</b> a nutrition coach and a former professional player, each covering half the problem.","<b>Trading within months of founding</b>, so the business was selling around the time of endorsement.","<b>Modest capital needs:</b> contract manufacturing and online D2C."],
+ sca:["<b>Consumer goods scale through distribution:</b> D2C → retail → international. UK food exports are routine.","<b>Repeatable channel strategy</b> into communities (gamers, athletes) via partnerships.","<b>Jobs follow</b> in operations, marketing and sales."],
+ ms:[1,2,5],msnote:"Customers and revenue are the natural route. A trademark is not enough for milestone 3; a formulation patent or registered design would be needed, so the IP route is weak for food.",
+ les:["Food and consumer products can pass when the difference is specific and provable, not 'healthier' or 'tastier'.","Launch before you apply if you possibly can. Sales, reviews and partnerships make viability a fact.","Plan settlement around customers and revenue; IP is hard for food."],
+ src:[["Maddyness: Meet RawQ","https://www.maddyness.com/uk/2025/02/25/meet-rawq-long-lasting-energy-better-focus-and-no-crashes/"],["TechRound founder interview","https://techround.co.uk/interviews/arina-kuzmina-daria-medvedev-at-rawq/"],["Insight: RawQ","https://insight.innovatorinternational.com/rawq-what-real-energy-tastes-like/"]]},
+
+{id:"kairos",name:"Kairos Wine Aerator",sector:"Consumer & sport",kind:["Patent / IP"],route:"current",year:"Megadots Ltd, UK",founders:"Not public",base:"UK",endorser:"Innovator International",status:"On sale via own site, Amazon UK and specialist retailers. UK patent application 2405975.0.",
+ one:"The first contactless wine aerator: patented EM-wave aeration, 98.33% faster than decanting.",tags:["consumer hardware","patent pending","retail-ready","single product"],
+ what:"A handheld device that aerates wine without touching it. Held up to 20 cm above the glass, it uses electromagnetic waves to accelerate oxygen at the wine's surface. Five preset times from 15 to 90 seconds, up to four glasses at once, 168 g, USB-C, 500+ cycles per charge.",
+ inn:["<b>A patented mechanism no competitor uses.</b> Every other aerator is pour-through or in-bottle; contactless EM aeration is a new category.","<b>Quantified claims</b> (98.33%, 20 cm, four glasses) make it testable rather than marketing.","<b>The patent application</b> turns the innovation into a defensible asset."],
+ via:["<b>Finished, manufactured, retail-ready product</b> with marketplace listings: beyond MVP.","<b>Low operating complexity:</b> contract manufacturing, e-commerce, retail distribution.","<b>Founder must have created the device.</b> The rules require the applicant to have generated or significantly contributed to the idea."],
+ sca:["<b>Consumer hardware sells worldwide</b> through marketplaces; wine is a global enthusiast and trade market.","<b>Line extension is obvious:</b> spirits, coffee, hospitality units, licensing the technology.","<b>Jobs in product development, marketing and operations</b> as volume grows."],
+ ms:[1,2,3,5],msnote:"The patent application already satisfies the IP half of milestone 3. Amazon international marketplaces make export revenue plausible.",
+ les:["Scale of ambition is not the test. A single gadget passed because it is new, patented and selling.","For a physical product, reach retail-ready stage before applying.","File the UK patent application before endorsement if you can.","Prepare the 'what next?' answer: product two and export."],
+ src:[["Innovator International: Kairos","https://www.innovatorinternational.com/client-stories/kairos-wine-aerator/"],["Kairos: our story","https://kairosaerator.com/pages/our-story"],["Amazon UK listing","https://www.amazon.co.uk/Contactless-Technology-Perfectly-Flavours-Maintenance-Free/dp/B0DJ5LSJS2"]]},
+
+{id:"reed",name:"The Reed Aircraft Company",sector:"Aerospace",kind:["Proprietary technology"],route:"current",year:"UK, early stage",founders:"Justin Rautenbach — 23 years in aviation: mechanic, fire-suppression pilot, UN contract pilot, airline and corporate pilot (Global 6000, G650)",base:"UK",endorser:"Innovator International",status:"Commercialising the designs. No funding or launch public.",
+ one:"Commercialising an unmanned aircraft system based on Prof. Reed's aeronautical designs.",tags:["drones","founder CV as viability","design rights assigned","pre-revenue"],
+ what:"Developing an unmanned aircraft system from the historical designs of a Professor Reed. Rautenbach was nominated assignee of those designs, so he holds the rights to develop them. He is the third generation of a family of eight pilots; his grandfather founded a crop-dusting firm in 1959.",
+ inn:["<b>Proprietary aeronautical designs</b> the founder holds the rights to: a defensible technical basis, not a me-too drone from off-the-shelf parts.","<b>Growing UK drone market</b> (inspection, agriculture, logistics, defence) where a differentiated airframe creates advantage.","<b>The endorser would have tested</b> what the Reed design does that existing platforms don't. The public story doesn't say, but the acceptance implies a convincing answer."],
+ via:["<b>The clearest case of viability resting on the CV.</b> Twenty-three years across maintenance, hazardous operations and corporate aviation.","<b>Holding the design rights</b> removes an IP risk that would otherwise sink the plan.","<b>Gaps a careful endorser would probe:</b> funding for prototyping and CAA certification, and engineering design capability alongside operational expertise."],
+ sca:["<b>Aircraft export globally;</b> CAA approvals are respected abroad.","<b>One UAS platform serves many sectors</b>, each a revenue line.","<b>Skilled aerospace jobs.</b>"],
+ ms:[1,3,7],msnote:"Revenue within three years is unlikely for a new airframe needing certification. The plan must lean on R&D/IP and jobs.",
+ les:["Document deep operational experience in detail: roles, aircraft types, employers, incidents handled.","Secure rights to any third-party design before applying, and show the assignment.","For regulated hardware, explain the certification pathway and timeline."],
+ src:[["Innovator International: Reed Aircraft","https://www.innovatorinternational.com/client-stories/the-reed-aircraft-company/"]]},
+
+{id:"tamara",name:"Tamara's Patisserie",sector:"Food & drink",kind:["Product formulation","Business model / market"],route:"old",year:"c. 2020, London",founders:"Tamara — Palestinian/Jordanian national, trained at Le Cordon Bleu London",base:"London",endorser:"Innovator International",status:"Not publicly documented beyond the endorser's testimonial.",
+ one:"Le Cordon Bleu technique applied to Levantine flavours; a patisserie for 'anyone with more than one home'.",tags:["hospitality","old route","elite training","the exception"],
+ what:"A patisserie built around the founder's multicultural identity: classical French technique from Le Cordon Bleu applied to Palestinian and Jordanian flavours and formats. This is the case that shows the sector is not the problem; the absence of a specific innovation is.",
+ inn:["<b>Fusion at a high technical level.</b> If competitor analysis showed no equivalent offering in London, that meets 'a market need and competitive advantage'.","<b>What is not enough:</b> 'a good bakery' or 'authentic Middle Eastern sweets'. The claim must be a combination or technique new to the market.","<b>Today the bar is higher.</b> A current food applicant would want proprietary recipes or processes, a tech-enabled model, or a packaged product that can be distributed."],
+ via:["<b>Elite professional training</b> at a globally recognised institution: for food, the equivalent of a PhD.","<b>Low capital</b> for a single site, so the resource test is easy to meet.","<b>Documentable market:</b> London's Middle Eastern diaspora and premium-patisserie demand."],
+ sca:["<b>The weak point for any hospitality business</b> and the reason most are refused. The plan needed growth beyond one shop: wholesale to cafés and hotels, packaged retail, events, more sites or franchising.","<b>Hospitality wages</b> mostly sit below the £25k mean, so milestone 7 is hard; milestone 6 (10 FTE) suits a multi-site food business better."],
+ ms:[1,2,6],msnote:"IP and export milestones are unrealistic for a patisserie. Customers and headcount are the route.",
+ les:["Food and hospitality are not excluded, but need a specific innovation and a scaling plan beyond more branches.","Formal professional qualifications carry real weight for viability in craft sectors.","Under today's stricter regime, pair the concept with something that scales: packaged products, B2B supply, technology or a protectable process."],
+ src:[["Innovator International: Tamara's Patisserie","https://www.innovatorinternational.com/client-stories/test-story/"]]},
+
+{id:"jb",name:"JB Art Gallery",sector:"Consumer & sport",kind:["Business model / market"],route:"old",year:"Early 2020, London",founders:"Julia Bolgova — Art Business, Sotheby's Institute of Art, London",base:"London",endorser:"Innovator International",status:"Not publicly documented beyond the endorser's page.",
+ one:"A curated digital art gallery, taking a relationship-driven trade online.",tags:["digital platform","old route","sector education","time-stamped innovation"],
+ what:"An online platform for exhibiting and selling art, positioned on competitive advantages in the digital art space. The founder refined the concept with Innovator International before endorsement in early 2020.",
+ inn:["<b>In 2020, a curated online gallery</b> was a credible innovation in a conservative sector; the pandemic accelerated exactly this shift.","<b>Today the bar is higher:</b> Artsy, Saatchi Art and Singulart exist. A current applicant would need a sharper edge: a niche, technology (provenance, AR viewing, fractional ownership) or a new model for artists.","<b>Innovation is judged against the UK market at the time of application.</b>"],
+ via:["<b>Sector-specific professional education</b> at the recognised route into the art business, covering valuation, market structure, law and dealing.","<b>Low capital</b> for a digital platform versus a physical gallery.","<b>An iterated, realistic plan</b> refined with the endorser."],
+ sca:["<b>No geographic limit:</b> artists and buyers worldwide, so export sales are natural.","<b>Commission revenue grows</b> without proportional cost.","<b>Hiring in curation, marketing and technology</b> as the catalogue grows."],
+ ms:[1,2,5],msnote:"International art sales count as exports. IP is unlikely for a marketplace.",
+ les:["Time-stamp your innovation: research what exists in the UK market now, not when you first had the idea.","Specialist education in the sector is strong viability evidence even without a long employment record.","Working with the endorser to refine the plan before formal submission is normal and encouraged."],
+ src:[["Innovator International: JB Art Gallery","https://www.innovatorinternational.com/client-stories/jb-art-gallery/"]]}
+];
+
+const REFUSALS=[
+ {r:"'A logical extension of an existing product category'",c:"Innovative",how:["granlab","kairos","neol","cas","ankar"]},
+ {r:"Can't name UK competitors or explain the difference",c:"Innovative",how:["kairos","rawq","neol"]},
+ {r:"Development outsourced with no founder oversight",c:"Viable",how:["tyten","yeti","ankar"]},
+ {r:"Founder's background doesn't match the business",c:"Viable",how:["granlab","reed","rawq"]},
+ {r:"No customer conversations, pilots or sales",c:"Viable",how:["ankar","kairos","peratera","cas","yeti"]},
+ {r:"Not enough funding for the stated timeline",c:"Viable",how:["neworbit","granlab","tyten"]},
+ {r:"Vague traction claims without evidence",c:"Viable",how:["tankx","neol","rawq"]},
+ {r:"No clear revenue model or IP strategy",c:"Scalable",how:["neol","ankar","yeti"]},
+ {r:"Growth only by opening more sites; unrealistic job creation",c:"Scalable",how:["rawq","tamara","peratera"]},
+ {r:"Plan obviously written by a consultant",c:"All three",how:["jb","tamara"]},
+ {r:"Ambiguity over whether it's a new UK business or a branch",c:"Eligibility",how:["tankx","cas"]}
+];
+
+const RCASES=[
+ {t:"AI education platform, sole non-technical founder",st:"no",lab:"Refused",body:"An 'artificial intelligence' platform for teaching under-18s. The founder had no AI background, no technical co-founder, could describe the end product but not how to build it, and planned to outsource all development.",pts:["Fails <b>viable</b>: no skills to deliver.","Fails <b>innovative</b> by extension: couldn't explain what was new because they didn't understand the technology.","Also fails the rule that the applicant must have generated, or significantly contributed to, the ideas in the plan."],src:"Tom Bradford, immigration barrister"},
+ {t:"University spin-out, engine-efficiency technology",st:"yes",lab:"Endorsed",body:"Applicant was part of a founding team commercialising new engine-efficiency research. Could articulate the R&D proposition, show the technology was new to market, and present a credible commercialisation pathway.",pts:["The mirror image of the case above: same sector breadth, opposite founder capability."],src:"Tom Bradford"},
+ {t:"AI triage for NHS GP practices",st:"turn",lab:"Refused ×2, then endorsed",body:"Founder had run a healthcare-tech consultancy in Mumbai for six years. Attempts one and two used 'fast-track' consultants (about £14,300 spent): no NHS conversations, no UK validation, couldn't explain competitive differentiation or her own unit economics. Attempt three followed nine months of 50+ UK customer conversations, an MVP and two paying customers, with the plan rewritten by the founder.",pts:["The idea never changed. The <b>evidence</b> did.","Names are anonymised composites and the early dates fall under the old Innovator visa; the reasons are the same ones endorsers cite today."],src:"The Startup Race"},
+ {t:"E-commerce conversion platform for diaspora retailers",st:"no",lab:"Refused, abandoned",body:"AI conversion optimisation for African-diaspora retailers in the UK. Insufficient evidence of innovation versus existing UK tools, only superficial outreach, unclear whether a new UK business or a branch of an overseas operation, weak job projections, visible dependence on a premium consultant (about £15,500).",pts:["Failed all three criteria.","The 'branch or new business?' question is worth noting; TankX and Carbon Asset Solutions show how to structure a genuinely new UK entity."],src:"The Startup Race"}
+];
+
+const QUESTIONS=[
+ {crit:"inn",q:"Is there something proprietary at the core: a patent (filed or filable), a formulation, a model trained on your own data, or a design you own the rights to?",hint:"Granlab, Kairos, Neol, CAS, Reed"},
+ {crit:"inn",q:"Can you name the three closest UK competitors and state, in one sentence each, what you do that they cannot?",hint:"Kairos (98.33% faster), RawQ (70% less sugar), Peratera (no fixed fees, mid-market FX)"},
+ {crit:"inn",q:"Did you, or your co-founders, actually create the core product or idea, rather than planning to buy it in from a third party?",hint:"The refused AI edtech case planned to outsource everything"},
+ {crit:"via",q:"Does the founder's CV explain why this person can run this business: relevant degree, professional training, years in the sector, or having built it before?",hint:"Biochemist → dermatology; 23-year pilot → aircraft; Le Cordon Bleu → patisserie"},
+ {crit:"via",q:"Is there real UK market validation: customer conversations you can evidence, pilots, letters of intent, paying customers, or a live product?",hint:"Ankar (L'Oréal), Kairos (on sale), RawQ (trading), CAS (UKCEH)"},
+ {crit:"via",q:"Is the money to deliver the three-year plan in place or credibly committed (savings, grants, investors), and does the plan match what you have?",hint:"No minimum investment is required, but the plan must be fundable"},
+ {crit:"sca",q:"Does revenue grow faster than cost: software, licensing, packaged products, platform fees, or exports, rather than opening more physical sites?",hint:"Neol (licensing), Ankar (SaaS), RawQ (distribution)"},
+ {crit:"sca",q:"Is there a credible international market, with a stated plan to reach it within three years?",hint:"Yeti Coach sells to skiers abroad from a UK base; Granlab launches UK and US together"},
+ {crit:"sca",q:"Can you name the two settlement milestones you will target and show how the plan gets there (investment, IP, customers, revenue, jobs)?",hint:"Deep tech: investment + IP + jobs. Consumer: customers + revenue."}
+];
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+const byId=id=>CASES.find(c=>c.id===id);
+const SECTORS=[...new Set(CASES.map(c=>c.sector))];
+const KINDS=[...new Set(CASES.flatMap(c=>c.kind))];
+const state={sector:new Set(),kind:new Set(),route:new Set(),q:""};
+
+function chipRow(container,items,key,label){
+  items.forEach(v=>{
+    const b=el("button","chip",label?label(v):v);b.type="button";b.setAttribute("aria-pressed","false");b.dataset.v=v;
+    b.onclick=()=>{state[key].has(v)?state[key].delete(v):state[key].add(v);b.setAttribute("aria-pressed",state[key].has(v));render();};
+    container.appendChild(b);
+  });
+}
+chipRow($("#f-sector"),SECTORS,"sector");
+chipRow($("#f-kind"),KINDS,"kind");
+chipRow($("#f-route"),["current","old"],"route",v=>v==="current"?"Innovator Founder (2023–)":"Old route (pre-2023)");
+$("#f-search").oninput=e=>{state.q=e.target.value.trim().toLowerCase();render();};
+$("#f-clear").onclick=()=>{state.sector.clear();state.kind.clear();state.route.clear();state.q="";$("#f-search").value="";document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-pressed","false"));render();};
+
+function visible(){
+  return CASES.filter(c=>{
+    if(state.sector.size&&!state.sector.has(c.sector))return false;
+    if(state.kind.size&&!c.kind.some(k=>state.kind.has(k)))return false;
+    if(state.route.size&&!state.route.has(c.route))return false;
+    if(state.q){const hay=[c.name,c.sector,c.one,c.founders,c.what,c.tags.join(" "),c.kind.join(" "),...c.inn,...c.via,...c.sca,...c.les].join(" ").toLowerCase();if(!hay.includes(state.q))return false;}
+    return true;
+  });
+}
+function dots(c){return MILESTONES.map(m=>`<i class="dot ${c.ms.includes(m.n)?"on":""}" title="${m.n}. ${m.s}">${m.n}</i>`).join("");}
+function render(){
+  const list=visible();const g=$("#grid");g.innerHTML="";
+  $("#f-count").textContent=`${list.length} of ${CASES.length} cases`;
+  if(!list.length){g.appendChild(el("div","empty","No cases match. Clear a filter or try another search term."));return;}
+  list.forEach(c=>{
+    const b=el("button","card");b.type="button";b.dataset.id=c.id;
+    b.innerHTML=`<div class="row"><span class="sector">${c.sector}</span><span class="route ${c.route}">${c.route==="current"?"Innovator Founder":"Old route"}</span></div>
+      <h3>${c.name}</h3><p class="one">${c.one}</p>
+      <div class="tags">${c.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+      <div class="ms"><span>MS</span>${dots(c)}</div>`;
+    b.onclick=()=>openCase(c.id);g.appendChild(b);
+  });
+}
+render();
+
+/* ---------- drawer ---------- */
+let current=null,tab="over",lastFocus=null;
+const drawer=$("#drawer"),scrim=$("#scrim");
+function openCase(id,push=true){
+  const c=byId(id);if(!c)return;current=c;lastFocus=document.activeElement;
+  $("#d-sector").textContent=`${c.sector} · ${c.route==="current"?"Innovator Founder route":"Old route (pre-2023)"}`;
+  $("#d-name").textContent=c.name;
+  $("#d-facts").innerHTML=[["Founders",c.founders],["Base / when",`${c.base} · ${c.year}`],["Endorser",c.endorser],["Status",c.status]].map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("");
+  setTab("over");drawer.hidden=false;scrim.hidden=false;document.body.classList.add("locked");
+  if(push)history.replaceState(null,"","#"+c.id);
+  $("#d-close").focus();
+}
+function closeCase(){drawer.hidden=true;scrim.hidden=true;document.body.classList.add("locked");document.body.classList.remove("locked");current=null;history.replaceState(null,"","#library");if(lastFocus)lastFocus.focus();}
+$("#d-close").onclick=closeCase;scrim.onclick=closeCase;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!drawer.hidden)closeCase();});
+$("#d-tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+function setTab(t){
+  tab=t;$("#d-tabs").querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
+  const c=current,p=$("#d-panel");p.innerHTML="";
+  const idx=CASES.indexOf(c);
+  const nav=`<div class="prevnext"><button type="button" data-go="${CASES[(idx-1+CASES.length)%CASES.length].id}">← ${CASES[(idx-1+CASES.length)%CASES.length].name}</button><button type="button" data-go="${CASES[(idx+1)%CASES.length].id}">${CASES[(idx+1)%CASES.length].name} →</button></div>`;
+  const cav=`<p class="caveat">Criteria analysis is the author's reading of public information; the endorser's reasoning is not published.${c.route==="old"?" This case dates from the previous Innovator/Start-up visa.":""}</p>`;
+  if(t==="over")p.innerHTML=`<p class="what">${c.what}</p><div class="verdict"><span>✓</span><span>${c.one}</span></div><div><p class="eyebrow" style="margin-bottom:6px">Sources</p><div class="srcs">${c.src.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join("")}</div></div>${cav}${nav}`;
+  if(t==="inn")p.innerHTML=`<p class="eyebrow">INNF 5.2(a) · Innovative</p><ul>${c.inn.map(x=>`<li>${x}</li>`).join("")}</ul>${cav}${nav}`;
+  if(t==="via")p.innerHTML=`<p class="eyebrow">INNF 5.2(b) · Viable</p><ul>${c.via.map(x=>`<li>${x}</li>`).join("")}</ul>${cav}${nav}`;
+  if(t==="sca")p.innerHTML=`<p class="eyebrow">INNF 5.2(c) · Scalable</p><ul>${c.sca.map(x=>`<li>${x}</li>`).join("")}</ul>${cav}${nav}`;
+  if(t==="ms")p.innerHTML=`<p class="eyebrow">Settlement after 3 years · needs 2 of 7</p><div class="msl">${MILESTONES.map(m=>`<div class="m ${c.ms.includes(m.n)?"on":""}"><span class="n">${m.n}</span><div>${m.s}<small>${m.d}</small></div></div>`).join("")}</div><div class="verdict"><span>→</span><span>${c.msnote}</span></div>${cav}${nav}`;
+  if(t==="les")p.innerHTML=`<p class="eyebrow">Lessons for an applicant</p><ul>${c.les.map(x=>`<li>${x}</li>`).join("")}</ul>${nav}`;
+  p.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>openCase(b.dataset.go));
+  p.scrollTop=0;
+}
+
+/* ---------- matrix ---------- */
+(function(){
+  const t=$("#mtable");
+  const head=`<thead><tr><th>Business</th><th>Sector</th>${MILESTONES.map(m=>`<th class="c" title="${m.d}">${m.n}</th>`).join("")}<th class="c">Total</th></tr></thead>`;
+  const rows=CASES.map(c=>`<tr><td class="name"><button type="button" data-id="${c.id}">${c.name}</button></td><td class="sec">${c.sector}</td>${MILESTONES.map(m=>`<td class="c"><i class="dot ${c.ms.includes(m.n)?"on":""}" aria-label="${c.ms.includes(m.n)?"plausible":"unlikely"}"></i></td>`).join("")}<td class="c" style="font-family:var(--mono);font-size:.8rem">${c.ms.length}</td></tr>`).join("");
+  const tot=`<tfoot><tr><td colspan="2">Cases where plausible</td>${MILESTONES.map(m=>`<td class="c">${CASES.filter(c=>c.ms.includes(m.n)).length}/${CASES.length}</td>`).join("")}<td></td></tr></tfoot>`;
+  t.innerHTML=head+`<tbody>${rows}</tbody>`+tot;
+  t.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>openCase(b.dataset.id));
+  $("#mkey").innerHTML=MILESTONES.map(m=>`<div><b>${m.n}</b>${m.d}</div>`).join("");
+})();
+
+/* ---------- refusals ---------- */
+(function(){
+  const t=$("#rtable");
+  t.innerHTML=`<thead><tr><th>Refusal reason</th><th>Criterion</th><th>How endorsed cases avoided it</th></tr></thead><tbody>${REFUSALS.map(r=>`<tr><td>${r.r}</td><td class="crit">${r.c}</td><td class="how">${r.how.map(id=>`<button type="button" data-id="${id}">${byId(id).name}</button>`).join(" · ")}</td></tr>`).join("")}</tbody>`;
+  t.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>openCase(b.dataset.id));
+  const w=$("#rcases");
+  RCASES.forEach((r,i)=>{
+    const d=el("details","rcase");if(i===0)d.open=true;
+    d.innerHTML=`<summary>${r.t}<span class="st ${r.st}">${r.lab}</span></summary><div class="body"><p>${r.body}</p><ul>${r.pts.map(p=>`<li>${p}</li>`).join("")}</ul><p class="src">Source: ${r.src}</p></div>`;
+    w.appendChild(d);
+  });
+})();
+
+/* ---------- self-assessment ---------- */
+(function(){
+  const f=$("#qform");const groups={inn:["Innovative","INNF 5.2(a)"],via:["Viable","INNF 5.2(b)"],sca:["Scalable","INNF 5.2(c)"]};
+  Object.entries(groups).forEach(([k,[name,ref]])=>{
+    const g=el("div","qgroup",`<h3><span class="k">${ref}</span>${name}</h3>`);
+    QUESTIONS.filter(q=>q.crit===k).forEach((q,i)=>{
+      const n=`q-${k}-${i}`;
+      g.innerHTML+=`<div class="q"><p>${q.q}</p><div class="opts">
+        <label><input type="radio" name="${n}" id="${n}-y" value="2">Yes, with evidence</label>
+        <label><input type="radio" name="${n}" id="${n}-p" value="1">Partly</label>
+        <label><input type="radio" name="${n}" id="${n}-n" value="0">No / not yet</label></div>
+        <p class="note">Compare: ${q.hint}</p></div>`;
+    });
+    f.appendChild(g);
+  });
+  const bars=$("#bars");
+  bars.innerHTML=Object.entries(groups).map(([k,[name]])=>`<div class="bar"><span class="lab">${name}</span><div class="trk"><div class="fil" id="fil-${k}"></div></div><span class="num" id="num-${k}">–</span></div>`).join("");
+  function score(){
+    const res={};let answered=0;
+    Object.keys(groups).forEach(k=>{let s=0,n=0;QUESTIONS.filter(q=>q.crit===k).forEach((q,i)=>{const v=f.querySelector(`input[name="q-${k}-${i}"]:checked`);if(v){s+=+v.value;n++;answered++;}});res[k]={s,n,max:QUESTIONS.filter(q=>q.crit===k).length*2};});
+    Object.entries(res).forEach(([k,r])=>{const pct=r.n?Math.round(r.s/r.max*100):0;const fil=$(`#fil-${k}`);fil.style.width=pct+"%";fil.className="fil "+(pct>=67?"":pct>=40?"mid":"low");$(`#num-${k}`).textContent=r.n?`${r.s}/${r.max}`:"–";});
+    const vt=$("#vtitle"),vb=$("#vbody"),cw=$("#compwrap");
+    if(answered<QUESTIONS.length){vt.textContent=answered?`${answered} of ${QUESTIONS.length} answered`:"Answer the questions to see a readout.";vb.innerHTML=answered?"<p>Finish all nine for a reading and comparable cases.</p>":"";cw.hidden=true;return;}
+    const weakest=Object.entries(res).sort((a,b)=>a[1].s/a[1].max-b[1].s/b[1].max)[0];
+    const total=Object.values(res).reduce((a,r)=>a+r.s,0),max=Object.values(res).reduce((a,r)=>a+r.max,0);
+    const pct=total/max;const names={inn:"innovation",via:"viability",sca:"scalability"};
+    const anyZero=Object.values(res).some(r=>r.s<=1);
+    let title,body;
+    if(anyZero){title="Not ready: one criterion is close to empty.";body=`<p>Endorsers require all three. A near-zero score on <b>${names[weakest[0]]}</b> is a refusal regardless of the other two. Fix that before anything else.</p>`;}
+    else if(pct>=.78){title="Strong on paper. Now rehearse the interview.";body="<p>The evidence profile resembles the endorsed cases. Refusals at this stage come from founders who cannot defend their own numbers or name their competitors. Prepare for a 30-minute pitch and hard Q&A.</p>";}
+    else if(pct>=.55){title=`Promising, but ${names[weakest[0]]} needs work.`;body=`<p>The idea is probably endorsable with more evidence. The weakest area is <b>${names[weakest[0]]}</b>; see the comparable cases for what 'evidence' looked like there.</p>`;}
+    else{title="Too early to apply.";body="<p>Several criteria rest on intention rather than evidence. The NHS triage case took nine months of customer conversations, an MVP and two paying customers to turn two refusals into an endorsement. Build that first.</p>";}
+    const tips={inn:"<li>File or at least draft a UK patent, design or formulation record.</li><li>Write a competitor table naming UK rivals and the precise difference.</li>",via:"<li>Run 30+ documented UK customer conversations; collect letters of intent.</li><li>Match the CV to the business; recruit a co-founder for any gap.</li><li>Size the plan to the money you can evidence.</li>",sca:"<li>Choose a revenue model that scales without linear cost.</li><li>Name the export market and the route to it.</li><li>Pick two settlement milestones and build the plan backwards from them.</li>"};
+    body+=`<ul>${tips[weakest[0]]}</ul>`;
+    vt.textContent=title;vb.innerHTML=body;
+    const profile={inn:res.inn.s/res.inn.max,via:res.via.s/res.via.max,sca:res.sca.s/res.sca.max};
+    const kindHint=res.inn.s>=5?["Patent / IP","Proprietary technology"]:["Business model / market","Product formulation","New application / model"];
+    const ranked=CASES.filter(c=>c.route==="current").map(c=>({c,k:(c.kind.some(k=>kindHint.includes(k))?2:0)+(profile.sca>=.67&&c.ms.length>=4?1:0)+(profile.via<.67&&["rawq","kairos","tyten"].includes(c.id)?1:0)})).sort((a,b)=>b.k-a.k).slice(0,3);
+    $("#comps").innerHTML=ranked.map(({c})=>`<button type="button" data-id="${c.id}"><b>${c.name}</b> · ${c.one}</button>`).join("");
+    $("#comps").querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>openCase(b.dataset.id));
+    cw.hidden=false;
+  }
+  f.addEventListener("change",score);
+  $("#qreset").onclick=()=>{f.reset();score();};
+  score();
+})();
+
+/* ---------- graduate pathway calculator ---------- */
+(function(){
+  const start=$("#g-start"),end=$("#g-end"),lvl=$("#g-level"),place=$("#g-place"),kv=$("#g-kv"),tl=$("#g-tl");
+  const fmt=d=>d.toLocaleDateString("en-GB",{month:"short",year:"numeric"});
+  const add=(d,m)=>{const x=new Date(d);x.setMonth(x.getMonth()+m);return x;};
+  const parse=v=>{const [y,m]=v.split("-").map(Number);return new Date(y,m-1,1);};
+  const diff=(a,b)=>(b.getFullYear()-a.getFullYear())*12+(b.getMonth()-a.getMonth());
+  function run(){
+    if(!end.value)return;
+    const apply=parse(end.value);
+    const began=start.value?parse(start.value):null;
+    const courseLen=began&&began<apply?diff(began,apply):null;
+    const cutoff=new Date(2026,11,31);
+    const months=lvl.value==="phd"?36:(apply<=cutoff?24:18);
+    const expiry=add(apply,months);
+    const decide=add(expiry,-4);
+    const evidenceEnd=add(apply,Math.min(12,months-6));
+    const lostTime=lvl.value!=="phd"&&apply>cutoff;
+    const waivedAtEnd=courseLen!=null&&courseLen>=12;
+    const placeOk=courseLen==null||courseLen>=24;
+    const rows=[];
+    if(courseLen!=null){rows.push(["Course length",`${courseLen} months`,""]);rows.push(["Time in UK at course end",`${courseLen} months`,""]);}
+    if(place.checked&&courseLen!=null)rows.push(["Placement share of course",`${Math.round(12/courseLen*100)}%`,placeOk?"hi":"warnc"]);
+    rows.push(["Graduate visa applied",fmt(apply),""]);
+    rows.push(["Length granted",`${months} months`,lostTime?"warnc":"hi"]);
+    rows.push(["Graduate visa expires",fmt(expiry),""]);
+    rows.push(["Maintenance waived from",waivedAtEnd?`${fmt(apply)} (course end)`:fmt(add(apply,12))+(months<=12?" (after expiry)":""),waivedAtEnd?"hi":""]);
+    rows.push(["Latest decision point",fmt(decide),"hi"]);
+    kv.innerHTML=rows.map(([k,v,c])=>`<dt>${k}</dt><dd class="${c}">${v}</dd>`).join("");
+    const phases=[];
+    if(began&&courseLen){
+      phases.push({w:`${fmt(began)} – ${fmt(apply)}`,t:"Student visa: prepare, don't trade",p:"A Student visa holder cannot be self-employed or carry on business activity. Allowed: customer research and conversations, a prototype built as coursework or the dissertation, a competitor table, a patent search, the university enterprise team, student start-up competitions. Not allowed: trading, invoicing, running a company. Business activity opens once an in-time Innovator Founder application is made after completing the course."});
+      if(place.checked){
+        const pStart=add(apply,-Math.min(12,courseLen)-Math.min(3,Math.max(0,courseLen-12)));
+        phases.push({w:`${fmt(pStart)} – ${fmt(add(pStart,12))}`,t:"Placement year: the most valuable year",p:(placeOk?"":"<span style=\"color:var(--warn);font-weight:600\">A 12-month placement exceeds 50% of a course shorter than 24 months and is not permitted on a Student visa. </span>")+"Paid work inside a UK tech employer gives three things at once: UK sector experience for the viability test, first-hand sight of a problem worth solving (where TYTEN and Yeti Coach came from), and a relationship with a potential Skilled Worker sponsor. Choose the employer with both tracks in mind. Document customer conversations as they happen."});
+      }
+      phases.push({w:fmt(apply),t:"Course end: decision point one",key:true,p:"Since 25 Nov 2025 a student who has completed the course can switch directly to Innovator Founder without taking the Graduate visa."+(waivedAtEnd?" Maintenance is already waived after 12 months in the UK.":"")+" Switching now starts the 3-year settlement clock immediately; taking the Graduate visa buys "+months+" months to build evidence but delays that clock. Decide on the evidence in hand."});
+    }
+    phases.push({w:fmt(apply),t:"Apply for the Graduate visa (if not switching directly)",p:lostTime?"Applying after 31 Dec 2026 means 18 months, not 24. No sponsor needed; free to work, trade and build.":"Apply as soon as results are issued. No sponsor needed; free to work and to build."});
+    phases.push({w:`${fmt(apply)} – ${fmt(evidenceEnd)}`,t:"Evidence-building, two tracks in parallel",p:"Founder track: trade, sign customers, file the patent, approach an endorser informally. Employee track: a sponsored offer, ideally from the placement employer. Each is the other's fallback."});
+    if(!waivedAtEnd)phases.push({w:fmt(add(apply,12)),t:"12 months in the UK",p:"The £1,270 maintenance requirement for Innovator Founder falls away. Reassess: is the evidence close to what the endorsed cases had?"});
+    phases.push({w:fmt(decide),t:(began?"Decision point two":"Decision point"),key:true,p:"Choose the route with the evidence in hand: Innovator Founder (submit to an endorser now; allow 4–6 weeks for endorsement and up to 8 weeks for the visa), Skilled Worker (sponsored offer in hand; the new entrant rate's 4-year cap includes Graduate time), or Global Talent (portfolio strong enough for 'exceptional promise')."});
+    phases.push({w:fmt(expiry),t:"Graduate visa expires",p:"The new application must be submitted before this date. An in-time application keeps permission running while it is decided."});
+    tl.innerHTML=phases.map(x=>`<div class="ph ${x.key?"key":""}"><span class="when">${x.w}</span><div><b>${x.t}</b><p>${x.p}</p></div></div>`).join("");
+  }
+  [start,end].forEach(i=>i.addEventListener("input",run));lvl.addEventListener("change",run);place.addEventListener("change",run);run();
+})();
+
+/* ---------- deep link ---------- */
+(function(){const h=location.hash.replace("#","");if(h&&byId(h))openCase(h,false);})();
+window.addEventListener("hashchange",()=>{const h=location.hash.replace("#","");if(h&&byId(h))openCase(h,false);});
+</script>
+
+</body></html>
